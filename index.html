@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Out of Your Head | Done-for-You Claude Setup | AI with Intent</title>
+  <meta name="description" content="Out of Your Head is a done-for-you Claude setup that builds a proper AI foundation for small business owners." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&family=Caveat:wght@500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --dark:        #2E2845;
+      --dark-lift:   #3D3560;
+      --denim:       #25587F;
+      --denim-mid:   #95B6D7;
+      --denim-light: #D6E7F7;
+      --cream:       #EEE6DE;
+      --pale-pink:   #FAEFF3;
+      --pink:        #D4336E;
+      --white:       #FFFFFF;
+      --font-heading: 'Libre Baskerville', Georgia, serif;
+      --font-body:    'Nunito', system-ui, sans-serif;
+      --font-script:  'Caveat', cursive;
+      --max-width: 860px;
+      --section-pad: 80px 24px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--dark);
+      background: var(--dark);
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .section-dark  { background: var(--dark);        color: var(--cream); }
+    .section-light { background: var(--denim-light); color: var(--dark);  }
+    .section-cream { background: var(--cream);       color: var(--dark);  }
+    .section-pink  { background: var(--pale-pink);   color: var(--dark);  }
+
+    .section-wrap {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--section-pad);
+    }
+
+    h1, h2, h3 { font-family: var(--font-heading); line-height: 1.2; }
+    h1 { font-size: clamp(32px, 5vw, 56px); font-weight: 700; }
+    h2 { font-size: clamp(26px, 4vw, 40px); font-weight: 700; }
+    h3 { font-size: clamp(20px, 3vw, 26px); font-weight: 400; }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 16px;
+    }
+    .section-dark  .eyebrow { color: var(--denim-mid); }
+    .section-light .eyebrow { color: var(--denim); }
+    .section-cream .eyebrow { color: var(--denim); }
+    .section-pink  .eyebrow { color: var(--denim); }
+
+    .offer-name {
+      font-family: var(--font-script);
+      font-size: clamp(48px, 8vw, 80px);
+      font-weight: 500;
+      line-height: 1.0;
+      display: block;
+      margin-bottom: 6px;
+      color: var(--denim);
+    }
+    .offer-sub {
+      font-family: var(--font-heading);
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0;
+    }
+
+    p { margin-bottom: 1.2em; }
+    p:last-child { margin-bottom: 0; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border-radius: 4px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      text-align: center;
+    }
+    .btn:hover { background: #25587F !important; border-color: #25587F !important; color: #FFFFFF !important; transform: translateY(-1px); opacity: 1; }
+    .btn:active { transform: translateY(0); }
+    .btn-primary  { background: var(--pink);  color: var(--white); border-color: var(--pink); }
+    .btn-outline-dark  { background: transparent; color: var(--denim-mid); border-color: var(--denim-mid); }
+    .btn-outline-light { background: transparent; color: var(--denim);     border-color: var(--denim); }
+    .btn-group { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+
+    /* NAV */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--dark);
+      border-bottom: 1px solid var(--dark-lift);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--cream);
+    }
+    .nav-brand span {
+      font-family: var(--font-script);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--denim-mid);
+      margin-right: 6px;
+    }
+    .nav-cta {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--pink);
+      border: 1.5px solid var(--pink);
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--pink); color: var(--white); }
+
+    /* HERO */
+    .hero {
+      background: var(--dark);
+      padding: 140px 24px 100px;
+    }
+    .hero-inner { max-width: var(--max-width); margin: 0 auto; }
+    .hero h1 { color: var(--cream); margin-bottom: 24px; max-width: 720px; }
+    .hero-sub {
+      font-size: clamp(17px, 2.2vw, 20px);
+      color: var(--denim-light);
+      max-width: 640px;
+      line-height: 1.75;
+    }
+    .hero-rule { width: 48px; height: 3px; background: var(--pink); margin: 32px 0; border: none; }
+
+    /* SECTION RULE */
+    .section-rule { width: 48px; height: 3px; border: none; margin: 28px 0; }
+    .section-dark  .section-rule { background: var(--pink); }
+    .section-light .section-rule { background: var(--denim); }
+    .section-cream .section-rule { background: var(--denim); }
+    .section-pink  .section-rule { background: var(--pink); }
+
+    /* FRAMING */
+    .framing-body { font-size: clamp(16px, 2vw, 18px); color: var(--dark); max-width: 740px; }
+    .framing-body p { margin-bottom: 1.4em; }
+    .framing-callout {
+      border-left: 3px solid var(--denim);
+      padding-left: 24px;
+      margin: 36px 0;
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: clamp(18px, 2.4vw, 22px);
+      color: var(--dark);
+      line-height: 1.45;
+    }
+
+    /* ABOUT */
+    .about-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 48px;
+      align-items: start;
+      margin-top: 16px;
+    }
+    @media (max-width: 640px) {
+      .about-layout { grid-template-columns: 1fr; }
+      .about-photo { max-width: 240px; }
+    }
+    .about-photo {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+      border: 2px solid var(--dark-lift);
+    }
+    .about-body { font-size: clamp(16px, 2vw, 18px); color: var(--cream); }
+    .about-body p { margin-bottom: 1.4em; }
+
+    /* OFFER */
+    .offer-body { font-size: clamp(16px, 2vw, 18px); max-width: 740px; }
+    .offer-body p { margin-bottom: 1.4em; }
+
+    /* HOW IT WORKS */
+    .steps-grid { display: flex; flex-direction: column; gap: 48px; margin-top: 48px; }
+    .step { display: grid; grid-template-columns: 80px 1fr; gap: 24px; align-items: start; }
+    .step-number {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 48px;
+      color: var(--pink);
+      line-height: 1;
+      padding-top: 4px;
+    }
+    .step-content h3 {
+      font-family: var(--font-heading);
+      font-size: clamp(18px, 2.4vw, 24px);
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+    .step-meta {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--denim-mid);
+      margin-bottom: 12px;
+    }
+    .step-content p { color: var(--denim-light); font-size: 16px; line-height: 1.7; margin: 0; }
+    .steps-divider { width: 100%; height: 1px; background: var(--dark-lift); }
+
+    .pricing-card {
+      background: var(--dark-lift);
+      border-radius: 10px;
+      padding: 36px 40px;
+      margin-top: 56px;
+    }
+    .pricing-card h3 {
+      font-family: var(--font-heading);
+      font-size: clamp(20px, 2.8vw, 28px);
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .pricing-main {
+      font-size: clamp(28px, 4vw, 44px);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--pink);
+      line-height: 1;
+      margin: 16px 0 8px;
+    }
+    .pricing-note  { color: var(--denim-mid); font-size: 15px; margin-bottom: 16px; }
+    .pricing-detail { color: var(--denim-light); font-size: 15px; line-height: 1.65; }
+    .pricing-after {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--dark);
+      font-size: 14px;
+      color: var(--denim-mid);
+    }
+    .claude-note {
+      background: var(--dark-lift);
+      border-left: 3px solid var(--denim-mid);
+      padding: 14px 20px;
+      border-radius: 0 6px 6px 0;
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--denim-mid);
+    }
+
+    /* BENEFITS */
+    .benefits-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 740px;
+    }
+    .benefits-list li {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 16px;
+      align-items: start;
+      font-size: clamp(15px, 1.8vw, 17px);
+      background: var(--white);
+      border: 2px solid var(--denim);
+      border-radius: 8px;
+      padding: 20px 24px;
+      color: var(--dark);
+    }
+    .benefit-icon {
+      width: 28px; height: 28px;
+      background: var(--pink);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .benefit-icon svg {
+      width: 14px; height: 14px;
+      stroke: var(--white); fill: none;
+      stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .benefit-text strong {
+      display: block;
+      font-weight: 700;
+      color: var(--denim);
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+
+    /* FIT */
+    .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 640px) { .fit-grid { grid-template-columns: 1fr; } }
+    .fit-card { background: var(--dark-lift); border-radius: 10px; padding: 32px; }
+    .fit-card h3 { font-family: var(--font-heading); font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+    .fit-card--yes h3 { color: var(--denim-light); }
+    .fit-card--no  h3 { color: var(--denim-mid); }
+    .fit-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .fit-list li { display: grid; grid-template-columns: 20px 1fr; gap: 12px; font-size: 15px; line-height: 1.55; color: var(--denim-light); }
+    .fit-list--no li { color: var(--denim-mid); }
+    .fit-marker { font-weight: 700; margin-top: 1px; }
+    .fit-card--yes .fit-marker { color: var(--pink); }
+    .fit-card--no  .fit-marker { color: var(--denim-mid); opacity: 0.6; }
+    .trust-paras { max-width: 700px; margin-bottom: 40px; }
+    .trust-paras p { font-size: clamp(16px, 2vw, 18px); color: var(--cream); margin-bottom: 1.2em; }
+    .trust-paras p:last-child { margin-bottom: 0; }
+
+    /* FAQ */
+    .ooyh-faq-list { list-style: none !important; margin-top: 40px !important; border-top: 1px solid #95B6D7 !important; padding: 0 !important; }
+    .ooyh-faq-item { border-bottom: 1px solid #95B6D7 !important; background: transparent !important; padding: 0 !important; margin: 0 !important; }
+    .ooyh-faq-question {
+      width: 100% !important; background: transparent !important; border: none !important;
+      text-align: left !important; cursor: pointer !important;
+      padding: 22px 0 !important;
+      display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 16px !important;
+      color: #2E2845 !important;
+      font-family: 'Libre Baskerville', Georgia, serif !important;
+      font-size: clamp(15px, 1.8vw, 18px) !important;
+      font-weight: 400 !important; line-height: 1.35 !important;
+    }
+    .ooyh-faq-question:hover { color: #25587F !important; }
+    .ooyh-faq-icon {
+      flex-shrink: 0 !important; width: 24px !important; height: 24px !important;
+      border: 1.5px solid #25587F !important;
+      border-radius: 50% !important;
+      display: flex !important; align-items: center !important; justify-content: center !important;
+      transition: background 0.2s, border-color 0.2s !important;
+      background: transparent !important;
+    }
+    .ooyh-faq-item.open .ooyh-faq-icon { background: #D4336E !important; border-color: #D4336E !important; }
+    .ooyh-faq-icon svg {
+      width: 12px !important; height: 12px !important;
+      stroke: #25587F !important; fill: none !important;
+      stroke-width: 2.5 !important; stroke-linecap: round !important;
+      transition: stroke 0.2s, transform 0.25s !important;
+    }
+    .ooyh-faq-item.open .ooyh-faq-icon svg { stroke: #FFFFFF !important; transform: rotate(45deg) !important; }
+    .ooyh-faq-answer { max-height: 0 !important; overflow: hidden !important; transition: max-height 0.35s ease !important; }
+    .ooyh-faq-item.open .ooyh-faq-answer { max-height: 600px !important; }
+    .ooyh-faq-answer-inner {
+      padding: 0 0 24px !important;
+      color: #2E2845 !important;
+      font-size: 16px !important; line-height: 1.7 !important; max-width: 680px !important;
+    }
+    .ooyh-faq-answer-inner p { margin-bottom: 0.8em !important; }
+    .ooyh-faq-answer-inner p:last-child { margin-bottom: 0 !important; }
+
+    /* CLOSING */
+    .closing-body { font-size: clamp(16px, 2vw, 19px); max-width: 680px; }
+    .closing-body p { margin-bottom: 1.4em; }
+
+    /* FOOTER */
+    .footer { background: var(--dark); border-top: 2px solid var(--dark-lift); padding: 48px 24px; }
+    .footer-inner {
+      max-width: var(--max-width); margin: 0 auto;
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 32px;
+    }
+    .footer-brand { font-family: var(--font-heading); font-size: 16px; color: var(--cream); }
+    .footer-brand a { color: var(--denim-mid); font-size: 14px; display: block; margin-top: 8px; transition: color 0.2s; }
+    .footer-brand a:hover { color: var(--cream); }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+    .footer-links a { color: var(--denim-mid); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-note { width: 100%; border-top: 1px solid var(--dark-lift); padding-top: 24px; font-size: 13px; color: var(--denim-mid); }
+
+    /* STICKY MOBILE */
+    .sticky-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 99; background: var(--dark); border-top: 1px solid var(--dark-lift); padding: 12px 16px; gap: 10px; }
+    @media (max-width: 600px) {
+      .sticky-cta { display: flex; }
+      .sticky-cta .btn { flex: 1; font-size: 12px; padding: 12px 10px; }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 760px) {
+      :root { --section-pad: 56px 20px; }
+      .hero { padding: 120px 20px 72px; }
+      .step { grid-template-columns: 56px 1fr; gap: 16px; }
+      .step-number { font-size: 36px; }
+      .pricing-card { padding: 28px 24px; }
+    }
+    @media (max-width: 480px) {
+      .btn-group { flex-direction: column; }
+      .btn-group .btn { width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand"><span>AI</span> with Intent</div>
+      <a href="https://tidycal.com/tcarcenac/ooyh-discovery" class="nav-cta" target="_blank" rel="noopener">Book now</a>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <section class="hero section-dark">
+    <div class="hero-inner">
+      <span class="eyebrow">Done-for-You Claude Setup</span>
+      <h1>There's a version of Claude your business hasn't met yet.</h1>
+      <hr class="hero-rule" />
+      <p class="hero-sub">
+        You didn't start your business to spend your days copy-pasting into AI.<br>
+        Let's get Claude doing the mind-blowing work it's capable of so you can get back to the fun, the creative, the stimulating, the human work you built your business for.
+      </p>
+      <div class="btn-group">
+        <a href="#how-it-works" class="btn btn-primary">I'm IN - Give me the details!</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FRAMING -->
+  <section class="section-light" id="framing">
+    <div class="section-wrap">
+      <span class="eyebrow">Why most people aren't getting results</span>
+      <h2>Something doesn't add up.</h2>
+      <hr class="section-rule" />
+
+      <div class="framing-body">
+        <p>There's been a real shift lately. People who went deep into ChatGPT are moving across to Claude. Experimenting, poking around, trying to work out what all the noise is about.</p>
+
+        <p>Claude is doing more. The features are shipping faster than most people can keep up with. Connectors, scheduled tasks, projects, computer use. It's genuinely impressive.</p>
+
+        <p>But the results? Still a bit flat. Still a bit ordinary. Still that feeling of... <em>Surely this should be doing more than this?!</em></p>
+
+        <p>It should. But here's where most people get stuck.</p>
+
+        <p>The messaging around Claude makes it sound simple. Upload your information, build a skill, away you go. Ten minutes and you're off. You can get something running in ten minutes. But what's running is a surface version. A chat window that knows a little about you.</p>
+
+        <div class="framing-callout">
+          What actually makes Claude work is everything underneath that. The knowledge base. The context about how your business really runs. The voice and tone that's genuinely yours.
+        </div>
+
+        <figure style="margin: 40px 0; max-width: 520px;">
+          <img
+            src="https://taniacarcenac.com/wp-content/uploads/2026/04/Claude-quote.jpg"
+            alt="When Claude knows your business, you get space to remember why you started it."
+            style="width: 100%; border-radius: 8px; display: block;"
+          />
+        </figure>
+
+        <p>That's the foundation. It takes time to build properly. Time most people don't have, or don't know how to spend.</p>
+
+        <p>So they get ten minutes in, hit the complexity, and stall. Or they build bits and pieces that don't connect. Or they keep meaning to go deeper and never quite get there.</p>
+
+        <p>The foundation never gets built. Claude keeps starting from scratch.</p>
+
+        <p>When that foundation is properly built, when Claude genuinely knows your business, your voice, your clients, your recurring work, it stops feeling like a chat window and starts functioning like an ecosystem. One that moves things forward without you managing every step.</p>
+
+        <p>That's the version most people never reach.</p>
+
+        <p style="font-family: var(--font-heading); font-weight: 700; font-size: 20px; color: var(--dark);">This service builds it for you.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ABOUT TANIA -->
+  <section class="section-dark" id="about">
+    <div class="section-wrap">
+      <span class="eyebrow">About Tania</span>
+      <h2 style="color: var(--cream);">I've been in the trenches with this stuff.</h2>
+      <hr class="section-rule" />
+
+      <div class="about-layout">
+        <div>
+          <img
+            class="about-photo"
+            src="https://taniacarcenac.com/wp-content/uploads/2026/04/TC-Admire-2.jpg"
+            alt="Tania Carcenac"
+          />
+        </div>
+
+        <div class="about-body">
+          <p>I've been deep in the world of large language models since the early days. Experimenting with ChatGPT, Copilot, Gemini, poking around to see what each one could actually do.</p>
+
+          <p>Claude is where I landed. It wasn't just about the features.</p>
+
+          <p>Anthropic, the company behind Claude, built it on a foundation of constitutional AI. A framework designed to make it more honest, more harmless, more genuinely useful. They've just launched the Anthropic Institute, specifically to confront the most significant challenges that powerful AI will pose to our societies. Are they perfect? No. But in a landscape where ethics can feel like an afterthought, they're taking it seriously. That matters to me.</p>
+
+          <p>Then I saw what Claude could actually do when it was set up properly. Not the ten-minute version. The real version. The ecosystem version, where everything connects, where it knows your business, where it's genuinely moving things forward without you managing every step.</p>
+
+          <p>That's when I knew I wanted to help other people get there.</p>
+
+          <p>The gap between what most people are getting from Claude and what it's actually capable of is significant. It doesn't have to be.</p>
+
+          <p>I built Out of Your Head to close that gap. Without you having to figure out every step yourself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- THE OFFER -->
+  <section class="section-cream" id="offer">
+    <div class="section-wrap">
+      <span class="eyebrow">The Service</span>
+      <span class="offer-name">Out of Your Head</span>
+      <p class="offer-sub">Done for you.</p>
+      <hr class="section-rule" />
+
+      <div class="offer-body">
+        <p>Out of Your Head is a done-for-you Claude setup for small business owners who know Claude should be doing more for their business. But don't have the time, the energy, or the inclination to learn how to build it themselves.</p>
+
+        <p>Here's the thing about running a small business... The knowledge that makes it work is everywhere. Some of it is in your head. Some of it is in files and documents. Some of it is in half-built Claude setups and voice notes and things you meant to organise but never quite got to.</p>
+
+        <p>That's exactly what Claude needs to work properly. It just needs someone to pull it all together.</p>
+
+        <p>Out of Your Head does that. We gather what's in your head, what's in your files, what's scattered across your attempts to set this up, and build it into Claude so it can actually work for your business.</p>
+
+        <p style="font-family: var(--font-heading); font-weight: 700; font-size: 20px;">By the end of the week, Claude knows your business. It works in your voice. The foundation is properly built, and you know exactly how to use it.</p>
+
+        <p>From there, the repeating stuff starts getting lighter, the tabs start closing, and the ecosystem starts doing what it's supposed to.</p>
+
+        <p><strong>The cost of this Done for You service is $395!</strong></p>
+      </div>
+
+      <div class="btn-group">
+        <a href="https://tidycal.com/tcarcenac/ooyh-discovery" class="btn btn-primary" target="_blank" rel="noopener">I'm ready - Book Now!</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- HOW IT WORKS -->
+  <section class="section-dark" id="how-it-works">
+    <div class="section-wrap">
+      <span class="eyebrow">How It Works</span>
+      <h2 style="color: var(--cream);">Four stages. Entirely online.</h2>
+      <hr class="section-rule" />
+
+      <p style="color: var(--denim-light); max-width: 620px; font-size: 17px; margin-bottom: 0;">
+        Out Of Your Head happens entirely online, from wherever you are. The Build happens while you get on with your week.
+      </p>
+
+      <div class="steps-grid">
+
+        <div class="step">
+          <div class="step-number">01</div>
+          <div class="step-content">
+            <div class="step-meta">Discovery Call</div>
+            <h3>Where we begin - free</h3>
+            <p>A 30-minute conversation to make sure this is the right fit for both of us. You get a clear picture of the outcome and the process. No payment, no commitment until we both decide it makes sense.</p>
+          </div>
+        </div>
+
+        <hr class="steps-divider" />
+
+        <div class="step">
+          <div class="step-number">02</div>
+          <div class="step-content">
+            <div class="step-meta">The Brain Dump</div>
+            <h3>90 minutes</h3>
+            <p>This is where we unload everything. We spend 90 minutes together online and I ask everything I need to build your Claude foundation - how your business runs, how you communicate, what eats your week, what knowledge lives only in your head. We capture your voice, your language, your nuance. All raw material for the build.</p>
+          </div>
+        </div>
+
+        <hr class="steps-divider" />
+
+        <div class="step">
+          <div class="step-number">03</div>
+          <div class="step-content">
+            <div class="step-meta">The Build</div>
+            <h3>Happens on my end</h3>
+            <p>While you get on with your week, I go away and build. Using everything from the Brain Dump, I construct a Claude setup built specifically around your business. Within 1 week I'll send you a brief summary of what's been built so you know what's coming, you can flag anything that's missing and book your Reboot session.</p>
+          </div>
+        </div>
+
+        <hr class="steps-divider" />
+
+        <div class="step">
+          <div class="step-number">04</div>
+          <div class="step-content">
+            <div class="step-meta">The Reboot</div>
+            <h3>60 minutes</h3>
+            <p>This is where it all comes to life. We meet online and I walk you through your complete Claude setup. How it works, how to use it, how to add to it and grow it as your business grows. You leave with everything installed and the knowledge of how to use it.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pricing-card">
+        <h3>Special pricing - first 5 clients</h3>
+        <div class="pricing-main">$295 AUD</div>
+        <p class="pricing-note">Split across two sessions.</p>
+        <p class="pricing-detail">
+          $195 to book your Brain Dump.<br>
+          $100 to book your Reboot once your build summary lands in your inbox.
+        </p>
+        <p class="pricing-after">This is a special rate for the first 5 clients, in exchange for honest feedback and a testimonial. After that, the price moves to $395 AUD.</p>
+        <div class="claude-note">
+          You'll need Claude Pro to get started. It's around $30 AUD per month. Once your foundation is built, you'll wonder how you managed without it.
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <a href="https://tidycal.com/tcarcenac/ooyh-discovery" class="btn btn-primary" target="_blank" rel="noopener">Yes, I want this!</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- BENEFITS -->
+  <section class="section-light" id="benefits">
+    <div class="section-wrap">
+      <span class="eyebrow">What you get</span>
+      <h2>Not just hours back. Brain space back.</h2>
+      <hr class="section-rule" />
+
+      <p style="font-size: clamp(16px, 2vw, 18px); max-width: 680px; margin-bottom: 32px;">
+        Getting Claude properly set up isn't just about ticking things off faster. It's about what happens when the busy-but-not-done feeling lifts and you actually get to choose where your time and energy goes.
+      </p>
+
+      <p style="max-width: 680px; margin-bottom: 32px; font-size: 17px;">
+        Maybe that's deeper work in your business. The creative stuff, the ideas that keep getting bumped to next week. Maybe it's your garden. Your family. A holiday you've been meaning to book for two years. That's yours to decide.
+      </p>
+
+      <p style="max-width: 680px; margin-bottom: 40px; font-weight: 700; font-size: 18px; color: var(--dark);">
+        What Out of Your Head gives you is the foundation that makes the choice possible.
+      </p>
+
+      <ul class="benefits-list">
+        <li>
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+          <div class="benefit-text">
+            <strong>A Claude setup built specifically for your business</strong>
+            Not a generic starting point. A foundation that reflects how you actually work.
+          </div>
+        </li>
+        <li>
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+          <div class="benefit-text">
+            <strong>Less copy-pasting, less explaining from scratch</strong>
+            Less time doing the robot's job. More time doing yours.
+          </div>
+        </li>
+        <li>
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+          <div class="benefit-text">
+            <strong>Fewer tabs. Less toggling.</strong>
+            More of your work happening in one place that actually knows who you are.
+          </div>
+        </li>
+        <li>
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+          <div class="benefit-text">
+            <strong>More time being the human in your business</strong>
+            Rather than the tool. Claude handles the repeating stuff. You handle the rest.
+          </div>
+        </li>
+        <li>
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+          <div class="benefit-text">
+            <strong>Brain space back. Not just hours back.</strong>
+            For the parts of your work and your life you actually want to spend it on.
+          </div>
+        </li>
+        <li>
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+          <div class="benefit-text">
+            <strong>A clear understanding of how to use what's been built</strong>
+            How to add to it, and how to grow it as your business grows.
+          </div>
+        </li>
+      </ul>
+
+      <div class="btn-group">
+        <a href="https://tidycal.com/tcarcenac/ooyh-discovery" class="btn btn-primary" target="_blank" rel="noopener">Yes, I want this!</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- IS THIS FOR YOU -->
+  <section class="section-dark" id="fit">
+    <div class="section-wrap">
+      <span class="eyebrow">Honest answers.</span>
+      <h2 style="color: var(--cream);">Is this the right fit?</h2>
+      <hr class="section-rule" />
+
+      <div class="trust-paras">
+        <p>If you've tried to get Claude working before and didn't get far, that's not a reason to hesitate. It's exactly the reason this service exists. The foundation just wasn't built. That's what we're here to fix.</p>
+        <p>If you're wondering whether you have time right now, most of the work happens on my end while you get on with your week. Your sessions are short, focused and entirely online. What comes back is a Claude setup that knows your business and is ready to use from the moment we finish.</p>
+      </div>
+
+      <div class="fit-grid">
+        <div class="fit-card fit-card--yes">
+          <h3>This is for you if&hellip;</h3>
+          <ul class="fit-list">
+            <li><span class="fit-marker">+</span><span>You run a service business, coaching practice, consultancy or knowledge-based operation</span></li>
+            <li><span class="fit-marker">+</span><span>You are the main knowledge holder in your business. It runs because you know how it runs</span></li>
+            <li><span class="fit-marker">+</span><span>You want Claude working for your business without having to figure out how to build it yourself</span></li>
+            <li><span class="fit-marker">+</span><span>You're not sure Claude is worth committing to yet. Once the foundation is properly built, that question tends to answer itself</span></li>
+          </ul>
+        </div>
+        <div class="fit-card fit-card--no">
+          <h3>This isn't the right fit if&hellip;</h3>
+          <ul class="fit-list fit-list--no">
+            <li><span class="fit-marker">&ndash;</span><span>You have a larger team with complex infrastructure needs. This is built for solo operators and micro-businesses</span></li>
+            <li><span class="fit-marker">&ndash;</span><span>You're looking for API integrations, Make.com automations or technical builds beyond Claude's native ecosystem</span></li>
+            <li><span class="fit-marker">&ndash;</span><span>You don't yet have Claude Pro and aren't willing to set it up before The Reboot</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FAQs -->
+  <section class="section-cream" id="faqs">
+    <div class="section-wrap">
+      <span class="eyebrow">FAQs</span>
+      <h2>The questions worth asking.</h2>
+      <hr class="section-rule" />
+
+      <ul class="ooyh-faq-list" id="faqList">
+
+        <li class="ooyh-faq-item">
+          <button class="ooyh-faq-question" aria-expanded="false">
+            Do I need to have Claude Pro already?
+            <span class="ooyh-faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="ooyh-faq-answer"><div class="ooyh-faq-answer-inner">
+            <p>Yes. You'll need Claude Pro before we can run your Reboot session. It's around $29 AUD per month. If you don't have it yet, that's fine. Just make sure it's set up before we meet. If you're not sure how to do that, I can point you in the right direction.</p>
+          </div></div>
+        </li>
+
+        <li class="ooyh-faq-item">
+          <button class="ooyh-faq-question" aria-expanded="false">
+            What if I don't know much about Claude yet?
+            <span class="ooyh-faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="ooyh-faq-answer"><div class="ooyh-faq-answer-inner">
+            <p>You don't need to. Out of Your Head is a done-for-you service. You don't need to understand the technical side of what gets built. You just need to show up, be honest about how your business works, and let me handle the rest.</p>
+          </div></div>
+        </li>
+
+        <li class="ooyh-faq-item">
+          <button class="ooyh-faq-question" aria-expanded="false">
+            Is this available outside Australia?
+            <span class="ooyh-faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="ooyh-faq-answer"><div class="ooyh-faq-answer-inner">
+            <p>Yes. Everything happens online so wherever you are, we can work together. Pricing is in AUD.</p>
+          </div></div>
+        </li>
+
+        <li class="ooyh-faq-item">
+          <button class="ooyh-faq-question" aria-expanded="false">
+            What if I need to reschedule a session?
+            <span class="ooyh-faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="ooyh-faq-answer"><div class="ooyh-faq-answer-inner">
+            <p>Life happens. Just make sure you reschedule at least 12 hours before your scheduled session time. Rescheduling requests inside that window forfeit the session.</p>
+          </div></div>
+        </li>
+
+        <li class="ooyh-faq-item">
+          <button class="ooyh-faq-question" aria-expanded="false">
+            How long do I have to book my Reboot after receiving my build summary?
+            <span class="ooyh-faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="ooyh-faq-answer"><div class="ooyh-faq-answer-inner">
+            <p>Once you receive your build summary, you have 14 days to book and pay for your Reboot session. If that window lapses, a new agreement will be required.</p>
+          </div></div>
+        </li>
+
+        <li class="ooyh-faq-item">
+          <button class="ooyh-faq-question" aria-expanded="false">
+            Can I make changes after The Reboot?
+            <span class="ooyh-faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="ooyh-faq-answer"><div class="ooyh-faq-answer-inner">
+            <p>Two rounds of minor revisions are included within 14 days of your Reboot session. Revisions mean refining what's already been built. Not adding new scope. Refinement is included. If you want to expand the build beyond what was originally agreed, that's a separate conversation.</p>
+          </div></div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- CLOSING -->
+  <section class="section-pink" id="closing">
+    <div class="section-wrap">
+      <span class="eyebrow">Ready to get started?</span>
+      <h2>The next step is simple.</h2>
+      <hr class="section-rule" />
+
+      <div class="closing-body">
+        <p>Maybe you're tired of feeling like you're doing the robot's job in your own business. Maybe you've been meaning to properly set Claude up for months and it just keeps getting bumped. Maybe you caught a glimpse of what it could do and thought, I want that.</p>
+
+        <p>Whatever brought you here, the next step is simple.</p>
+
+        <p>If you're ready to get started, hit the hot pink button below and book your Discovery Call. We'll get to know each other, make sure we're the right fit and get your awesome Claude foundation underway.</p>
+
+        <p>Either way, by the end of the week Claude will know your business. The foundation will be built. The tabs will start closing.</p>
+
+        <p><strong>You get to decide what to do with the time and brain space that comes back while Claude blows your mind.</strong></p>
+      </div>
+
+      <div class="btn-group">
+        <a href="https://tidycal.com/tcarcenac/ooyh-discovery" class="btn btn-primary" target="_blank" rel="noopener">I want to chat</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        AI with Intent
+        <a href="https://taniacarcenac.com" target="_blank" rel="noopener">taniacarcenac.com</a>
+      </div>
+      <div class="footer-links">
+        <a href="https://taniacarcenac.com/about">About Tania</a>
+        <a href="https://taniacarcenac.com/contact">Contact</a>
+        <a href="https://tidycal.com/tcarcenac/ooyh-discovery" target="_blank" rel="noopener">Book a Discovery Call</a>
+      </div>
+    </div>
+    <div class="footer-inner" style="margin-top: 0; padding-top: 0;">
+      <p class="footer-note">&copy; 2026 Tania Carcenac. All prices in AUD. Tania acknowledges the Traditional Custodians of the lands on which she lives and works.</p>
+    </div>
+  </footer>
+
+  <!-- STICKY MOBILE CTA -->
+  <div class="sticky-cta" aria-hidden="true">
+    <a href="https://tidycal.com/tcarcenac/ooyh-discovery" class="btn btn-primary" target="_blank" rel="noopener">Book now</a>
+  </div>
+
+  <!-- FAQ ACCORDION -->
+  <script>
+    document.querySelectorAll(".ooyh-faq-item").forEach(item => {
+      item.querySelector(".ooyh-faq-question").addEventListener('click', () => {
+        const isOpen = item.classList.contains("open");
+        document.querySelectorAll(".ooyh-faq-item").forEach(i => {
+          i.classList.remove('open');
+          i.querySelector(".ooyh-faq-question").setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          item.querySelector(".ooyh-faq-question").setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
