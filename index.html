@@ -142,6 +142,27 @@
       color: var(--denim-mid);
       margin-right: 6px;
     }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--denim-mid);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--cream); }
     .nav-cta {
       font-family: var(--font-body);
       font-weight: 700;
@@ -409,6 +430,9 @@
     }
 
     /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+    }
     @media (max-width: 760px) {
       :root { --section-pad: 56px 20px; }
       .hero { padding: 120px 20px 72px; }
@@ -428,8 +452,15 @@
   <!-- NAV -->
   <nav class="nav">
     <div class="nav-inner">
-      <div class="nav-brand"><span>AI</span> with Intent</div>
-      <a href="https://tidycal.com/tcarcenac/ooyh-discovery" class="nav-cta" target="_blank" rel="noopener">Book now</a>
+      <a href="/" class="nav-brand"><span>AI</span> with Intent</a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="/" class="active">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/#offer">Out of Your Head</a></li>
+        </ul>
+        <a href="https://tidycal.com/tcarcenac/ooyh-discovery" class="nav-cta" target="_blank" rel="noopener">Book now</a>
+      </div>
     </div>
   </nav>
 
@@ -856,7 +887,7 @@
         <a href="https://taniacarcenac.com" target="_blank" rel="noopener">taniacarcenac.com</a>
       </div>
       <div class="footer-links">
-        <a href="https://taniacarcenac.com/about">About Tania</a>
+        <a href="/about.html">About Tania</a>
         <a href="https://taniacarcenac.com/contact">Contact</a>
         <a href="https://tidycal.com/tcarcenac/ooyh-discovery" target="_blank" rel="noopener">Book a Discovery Call</a>
       </div>
