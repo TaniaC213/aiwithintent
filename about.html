@@ -170,18 +170,45 @@
     }
     .section-dark .pull-quote { color: var(--denim-light); }
 
+    /* BIG CALLOUT */
+    .big-callout {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--denim-mid);
+      text-align: center;
+      padding: 2rem 0 0.5rem;
+      margin: 1.5rem 0 0;
+      letter-spacing: -0.01em;
+    }
+    .big-callout-sub {
+      text-align: center;
+      font-style: italic;
+      color: var(--denim-mid);
+      opacity: 0.75;
+      margin-bottom: 2rem;
+    }
+
+    /* TWO-COLUMN IMAGE SPLIT */
+    .img-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .img-split img {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+    }
+
     /* DIVIDER */
     .rule {
       border: none;
       border-top: 1px solid var(--denim-mid);
       opacity: 0.3;
       margin: 2rem 0;
-    }
-
-    /* STANDALONE LINES */
-    .standalone {
-      font-weight: 700;
-      margin-bottom: 0.2rem;
     }
 
     /* CTA STRIP */
@@ -251,6 +278,8 @@
       .hero { padding: 100px 20px 60px; }
       section { padding: 52px 20px; }
       .cta-strip { padding: 52px 20px; }
+      .img-split { grid-template-columns: 1fr; }
+      .img-split .img-col { order: -1; }
     }
   </style>
 </head>
@@ -275,16 +304,23 @@
   <header class="hero">
     <div class="section-wrap">
       <span class="eyebrow">About Tania</span>
-      <h1>Fact: for women in small business, the to-do list never actually ends.</h1>
+      <h1>Fact: For women in small business, the to-do list never actually ends.</h1>
     </div>
   </header>
 
-  <!-- SECTION 1: The full life -->
+  <!-- SECTION 1: The full life + Claude quote image -->
   <section class="section-cream">
     <div class="section-wrap">
-      <p>There's the client work and the admin behind it. The social media juggernaut that needs feeding. The inbox stacking up while you're busy doing everything else. And behind all of that, the household, the family, the parents who need a hand, the friends you keep meaning to call back, the exercise you know you need to do, the food you're trying to make nourishing and somehow hit that 30g of protein, the volunteer commitment you can't quite bring yourself to drop.</p>
-      <p>And somewhere in the middle of all of it, a creeping awareness that the AI conversation is growing and you can't quite find the time or the headspace to figure out if it's actually worth yours.</p>
-      <div class="pull-quote">It is. I want to show you why.</div>
+      <div class="img-split">
+        <div class="text-col">
+          <p>There's the client work and the admin behind it. The social media juggernaut that needs feeding. The inbox stacking up while you're busy doing everything else. And behind all of that, the household, the family, the parents who need a hand, the friends you keep meaning to call back, the exercise you know you need to do, the food you're trying to make nourishing and somehow hit that 30g of protein, the volunteer commitment you can't quite bring yourself to drop.</p>
+          <p>And somewhere in the middle of all of it, a creeping awareness that the AI conversation is growing and you can't quite find the time or the headspace to figure out if it's actually worth yours.</p>
+          <div class="pull-quote">It is. I want to show you why.</div>
+        </div>
+        <div class="img-col">
+          <img src="Claude quote 2.jpg" alt="A quote about what AI can do for your working week" />
+        </div>
+      </div>
     </div>
   </section>
 
@@ -292,20 +328,27 @@
   <section class="section-dark">
     <div class="section-wrap">
       <p>I spent years as a life coach working with women. From that time and from my own experience and the real conversations I've had with friends, I got a very clear picture of what a full life actually looks like. The one where you're holding everything together for everyone and wondering where along the line you became the last one on your own list.</p>
-      <p>When AI started making noise, I went down the rabbit hole. Then another one. And another. Until I looked around and realised I'd made it all the way to Wonderland.</p>
+      <div class="pull-quote">When AI started making noise, I went down the rabbit hole. Then another one. And another. Until I looked around and realised I'd made it all the way to Wonderland.</div>
       <p>Months of experimenting, learning, paid courses, free trainings, pulling together the pieces that actually worked from a mountain of information. I was genuinely fascinated by what it could do, by how to use it ethically, by what it meant to engage with it intentionally. And underneath all of that, a growing conviction: the people who needed these tools most were the people who had the least time to figure them out.</p>
-      <p class="standalone">Women. Running businesses. Juggling everything.</p>
-      <p>Mostly without help.</p>
+      <p class="big-callout">Women. Running businesses. Juggling everything.</p>
+      <p class="big-callout-sub">Mostly without help.</p>
       <p>What I found surprised me. When AI is set up properly, and right now Claude is where it's at, it doesn't just save time. It gives back brain space. And it allows our human side to grow.</p>
     </div>
   </section>
 
-  <!-- SECTION 3: Stats + why you -->
-  <section class="section-cream">
+  <!-- SECTION 3: Stats + why you + Holiday me -->
+  <section class="section-light">
     <div class="section-wrap">
-      <p>Stats show that men are taking up AI in significantly higher numbers than women. I find that interesting. Because the women I know are running rings around their schedules, managing businesses, families and about fourteen other things simultaneously. If anyone should have these tools working hard for them, it's the busiest people in the room.</p>
-      <p>You don't need to spend months in Wonderland like I did. That's what I'm here for.</p>
-      <p>I've done the learning so you don't have to. I know what works, what's worth your time and how to build it so Claude actually knows your business. So the tools start doing the work, rather than just being something you chat to and copy-paste from.</p>
+      <div class="img-split">
+        <div class="text-col">
+          <p>Stats show that men are taking up AI in significantly higher numbers than women. I find that interesting. Because the women I know are running rings around their schedules, managing businesses, families and about fourteen other things simultaneously. If anyone should have these tools working hard for them, it's the busiest people in the room.</p>
+          <p>You don't need to spend months in Wonderland like I did. That's what I'm here for.</p>
+          <p>I've done the learning so you don't have to. I know what works, what's worth your time and how to build it so Claude actually knows your business. So the tools start doing the work, rather than just being something you chat to and copy-paste from.</p>
+        </div>
+        <div class="img-col">
+          <img src="Holiday me ningaloo.jpg" alt="Tania at Ningaloo" />
+        </div>
+      </div>
       <hr class="rule">
       <p>I'm Tania. I used to help women find clarity in their lives. Now I help them find it in their working week.</p>
       <p><strong>Welcome to AI with Intent.</strong></p>
