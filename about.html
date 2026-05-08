@@ -275,9 +275,46 @@
     .footer-links a:hover { color: var(--cream); }
     .footer-note { width: 100%; border-top: 1px solid var(--dark-lift); padding-top: 24px; font-size: 13px; color: var(--denim-mid); }
 
+    /* HAMBURGER */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px 4px;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--cream);
+      border-radius: 1px;
+    }
+    .nav-mobile-book { display: none; }
+
     /* RESPONSIVE */
     @media (max-width: 600px) {
-      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-cta { display: none; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0; right: 0;
+        background: var(--dark);
+        flex-direction: column;
+        gap: 0;
+        border-top: 1px solid var(--dark-lift);
+        padding: 0 24px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { border-bottom: 1px solid var(--dark-lift); }
+      .nav-links li:last-child { border-bottom: none; }
+      .nav-links a { display: block; padding: 14px 0; font-size: 14px; }
+      .nav-mobile-book { display: block; }
+      .nav-mobile-book a { color: var(--pink) !important; font-weight: 700; }
       .hero { padding: 100px 20px 60px; }
       section { padding: 52px 20px; }
       .cta-strip { padding: 52px 20px; }
@@ -293,12 +330,16 @@
     <div class="nav-inner">
       <a href="/" class="nav-brand"><span>AI</span> with Intent</a>
       <div class="nav-right">
-        <ul class="nav-links">
+        <ul class="nav-links" id="navLinks">
           <li><a href="/">Home</a></li>
           <li><a href="/about.html" class="active">About</a></li>
-          <li><a href="/#offer">Out of Your Head</a></li>
+          <li><a href="/out-of-your-head.html">Out of Your Head</a></li>
+          <li class="nav-mobile-book"><a href="https://tidycal.com/tcarcenac/ooyh-discovery" target="_blank" rel="noopener">Book a Discovery Call</a></li>
         </ul>
         <a href="https://tidycal.com/tcarcenac/ooyh-discovery" class="nav-cta" target="_blank" rel="noopener">Book now</a>
+        <button class="nav-hamburger" id="navToggle" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </nav>
@@ -364,7 +405,7 @@
       <h2>Ready to stop figuring it out alone?</h2>
       <p>Book a free discovery call and let's talk about what your week could look like with Claude actually doing the work.</p>
       <a href="https://tidycal.com/tcarcenac/ooyh-discovery" class="btn-primary" target="_blank" rel="noopener">Book a discovery call</a>
-      <a href="/" class="btn-outline">See Out of Your Head</a>
+      <a href="/out-of-your-head.html" class="btn-outline">See Out of Your Head</a>
     </div>
   </div>
 
@@ -385,6 +426,15 @@
       <p class="footer-note">&copy; 2026 Tania Carcenac. Tania acknowledges the Traditional Custodians of the lands on which she lives and works.</p>
     </div>
   </footer>
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', function () {
+      const isOpen = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+  </script>
 
 </body>
 </html>
