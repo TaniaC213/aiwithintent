@@ -248,16 +248,16 @@
     }
     .recognition-caveat {
       font-family: var(--font-script);
-      font-size: 22px;
+      font-size: clamp(24px, 3vw, 32px);
       color: var(--denim);
       display: block;
       margin-top: 16px;
     }
     .recognition-layout {
       display: grid;
-      grid-template-columns: 1fr 280px;
+      grid-template-columns: 1fr 420px;
       gap: 40px;
-      align-items: start;
+      align-items: center;
     }
     .recognition-layout img {
       width: 100%;
@@ -372,6 +372,12 @@
       width: 100%;
       border-radius: 8px;
     }
+    .guide-list {
+      font-size: clamp(16px, 2vw, 18px);
+      padding-left: 1.4em;
+      margin: 0 0 1.2em;
+    }
+    .guide-list li { margin-bottom: 0.4em; }
 
     /* FOOTER */
     .footer { background: var(--dark); border-top: 2px solid var(--dark-lift); padding: 48px 24px; }
@@ -583,7 +589,14 @@
           <span class="eyebrow-script">Free resource</span>
           <h2>The Claude Back Pocket Guide</h2>
           <hr class="section-rule" />
-          <p class="guide-desc">Not sure where to start with AI? Start here. The Back Pocket Guide is a plain-language reference for anyone who wants to get more from Claude without wading through hours of content. What the terms actually mean. How to get better results. What's worth your time. Designed to be bookmarked and revisited.</p>
+          <p class="guide-desc">Not sure where to start with AI? Start here...</p>
+          <p class="guide-desc">The Back Pocket Guide is a plain-language reference for anyone who wants to get more from Claude without wading through hours of content.</p>
+          <ul class="guide-list">
+            <li>What the terms actually mean.</li>
+            <li>How to get better results.</li>
+            <li>What's worth your time.</li>
+          </ul>
+          <p class="guide-desc">Designed to be bookmarked and revisited.</p>
           <a href="https://taniacarcenac.myflodesk.com/back-pocket-guide" class="btn btn-primary" target="_blank" rel="noopener">Get your free copy</a>
         </div>
       </div>
