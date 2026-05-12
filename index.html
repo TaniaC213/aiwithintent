@@ -70,6 +70,20 @@
     .section-cream .eyebrow { color: var(--denim); }
     .section-pink  .eyebrow { color: var(--denim); }
 
+    .eyebrow-script {
+      font-family: var(--font-script);
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 0;
+      text-transform: none;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .section-dark  .eyebrow-script { color: var(--denim-mid); }
+    .section-light .eyebrow-script { color: var(--denim); }
+    .section-cream .eyebrow-script { color: var(--denim); }
+    .section-pink  .eyebrow-script { color: var(--denim); }
+
     p { margin-bottom: 1.2em; }
     p:last-child { margin-bottom: 0; }
 
@@ -232,6 +246,23 @@
       margin-top: 24px;
       color: var(--dark);
     }
+    .recognition-caveat {
+      font-family: var(--font-script);
+      font-size: 22px;
+      color: var(--denim);
+      display: block;
+      margin-top: 16px;
+    }
+    .recognition-layout {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 40px;
+      align-items: start;
+    }
+    .recognition-layout img {
+      width: 100%;
+      border-radius: 8px;
+    }
 
     /* ABOUT TEASER */
     .about-split {
@@ -331,6 +362,16 @@
       font-size: clamp(16px, 2vw, 18px);
       margin: 16px 0 28px;
     }
+    .guide-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .guide-layout img {
+      width: 100%;
+      border-radius: 8px;
+    }
 
     /* FOOTER */
     .footer { background: var(--dark); border-top: 2px solid var(--dark-lift); padding: 48px 24px; }
@@ -371,6 +412,8 @@
     @media (max-width: 640px) {
       .about-split { grid-template-columns: 1fr; }
       .about-split-photo { max-width: 180px; }
+      .recognition-layout,
+      .guide-layout { grid-template-columns: 1fr; }
     }
     @media (max-width: 760px) {
       :root { --section-pad: 56px 20px; }
@@ -407,8 +450,8 @@
   <!-- HERO -->
   <section class="hero section-dark">
     <div class="hero-inner">
-      <span class="eyebrow">AI with Intent</span>
-      <h1>Ten hours of learning AI later...<br>When does it start giving them back?</h1>
+      <span class="eyebrow-script">AI with Intent</span>
+      <h1>Ten hours into learning about AI...<br>When do you start getting them back?</h1>
       <hr class="hero-rule" />
       <p class="hero-sub">There's a gap between everything you've put into figuring out AI...<br>The time, the courses, the content, the mental load of piecing it together from a dozen different creators.<br>And what your business is getting back!</p>
       <p class="hero-sub">The right setup is how you get a return on that investment.</p>
@@ -423,18 +466,27 @@
   <!-- RECOGNITION -->
   <section class="section-cream">
     <div class="section-wrap">
-      <h2>Recognise yourself here?</h2>
-      <hr class="section-rule" />
+      <div class="recognition-layout">
+        <div>
+          <span class="eyebrow-script">the honest bit</span>
+          <h2>Recognise yourself here?</h2>
+          <hr class="section-rule" />
 
-      <div class="quotes-grid">
-        <div class="quote-item">"I've done the courses, watched the videos, joined the groups. My business is running exactly the same as it was before."</div>
-        <div class="quote-item">"I use it. I just end up redoing most of what it gives me. I'm not sure it's saving me anything."</div>
-        <div class="quote-item">"I've got prompts saved everywhere. I try different things. None of it feels like it was built for how I work."</div>
-        <div class="quote-item">"I don't want to learn more about AI. I just want it to work."</div>
-      </div>
+          <div class="quotes-grid">
+            <div class="quote-item">"I've done the courses, watched the videos, joined the groups. My business is running exactly the same as it was before."</div>
+            <div class="quote-item">"I use it. I just end up redoing most of what it gives me. I'm not sure it's saving me anything."</div>
+            <div class="quote-item">"I've got prompts saved everywhere. I try different things. None of it feels like it was built for how I work."</div>
+            <div class="quote-item">"I don't want to learn more about AI. I just want it to work."</div>
+          </div>
 
-      <div class="recognition-close">
-        <p>You've been learning from a hundred different sources, none of them designed around your business. What you've learned from diving in has value. But do you have the foundation for any of it to run on?</p>
+          <div class="recognition-close">
+            <p>You've been learning from a hundred different sources, none of them designed around your business. What you've learned from diving in has value.</p>
+            <span class="recognition-caveat">But do you have the foundation for any of it to run on?</span>
+          </div>
+        </div>
+        <div>
+          <img src="Actually used question.jpg" alt="Actually used question" />
+        </div>
       </div>
     </div>
   </section>
@@ -443,7 +495,7 @@
   <!-- ABOUT TANIA -->
   <section class="section-dark">
     <div class="section-wrap">
-      <span class="eyebrow">About Tania</span>
+      <span class="eyebrow-script">where this came from</span>
       <h2 style="color: var(--cream);">I went down the rabbit hole so you don't have to.</h2>
       <hr class="section-rule" />
 
@@ -523,12 +575,17 @@
   <!-- BACK POCKET GUIDE -->
   <section class="section-pink" id="guide">
     <div class="section-wrap">
-      <div class="guide-inner">
-        <span class="eyebrow">Free resource</span>
-        <h2>The Claude Back Pocket Guide</h2>
-        <hr class="section-rule" />
-        <p class="guide-desc">Not sure where to start with AI? Start here. The Back Pocket Guide is a plain-language reference for anyone who wants to get more from Claude without wading through hours of content. What the terms actually mean. How to get better results. What's worth your time. Designed to be bookmarked and revisited.</p>
-        <a href="https://taniacarcenac.myflodesk.com/back-pocket-guide" class="btn btn-primary" target="_blank" rel="noopener">Get your free copy</a>
+      <div class="guide-layout">
+        <div>
+          <img src="Back pocket image.jpg" alt="The Claude Back Pocket Guide" />
+        </div>
+        <div class="guide-inner">
+          <span class="eyebrow-script">Free resource</span>
+          <h2>The Claude Back Pocket Guide</h2>
+          <hr class="section-rule" />
+          <p class="guide-desc">Not sure where to start with AI? Start here. The Back Pocket Guide is a plain-language reference for anyone who wants to get more from Claude without wading through hours of content. What the terms actually mean. How to get better results. What's worth your time. Designed to be bookmarked and revisited.</p>
+          <a href="https://taniacarcenac.myflodesk.com/back-pocket-guide" class="btn btn-primary" target="_blank" rel="noopener">Get your free copy</a>
+        </div>
       </div>
     </div>
   </section>
