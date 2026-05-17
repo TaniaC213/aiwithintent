@@ -1244,6 +1244,14 @@
              demo-day    → https://aiwithintent.com.au/quiz?result=demo-day
              ready-keys  → https://aiwithintent.com.au/quiz?result=ready-keys  */
         window.fd('form', { formId: formId, containerEl: '#flodesk-container' });
+        /* Flodesk auto-focuses the first input on load, scrolling past the page header.
+           Wait for it to render then blur and scroll back to the card top. */
+        setTimeout(function() {
+          if (document.activeElement && document.activeElement.tagName === 'INPUT') {
+            document.activeElement.blur();
+          }
+          document.getElementById('quizCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 600);
       } else {
         container.innerHTML =
           '<div style="background:rgba(255,255,255,0.07);border:2px dashed rgba(149,182,215,0.4);border-radius:6px;padding:16px 20px;text-align:center;font-size:13px;color:var(--denim-mid);margin-bottom:14px;">' +
