@@ -387,6 +387,46 @@
     }
     .guide-list li { margin-bottom: 0.4em; }
 
+    /* QUIZ PROMO */
+    .quiz-promo {
+      background: var(--dark);
+      border-top: 6px solid #FFD130;
+      border-bottom: 6px solid #FFD130;
+      padding: 64px 24px;
+    }
+    .quiz-promo-inner { max-width: var(--max-width); margin: 0 auto; }
+    .quiz-promo h2 { color: var(--cream); margin-bottom: 20px; }
+    .quiz-promo-body {
+      font-size: clamp(16px, 2vw, 18px);
+      color: var(--denim-light);
+      max-width: 620px;
+      margin-bottom: 32px;
+    }
+    .quiz-results-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+    .quiz-result-chip {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dark);
+      background: #FFD130;
+      padding: 6px 14px;
+      border-radius: 40px;
+    }
+    .btn-quiz {
+      background: #FFD130;
+      color: var(--dark);
+      border-color: #FFD130;
+      font-size: 15px;
+    }
+    .btn-quiz:hover { background: #f5c800; border-color: #f5c800; }
+
     /* FOOTER */
     .footer { background: var(--dark); border-top: 2px solid var(--dark-lift); padding: 48px 24px; }
     .footer-inner {
@@ -449,6 +489,7 @@
         <ul class="nav-links" id="navLinks">
           <li><a href="/" class="active">Home</a></li>
           <li><a href="/about.html">About</a></li>
+          <li><a href="/quiz">Take the Quiz</a></li>
           <li><a href="/out-of-your-head.html">Out of Your Head</a></li>
           <li class="nav-mobile-book"><a href="https://tidycal.com/tcarcenac/ooyh-discovery" target="_blank" rel="noopener">Book a Discovery Call</a></li>
         </ul>
@@ -473,6 +514,23 @@
         <a href="https://tidycal.com/tcarcenac/ooyh-discovery" class="btn btn-primary" target="_blank" rel="noopener">Book a free discovery call</a>
         <a href="#guide" class="btn btn-outline-dark">Get the Back Pocket Guide</a>
       </div>
+    </div>
+  </section>
+
+
+  <!-- QUIZ PROMO -->
+  <section class="quiz-promo">
+    <div class="quiz-promo-inner">
+      <span class="eyebrow" style="color:#FFD130;">Free quiz</span>
+      <h2>Is Your Business Due for an AI Reno?</h2>
+      <p class="quiz-promo-body">Seven questions. Two minutes. Find out exactly where your business stands with AI and what the smartest next move looks like from here. You'll walk away with a real answer, not a generic checklist.</p>
+      <div class="quiz-results-row">
+        <span class="quiz-result-chip">Still on the Mood Board</span>
+        <span class="quiz-result-chip">Plans Drawn, Builder Not Booked</span>
+        <span class="quiz-result-chip">Demo Day</span>
+        <span class="quiz-result-chip">Ready for the Keys</span>
+      </div>
+      <a href="/quiz" class="btn btn-quiz">Take the quiz &rarr;</a>
     </div>
   </section>
 
@@ -621,6 +679,7 @@
       </div>
       <div class="footer-links">
         <a href="/about.html">About Tania</a>
+        <a href="/quiz">AI Reno Quiz</a>
         <a href="/out-of-your-head.html">Out of Your Head</a>
         <a href="https://taniacarcenac.com/contact">Contact</a>
         <a href="https://tidycal.com/tcarcenac/ooyh-discovery" target="_blank" rel="noopener">Book a Discovery Call</a>
