@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Claude Setup | Mindful Parenting Lifestyle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --plum:       #2E2845;
+      --denim:      #25587F;
+      --mid-denim:  #95B6D7;
+      --pale-denim: #D6E7F7;
+      --cream:      #EEE6DE;
+      --pale-pink:  #FAEFF3;
+      --hot-pink:   #D4336E;
+      --white:      #ffffff;
+      --text:       #1a1a2e;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(140deg, var(--pale-denim) 0%, var(--cream) 100%);
+      min-height: 100vh;
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 24px 20px; }
+
+    .header {
+      text-align: center;
+      padding: 50px 30px 42px;
+      background: var(--plum);
+      color: var(--white);
+      border-radius: 16px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 260px; height: 260px;
+      background: rgba(212,51,110,0.12);
+      border-radius: 50%;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 180px; height: 180px;
+      background: rgba(149,182,215,0.08);
+      border-radius: 50%;
+    }
+    .header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .header .subtitle {
+      font-size: 1.6rem;
+      color: var(--mid-denim);
+      font-weight: 600;
+      position: relative;
+    }
+    .header .meta {
+      margin-top: 14px;
+      font-size: 0.88rem;
+      opacity: 0.6;
+      position: relative;
+    }
+
+    .recording-banner {
+      background: linear-gradient(135deg, var(--hot-pink) 0%, #b8275e 100%);
+      color: var(--white);
+      padding: 22px 28px;
+      border-radius: 12px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .recording-banner .rb-left { display: flex; align-items: center; gap: 16px; flex: 1; min-width: 220px; }
+    .recording-banner .icon { font-size: 2.2rem; flex-shrink: 0; }
+    .recording-banner h3 { font-family: 'Libre Baskerville', serif; font-size: 1.05rem; margin-bottom: 3px; }
+    .recording-banner p { font-size: 0.88rem; opacity: 0.9; }
+    .recording-banner a {
+      background: var(--white);
+      color: var(--hot-pink);
+      padding: 11px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .recording-banner a:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      background: rgba(255,255,255,0.97);
+      padding: 14px 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(46,40,69,0.14);
+    }
+    .nav a {
+      padding: 9px 14px;
+      border: 2px solid transparent;
+      background: var(--pale-denim);
+      color: var(--plum);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.83rem;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .nav a:hover { background: var(--mid-denim); color: var(--white); text-decoration: none; }
+
+    body:not(:has(.section:target)) .nav a[href="#workspace"],
+    body:has(#workspace:target)     .nav a[href="#workspace"] { background: var(--plum); color: var(--white); }
+    body:has(#skills:target)        .nav a[href="#skills"]    { background: var(--plum); color: var(--white); }
+    body:has(#tasks:target)         .nav a[href="#tasks"]     { background: var(--plum); color: var(--white); }
+    body:has(#tips:target)          .nav a[href="#tips"]      { background: var(--plum); color: var(--white); }
+    body:has(#nextsteps:target)     .nav a[href="#nextsteps"] { background: var(--plum); color: var(--white); }
+    body:has(#thankyou:target)      .nav a[href="#thankyou"]  { background: var(--plum); color: var(--white); }
+
+    .section {
+      display: none;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 14px rgba(46,40,69,0.07);
+      scroll-margin-top: 90px;
+    }
+    .section:target { display: block; animation: fadeIn 0.3s ease; }
+    body:not(:has(.section:target)) #workspace { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section h2 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--plum);
+      font-size: 1.75rem;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--pale-denim);
+    }
+    .section h3 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--denim);
+      font-size: 1.15rem;
+      margin: 28px 0 12px;
+    }
+    .section h4 { color: var(--plum); font-size: 0.98rem; font-weight: 700; margin: 16px 0 6px; }
+    .section p { margin-bottom: 10px; }
+
+    .box {
+      padding: 18px 22px;
+      border-radius: 10px;
+      margin: 16px 0;
+      border-left: 4px solid var(--denim);
+      background: var(--pale-denim);
+    }
+    .box.pink  { border-left-color: var(--hot-pink); background: var(--pale-pink); }
+    .box.cream { border-left-color: var(--mid-denim); background: var(--cream); }
+
+    .folder-map {
+      background: var(--plum);
+      color: #c4d8ec;
+      padding: 22px 26px;
+      border-radius: 10px;
+      font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 1.9;
+      margin: 16px 0;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .folder-map .f-dir  { color: var(--mid-denim); font-weight: 600; }
+    .folder-map .f-file { color: #e8d8f0; }
+    .folder-map .f-note { color: #7a9bb5; font-style: italic; }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin: 20px 0;
+    }
+    .card {
+      background: var(--white);
+      border: 2px solid var(--pale-denim);
+      border-radius: 12px;
+      padding: 22px;
+      transition: all 0.2s;
+    }
+    .card:hover { border-color: var(--plum); box-shadow: 0 4px 18px rgba(46,40,69,0.1); }
+    .skill-tag {
+      display: inline-block;
+      background: var(--plum);
+      color: var(--white);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .skill-tag.brand { background: var(--hot-pink); }
+    .card h4 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--plum);
+      font-size: 1.02rem;
+      margin: 0 0 8px;
+    }
+    .card p { font-size: 0.88rem; color: #555; line-height: 1.65; margin: 0; }
+    .card .trigger {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--pale-denim);
+      font-size: 0.83rem;
+      color: var(--denim);
+    }
+    .card .trigger strong { display: block; color: var(--plum); margin-bottom: 3px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.4px; }
+
+    table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.9rem; }
+    th { background: var(--plum); color: var(--white); padding: 12px 16px; text-align: left; font-weight: 600; }
+    td { padding: 11px 16px; border-bottom: 1px solid var(--pale-denim); vertical-align: top; }
+    tr:nth-child(even) td { background: #fafbff; }
+
+    .prompt-box {
+      background: var(--plum);
+      color: #c4d8ec;
+      padding: 44px 20px 18px 20px;
+      border-radius: 10px;
+      margin: 12px 0;
+      font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+      font-size: 0.83rem;
+      white-space: pre-wrap;
+      position: relative;
+      line-height: 1.65;
+    }
+    .prompt-box .copy-btn {
+      position: absolute;
+      top: 11px; right: 11px;
+      background: var(--hot-pink);
+      color: var(--white);
+      border: none;
+      padding: 5px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.73rem;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+    }
+    .prompt-box .copy-btn:hover { background: #b8275e; }
+
+    .step-list { list-style: none; padding: 0; margin: 14px 0; }
+    .step-list li {
+      display: flex;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--pale-denim);
+      align-items: flex-start;
+    }
+    .step-list li:last-child { border-bottom: none; }
+    .step-num {
+      background: var(--plum);
+      color: var(--white);
+      min-width: 26px; height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .tip-list { display: flex; flex-direction: column; gap: 14px; margin: 16px 0; }
+    .tip-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px;
+      background: var(--cream);
+      border-radius: 10px;
+    }
+    .tip-num {
+      background: var(--hot-pink);
+      color: var(--white);
+      min-width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+    }
+    .tip-content h4 { color: var(--plum); margin: 0 0 5px; }
+    .tip-content p { font-size: 0.9rem; color: #444; margin: 0; }
+    .tip-content ul { font-size: 0.9rem; color: #444; padding-left: 20px; margin: 6px 0 0; }
+
+    .action-item {
+      background: var(--pale-denim);
+      padding: 13px 18px;
+      border-radius: 8px;
+      margin: 9px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .action-item input[type="checkbox"] {
+      margin-top: 3px;
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      accent-color: var(--plum);
+      cursor: pointer;
+    }
+
+    .revision-box {
+      border: 2px solid var(--mid-denim);
+      border-radius: 12px;
+      padding: 24px 26px;
+      background: var(--pale-denim);
+      margin: 22px 0;
+    }
+    .revision-box h3 { margin-top: 0; color: var(--plum); }
+    .revision-box p { margin: 8px 0; font-size: 0.93rem; }
+
+    .thankyou-box {
+      background: linear-gradient(135deg, var(--plum) 0%, var(--denim) 100%);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 36px;
+      margin-bottom: 28px;
+      text-align: center;
+    }
+    .thankyou-box h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.6rem;
+      margin-bottom: 14px;
+      color: var(--white);
+    }
+    .thankyou-box p { opacity: 0.9; font-size: 0.97rem; line-height: 1.8; margin-bottom: 10px; }
+
+    .testimonial-qs {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 28px 30px;
+      margin: 24px 0;
+    }
+    .testimonial-qs h3 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--plum);
+      font-size: 1.15rem;
+      margin: 0 0 6px;
+    }
+    .testimonial-qs .intro { font-size: 0.9rem; color: #555; margin-bottom: 18px; }
+    .q-item {
+      display: flex;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--pale-denim);
+      align-items: flex-start;
+    }
+    .q-item:last-child { border-bottom: none; }
+    .q-num {
+      background: var(--plum);
+      color: var(--white);
+      min-width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .q-item p { font-size: 0.93rem; color: #333; margin: 0; line-height: 1.7; }
+
+    .mailto-btn {
+      display: inline-block;
+      background: var(--hot-pink);
+      color: var(--white);
+      padding: 14px 30px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-top: 18px;
+      transition: all 0.2s;
+    }
+    .mailto-btn:hover { background: #b8275e; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(212,51,110,0.35); text-decoration: none; }
+
+    a { color: var(--hot-pink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .footer {
+      text-align: center;
+      padding: 36px 30px;
+      background: var(--plum);
+      color: var(--white);
+      border-radius: 16px;
+      margin-top: 28px;
+    }
+    .footer h3 { font-family: 'Libre Baskerville', serif; color: var(--white); margin-bottom: 8px; font-size: 1.3rem; }
+    .footer p { font-size: 0.9rem; opacity: 0.8; margin: 4px 0; }
+    .footer a { color: var(--mid-denim); }
+
+    @media (max-width: 620px) {
+      .header h1 { font-size: 1.8rem; }
+      .header .subtitle { font-size: 1.25rem; }
+      .nav { position: static; }
+      .nav a { font-size: 0.77rem; padding: 8px 10px; }
+      .section { padding: 24px 18px; }
+      .recording-banner { flex-direction: column; text-align: center; }
+      .recording-banner .rb-left { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>Your Claude Setup</h1>
+    <p class="subtitle">Mindful Parenting Lifestyle</p>
+    <p class="meta">Built by Tania Carcenac &nbsp;·&nbsp; Out of Your Head &nbsp;·&nbsp; June 2026</p>
+  </div>
+
+  <div class="recording-banner">
+    <div class="rb-left">
+      <span class="icon">🎥</span>
+      <div>
+        <h3>Your Reboot Call Recording</h3>
+        <p>9 June 2026. Everything we walked through, with timestamps and full transcript.</p>
+      </div>
+    </div>
+    <a href="https://fathom.video/calls/701827303" target="_blank">Watch Recording →</a>
+  </div>
+
+  <div class="nav">
+    <a href="#workspace">Your Workspace</a>
+    <a href="#skills">Your Skills</a>
+    <a href="#tasks">Your Task</a>
+    <a href="#tips">Quick Tips</a>
+    <a href="#nextsteps">Next Steps</a>
+    <a href="#thankyou">A Note from Tania</a>
+  </div>
+
+  <!-- WORKSPACE -->
+  <div id="workspace" class="section">
+    <h2>Your Mindful Parenting Lifestyle Workspace</h2>
+
+    <p>This isn't just a folder of files. It's a system where Claude already knows your podcast, your brand, and your workflow before you type your first message. When you open Claude Cowork and select the <strong>Mindful Parenting Lifestyle</strong> folder as your workspace, Claude reads your <code>CLAUDE.md</code> automatically — it knows who Nina is, who your ideal listener is, how your show notes are structured, and what all seven skills do before you say a word.</p>
+
+    <h3>What's in the folder</h3>
+    <div class="folder-map"><span class="f-dir">📁 Mindful Parenting Lifestyle/</span>
+├── <span class="f-file">CLAUDE.md</span>                            <span class="f-note">← The brain. Claude reads this every session.</span>
+├── <span class="f-file">README.md</span>                            <span class="f-note">← Full guide to the system and how to use it.</span>
+├── <span class="f-file">task-setup.md</span>                        <span class="f-note">← Setup guide for your Podcast Content Pack task.</span>
+└── <span class="f-dir">📁 skills/</span>
+    ├── <span class="f-dir">brand-voice/</span>                      <span class="f-note">← How Nina sounds</span>
+    ├── <span class="f-dir">brand-guidelines/</span>                 <span class="f-note">← Visual identity (installed in Claude as "visual-identity")</span>
+    ├── <span class="f-dir">podcast-title/</span>                    <span class="f-note">← 10 title options + SEO keyword</span>
+    ├── <span class="f-dir">podcast-shownotes/</span>                <span class="f-note">← Full show notes per your template</span>
+    ├── <span class="f-dir">podcast-instagram/</span>                <span class="f-note">← Reel quotes, static quotes, carousels</span>
+    ├── <span class="f-dir">podcast-newsletter/</span>               <span class="f-note">← Two newsletter blurb versions</span>
+    └── <span class="f-dir">podcast-orchestrator/</span>             <span class="f-note">← Runs all of the above in one go</span></div>
+
+    <div class="box cream">
+      <h4>Note on the visual identity skill</h4>
+      <p>The skill folder is called <strong>brand-guidelines</strong> on your computer, but during the Reboot Call we installed it in Claude as <strong>visual-identity</strong> (to work around a naming conflict). The skill works exactly the same — just use <code>/visual-identity</code> to trigger it, or enable it in your skills list.</p>
+    </div>
+
+    <h3>Updating CLAUDE.md</h3>
+    <p>When something changes — a new episode format, a new offer, updated contact details — you never edit the file directly. Just tell Claude:</p>
+    <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Update the CLAUDE.md to reflect that [what's changed]. Also update the README if the folder structure has changed.</div>
+    <p>Claude makes the edit for you. Simple as that.</p>
+  </div>
+
+  <!-- SKILLS -->
+  <div id="skills" class="section">
+    <h2>Your 7 Skills</h2>
+    <p>These are installed and active in Claude. They're what makes Claude work the way it does for Mindful Parenting Lifestyle — structured, consistent, and tailored to your podcast workflow, rather than starting from scratch every time.</p>
+
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="skill-tag brand">Brand</div>
+        <h4>brand-voice</h4>
+        <p>Keeps everything sounding like Nina — warm, real, permission-giving, never preachy. Apply it whenever you're writing anything for the podcast, social media, or website.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          Enable the skill and ask Claude to write or review any content. Or say "write this in my voice."
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="skill-tag brand">Brand</div>
+        <h4>visual-identity</h4>
+        <p>Your full colour palette (burnt orange, grey blue, and all secondaries with HEX codes), Yemilla and Roboto fonts, and visual style guide for Canva work.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          Enable the skill and ask about colours, fonts, or design decisions. Type <code>/visual-identity</code> in any chat.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="skill-tag">Podcast</div>
+        <h4>podcast-title</h4>
+        <p>Generates 10 episode title options (all under 60 characters, mix of questions and statements) plus a recommended SEO focus keyword from your transcript.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          Enable the skill and paste in your episode transcript.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="skill-tag">Podcast</div>
+        <h4>podcast-shownotes</h4>
+        <p>Creates complete show notes following your Show Notes Template V2 — all 8 sections, under 2,000 characters, in your voice, with your fixed Let's Connect copy baked in.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          Enable the skill with your transcript, chosen title, and keyword.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="skill-tag">Podcast</div>
+        <h4>podcast-instagram</h4>
+        <p>Produces reel hook quotes (A), static quote posts (B), and full carousel options with all slide copy (C) — all verbatim from your transcript. Captions and carousel depth will improve as you refine the skill with your feedback.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          Enable the skill and paste in your transcript.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="skill-tag">Podcast</div>
+        <h4>podcast-newsletter</h4>
+        <p>Writes two versions of the Mindful Parenting Tip section for your weekly Wix newsletter — one that explains a single tip with a listen link, one that gives an episode overview.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          Enable the skill and paste in your transcript.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="skill-tag">Podcast</div>
+        <h4>podcast-orchestrator</h4>
+        <p>Runs the full weekly content pack in sequence — titles, show notes, social pack, newsletter — from a single transcript. This is the skill behind your Podcast Content Pack task. One run, four output files.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          Use the Podcast Content Pack task (see Your Task tab), or say "run the podcast orchestrator skill."
+        </div>
+      </div>
+
+    </div>
+
+    <h3>Updating a skill</h3>
+    <div class="box pink">
+      <p>When you want to refine a skill based on feedback, just have a conversation with Claude — tell it what landed, what didn't, show it an example if you have one. At the end of that conversation, say:</p>
+      <div class="prompt-box" style="margin-top: 14px;"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Update the podcast-instagram skill to reflect everything we've discussed. Update the installed skill in Claude and save the updated SKILL.md to my Mindful Parenting Lifestyle skills folder on OneDrive.</div>
+      <p style="margin-top: 10px;">Claude handles both. If the file and the installed skill drift apart, your outputs won't match what the files say — and you'll wonder why things feel off.</p>
+    </div>
+  </div>
+
+  <!-- TASKS -->
+  <div id="tasks" class="section">
+    <h2>Your Podcast Content Pack Task</h2>
+    <p>This task lives in Claude's <strong>Scheduled</strong> section. You run it manually whenever you're ready — drop a transcript in your WIP folder and hit Run Now. It runs the full podcast-orchestrator skill and saves four output files directly to your 01 WIP folder on OneDrive.</p>
+
+    <h3>How to run it</h3>
+    <ol class="step-list">
+      <li><span class="step-num">1</span><span>Save your episode transcript file to your <strong>01 WIP folder</strong> on OneDrive</span></li>
+      <li><span class="step-num">2</span><span>Open Claude Cowork → go to <strong>Scheduled</strong> → find <strong>Podcast Content Pack</strong></span></li>
+      <li><span class="step-num">3</span><span>Click <strong>Run Now</strong></span></li>
+      <li><span class="step-num">4</span><span>Claude finds the transcript, generates titles (with a recommended option), runs the full content pack</span></li>
+      <li><span class="step-num">5</span><span>Four files appear in your 01 WIP folder when it's done</span></li>
+      <li><span class="step-num">6</span><span>Review each file, choose what you want to use, and paste into Buzzsprout, Airtable, and Wix</span></li>
+    </ol>
+
+    <div class="box cream">
+      <h4>Make sure Claude stays open while it runs</h4>
+      <p>The task needs Claude Cowork to be open and active on your computer while it runs. If you close it mid-run, the task will stop. You can do other things while it's running — just don't close Claude.</p>
+    </div>
+
+    <p>The task will produce four files — titles, show notes, social pack, and newsletter — ready to review, edit further with Claude, or copy into your tools.</p>
+  </div>
+
+  <!-- TIPS -->
+  <div id="tips" class="section">
+    <h2>Quick Tips</h2>
+    <p>Four things that will make a real difference as you get comfortable using this.</p>
+
+    <div class="tip-list">
+      <div class="tip-item">
+        <div class="tip-num">1</div>
+        <div class="tip-content">
+          <h4>Update skills in both places</h4>
+          <p>When you refine a skill through Claude, always ask it to save the update to your OneDrive folder too. The version in Claude and the file in your workspace need to stay in sync. Otherwise you iterate in Claude but the file falls behind.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">2</div>
+        <div class="tip-content">
+          <h4>Don't let chats run too long</h4>
+          <p>Long chats burn through tokens fast, so Claude has to reread everything each time. When a chat gets long, ask for a handover and start fresh:</p>
+          <div class="prompt-box" style="margin-top: 10px;"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Summarise everything we've covered in this chat in a handover document so I can start a fresh conversation.</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">3</div>
+        <div class="tip-content">
+          <h4>Check your token usage</h4>
+          <p>Go to <strong>Settings → your name at the bottom → Usage</strong> to see how much you've used in your current session and when it resets. Handy for planning when to do heavier work.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">4</div>
+        <div class="tip-content">
+          <h4>Choose your model before you start</h4>
+          <p>Once you've opened a project chat, you can't change the model mid-stream, so pick intentionally at the start:</p>
+          <ul>
+            <li><strong>Haiku</strong>: quick questions, short tasks, general back-and-forth</li>
+            <li><strong>Sonnet</strong>: the everyday workhorse, quality and speed balanced</li>
+            <li><strong>Opus</strong>: deep thinking, complex strategy, nuanced analysis</li>
+            <li><strong>Adaptive</strong>: Claude decides what each part of the task needs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>Quick reference</h3>
+    <table>
+      <tr>
+        <th>What you want to do</th>
+        <th>What to say or do</th>
+      </tr>
+      <tr>
+        <td>Run the weekly content pack</td>
+        <td>Cowork → Scheduled → Podcast Content Pack → Run Now</td>
+      </tr>
+      <tr>
+        <td>Use a skill in a chat</td>
+        <td>Type <code>/[skill-name]</code> or just ask naturally — Claude draws in relevant skills</td>
+      </tr>
+      <tr>
+        <td>Refine a skill</td>
+        <td>Tell Claude what to change, then ask it to update both the Claude skill and the OneDrive file</td>
+      </tr>
+      <tr>
+        <td>Check brand colours or fonts</td>
+        <td>Type <code>/visual-identity</code> or enable the skill and ask</td>
+      </tr>
+      <tr>
+        <td>Update CLAUDE.md</td>
+        <td>"Update the CLAUDE.md to reflect that [what changed]"</td>
+      </tr>
+      <tr>
+        <td>Manage a long chat</td>
+        <td>"Summarise this chat as a handover document" → start a fresh chat</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- NEXT STEPS -->
+  <div id="nextsteps" class="section">
+    <h2>Next Steps</h2>
+
+    <h3>Your immediate to-do list</h3>
+    <div class="action-item">
+      <input type="checkbox">
+      <span>Refine the podcast-instagram skill — captions need more depth, carousels less text per slide. Have a conversation with Claude about what you'd like changed, show it an example or two, then ask it to update both copies.</span>
+    </div>
+    <div class="action-item">
+      <input type="checkbox">
+      <span>Run the content pack on your next episode — drop the transcript in your 01 WIP folder, then Cowork → Scheduled → Podcast Content Pack → Run Now.</span>
+    </div>
+    <div class="action-item">
+      <input type="checkbox">
+      <span>Test individual skills on older episodes — run just the title skill on one, just the show notes on another. This is how the system gets calibrated to your standards over time.</span>
+    </div>
+    <div class="action-item">
+      <input type="checkbox">
+      <span>Set up a Podcast project in Claude for ongoing brainstorming and episode planning (see below).</span>
+    </div>
+
+    <h3>Using Projects for your podcast</h3>
+    <div class="box">
+      <h4>Chat, Projects, and Claude Code — when to use what</h4>
+      <p><strong>Chat</strong> — best for quick, one-off questions or tasks that aren't related to your podcast workflow. Memory is on, so Claude knows a bit about you, but your skills aren't loaded.</p>
+      <p style="margin-top: 8px;"><strong>Projects (where your setup lives)</strong> — use this for all podcast content work. By linking your OneDrive podcast folder, your podcast info is always loaded and Claude has full context of your setup from the start of every conversation.</p>
+      <p style="margin-top: 8px;"><strong>Claude Code</strong> — worth exploring when you want to work directly with files on your computer rather than through a chat interface.</p>
+      <p style="margin-top: 8px;"><strong>What to set up:</strong> Creating a separate project for podcast brainstorming and episode planning is good practice — it keeps that thinking and context separate from your content production workflow.</p>
+    </div>
+
+    <h3>Revision window</h3>
+    <div class="revision-box">
+      <h3>Two rounds of revisions included</h3>
+      <p>If something in your setup isn't quite right — a skill that needs adjusting, wording that feels off, a task that needs a tweak — get in touch and we'll fix it.</p>
+      <p><strong>Revision window closes:</strong> 23 June 2026</p>
+      <p><strong>What counts:</strong> Adjustments and refinements to what's already built. Not new skills or additional deliverables. Those are a separate conversation. One I'd love to have with you when you're ready for the next phase!</p>
+      <p><strong>How to request a revision:</strong> Email Tania at <a href="mailto:tania@taniacarcenac.com">tania@taniacarcenac.com</a> clearly describing what needs revising. I'll get back to you within 2 working days.</p>
+    </div>
+  </div>
+
+  <!-- THANK YOU -->
+  <div id="thankyou" class="section">
+    <h2>A Note from Tania</h2>
+
+    <div class="thankyou-box">
+      <h3>Nina, we got there in the end!</h3>
+      <p>We had a few moments today where I wasn't sure it was going to cooperate — that naming conflict had me stumped for a while! But when you asked Claude who your ideal listener was and it came back with Amy, right down to the detail about not having to overhaul her whole life, there were smiles on both sides of the screen. That's the bit that makes all the setup worth it.</p>
+      <p>I hope it starts saving you the kind of time that means you can record three or four episodes in a row and just let it run.</p>
+    </div>
+
+    <div class="testimonial-qs">
+      <h3>Would you share your experience?</h3>
+      <p class="intro">A short testimonial from you makes a real difference for other business owners who are wondering whether something like this is right for them. Your honest experience — whatever it is — is more valuable than you know.</p>
+
+      <div style="text-align: center; margin-top: 24px;">
+        <a href="https://forms.gle/oU7L2ZNQiC433u8G9" target="_blank" class="mailto-btn">Share Your Experience →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <h3>Out of Your Head</h3>
+    <p>Helping small business owners build their AI foundations &nbsp;·&nbsp; <a href="https://aiwithintent.com.au">aiwithintent.com.au</a></p>
+  </div>
+
+</div>
+
+<script>
+  function copyPrompt(btn) {
+    const box = btn.parentElement;
+    const text = box.textContent.replace('Copy', '').trim();
+    navigator.clipboard.writeText(text);
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  }
+</script>
+</body>
+</html>
