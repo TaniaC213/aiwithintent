@@ -489,6 +489,22 @@
     .ooyh-faq-answer-inner p { margin-bottom: 0.8em !important; }
     .ooyh-faq-answer-inner p:last-child { margin-bottom: 0 !important; }
 
+    /* TESTIMONIALS */
+    .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 48px; }
+    @media (max-width: 640px) { .testimonials-grid { grid-template-columns: 1fr; } }
+    .testimonial-card { background: var(--dark-lift); border-radius: 10px; padding: 32px; }
+    .testimonial-quote {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: clamp(16px, 2vw, 19px);
+      line-height: 1.6;
+      color: var(--cream);
+      margin-bottom: 20px;
+      padding-left: 20px;
+      border-left: 3px solid var(--pink);
+    }
+    .testimonial-attr { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--denim-mid); }
+
     /* CLOSING */
     .closing-body { font-size: clamp(16px, 2vw, 19px); max-width: 680px; }
     .closing-body p { margin-bottom: 1.4em; }
@@ -506,6 +522,8 @@
     .footer-links a { color: var(--denim-mid); transition: color 0.2s; }
     .footer-links a:hover { color: var(--cream); }
     .footer-note { width: 100%; border-top: 1px solid var(--dark-lift); padding-top: 24px; font-size: 13px; color: var(--denim-mid); }
+    .footer-note a { color: var(--denim-mid); text-decoration: underline; }
+    .footer-note a:hover { color: var(--cream); }
 
     /* RESPONSIVE */
     @media (max-width: 600px) {
@@ -830,6 +848,30 @@
   </section>
 
 
+  <!-- TESTIMONIALS -->
+  <section class="section-cream" id="testimonials">
+    <div class="section-wrap">
+      <span class="eyebrow">Client results</span>
+      <h2>What clients are saying.</h2>
+      <hr class="section-rule" />
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">Don't even think about it &mdash; honestly just do it. Your future self will thank you for it.</p>
+          <p class="testimonial-attr">Lisa Stephenson</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">100% worth the investment. I love how Tania did the work for me but then also explained what she'd done in an easy to understand non-techy way so I understand the process without having to do the process.</p>
+          <p class="testimonial-attr">Nina &mdash; Mindful Parenting Lifestyle</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
   <!-- IS THIS FOR YOU -->
   <section class="section-dark" id="fit">
     <div class="section-wrap">
@@ -978,7 +1020,7 @@
       </div>
     </div>
     <div class="footer-inner" style="margin-top: 0; padding-top: 0;">
-      <p class="footer-note">&copy; 2026 Tania Carcenac. All prices in AUD. Tania acknowledges the Traditional Custodians of the lands on which she lives and works.</p>
+      <p class="footer-note">&copy; 2026 Tania Carcenac. All prices in AUD. Tania acknowledges the Traditional Custodians of the lands on which she lives and works. &nbsp;&middot;&nbsp; <a href="/privacy">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="/terms">Terms of Service</a></p>
     </div>
   </footer>
 
