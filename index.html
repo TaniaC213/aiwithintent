@@ -498,6 +498,32 @@
     .footer-note a { color: var(--denim-mid); text-decoration: underline; }
     .footer-note a:hover { color: var(--cream); }
 
+    /* HOME TESTIMONIALS */
+    .home-testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 48px; }
+    @media (max-width: 640px) { .home-testimonials-grid { grid-template-columns: 1fr; } }
+    .home-testimonial-card { background: var(--dark-lift); border-radius: 10px; padding: 32px; display: flex; flex-direction: column; }
+    .home-testimonial-context {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--denim-mid);
+      margin-bottom: 16px;
+    }
+    .home-testimonial-quote {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: clamp(16px, 2vw, 18px);
+      line-height: 1.6;
+      color: var(--cream);
+      padding-left: 20px;
+      border-left: 3px solid var(--pink);
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .home-testimonial-attr { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--denim-mid); }
+
     /* RESPONSIVE */
     @media (max-width: 600px) {
       .nav-hamburger { display: flex; }
@@ -735,6 +761,32 @@
       <div class="btn-group">
         <a href="https://tidycal.com/tcarcenac/ooyh-discovery" class="btn btn-primary" target="_blank" rel="noopener">Book a discovery call</a>
         <a href="/out-of-your-head.html" class="btn btn-outline-light">See the full offer</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- HOME TESTIMONIALS -->
+  <section class="section-dark">
+    <div class="section-wrap">
+      <span class="eyebrow">What clients are saying</span>
+      <h2 style="color: var(--cream);">In their own words.</h2>
+      <hr class="section-rule" />
+
+      <div class="home-testimonials-grid">
+
+        <div class="home-testimonial-card">
+          <p class="home-testimonial-context">On deciding to have it done for her</p>
+          <p class="home-testimonial-quote">Definitely to save time and also not knowing where to start &mdash; I didn&rsquo;t have the brain power to spend the time learning.</p>
+          <p class="home-testimonial-attr">Lisa Stephenson</p>
+        </div>
+
+        <div class="home-testimonial-card">
+          <p class="home-testimonial-context">On choosing done-for-you over figuring it out herself</p>
+          <p class="home-testimonial-quote">I know I have the ability to learn how to use and set up Claude, but I just didn&rsquo;t have the time or the patience to sit down and figure it all out.</p>
+          <p class="home-testimonial-attr">Nina &mdash; Mindful Parenting Lifestyle</p>
+        </div>
+
       </div>
     </div>
   </section>
