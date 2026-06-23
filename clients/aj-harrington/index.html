@@ -1,674 +1,971 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Your Out of Your Head Plan · AJ Harrington Photos</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet"/>
-<style>
-:root {
-  --dark:       #2E2845;
-  --denim:      #25587F;
-  --denim-mid:  #95B6D7;
-  --denim-light:#D6E7F7;
-  --cream:      #EEE6DE;
-  --pale-pink:  #FAEFF3;
-  --pink:       #D4336E;
-  --white:      #FFFFFF;
-  --font-h: 'Libre Baskerville', Georgia, serif;
-  --font-b: 'Nunito', system-ui, sans-serif;
-  --font-s: 'Caveat', cursive;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--font-b);background:var(--denim-light);color:var(--dark);overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased;font-size:17px}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Claude Setup | AJ Harrington Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(37,88,127,.15);height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 40px}
-.nav-brand{font-family:var(--font-h);font-size:1.05rem;font-weight:400;color:var(--dark);font-style:italic}
-.nav-links{display:flex;gap:24px}
-.nav-links a{font-size:.68rem;font-weight:700;color:var(--denim);text-decoration:none;letter-spacing:.12em;text-transform:uppercase;transition:color .2s}
-.nav-links a:hover{color:var(--dark)}
-@media(max-width:680px){.nav-links{display:none}}
+    :root {
+      --plum:       #2E2845;
+      --denim:      #25587F;
+      --mid-denim:  #95B6D7;
+      --pale-denim: #D6E7F7;
+      --cream:      #EEE6DE;
+      --pale-pink:  #FAEFF3;
+      --hot-pink:   #D4336E;
+      --white:      #ffffff;
+      --text:       #1a1a2e;
+    }
 
-/* SECTION BACKGROUNDS */
-.s-denim-light{background:linear-gradient(150deg,#D6E7F7 0%,#C2D8EE 100%)}
-.s-cream      {background:linear-gradient(150deg,#EEE6DE 0%,#E2D9CF 100%)}
-.s-pink       {background:linear-gradient(150deg,#FAEFF3 0%,#F2DFEA 100%)}
-.s-denim-mid  {background:linear-gradient(150deg,#95B6D7 0%,#79A7CE 100%)}
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(140deg, var(--pale-denim) 0%, var(--cream) 100%);
+      min-height: 100vh;
+      color: var(--text);
+      line-height: 1.75;
+    }
 
-.sec{padding:48px 32px}
-.inner{max-width:1100px;margin:0 auto}
+    .container { max-width: 900px; margin: 0 auto; padding: 24px 20px; }
 
-/* TYPOGRAPHY */
-.eyebrow{font-family:var(--font-s);font-size:1.75rem;font-weight:700;color:var(--denim);display:inline-block;margin-bottom:8px}
-h2{font-family:var(--font-h);font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700;line-height:1.1;color:var(--dark);margin-bottom:12px}
-.sub{font-size:.95rem;color:var(--denim);max-width:580px;line-height:1.8;margin-bottom:40px;font-weight:300}
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      padding: 50px 30px 42px;
+      background: var(--plum);
+      color: var(--white);
+      border-radius: 16px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 260px; height: 260px;
+      background: rgba(212,51,110,0.12);
+      border-radius: 50%;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 180px; height: 180px;
+      background: rgba(149,182,215,0.08);
+      border-radius: 50%;
+    }
+    .header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .header .subtitle {
+      font-size: 1.6rem;
+      color: var(--mid-denim);
+      font-weight: 600;
+      position: relative;
+    }
+    .header .meta {
+      margin-top: 14px;
+      font-size: 0.88rem;
+      opacity: 0.6;
+      position: relative;
+    }
 
-/* HERO */
-.hero{min-height:100vh;background:linear-gradient(160deg,#C8DDEF 0%,#D6E7F7 45%,#C5DCF0 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 32px 40px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 72% 15%,rgba(212,51,110,.12),transparent 48%),radial-gradient(ellipse at 18% 82%,rgba(37,88,127,.16),transparent 45%),radial-gradient(ellipse at 50% 105%,rgba(149,182,215,.3),transparent 55%);pointer-events:none}
-.for-tag{font-family:var(--font-b);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--denim);border:1.5px solid rgba(37,88,127,.28);padding:7px 22px;border-radius:50px;display:inline-block;margin-bottom:28px}
-.hero h1{font-family:var(--font-h);font-size:clamp(2.8rem,7vw,5.2rem);font-weight:700;line-height:1.06;color:var(--dark);margin-bottom:18px}
-.hero h1 em{color:var(--denim);font-style:italic}
-.hero-p{font-size:clamp(.96rem,2vw,1.1rem);color:var(--denim);max-width:540px;margin:0 auto 40px;line-height:1.85;font-weight:300}
-.pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:48px}
-.pill{padding:7px 18px;border-radius:50px;font-size:.78rem;font-weight:700;font-family:var(--font-b);border:1.5px solid rgba(37,88,127,.3);color:var(--denim);background:rgba(37,88,127,.06)}
-.cue{color:var(--denim);font-size:.8rem;display:flex;flex-direction:column;align-items:center;gap:6px;animation:bob 3s ease-in-out infinite;cursor:pointer;font-family:var(--font-b)}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+    /* ── Recording Banner ── */
+    .recording-banner {
+      background: linear-gradient(135deg, var(--hot-pink) 0%, #b8275e 100%);
+      color: var(--white);
+      padding: 22px 28px;
+      border-radius: 12px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .recording-banner .rb-left { display: flex; align-items: center; gap: 16px; flex: 1; min-width: 220px; }
+    .recording-banner .icon { font-size: 2.2rem; flex-shrink: 0; }
+    .recording-banner h3 { font-family: 'Libre Baskerville', serif; font-size: 1.05rem; margin-bottom: 3px; }
+    .recording-banner p { font-size: 0.88rem; opacity: 0.9; }
+    .recording-banner a {
+      background: var(--white);
+      color: var(--hot-pink);
+      padding: 11px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .recording-banner a:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
 
-/* WHAT WE HEARD */
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:700px){.g3{grid-template-columns:1fr}}
-.hc{background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:28px;transition:border-color .25s,box-shadow .25s,transform .25s;box-shadow:0 4px 20px rgba(46,40,69,.08)}
-.hc:hover{border-color:var(--pink);box-shadow:0 6px 28px rgba(212,51,110,.12);transform:translateY(-2px)}
-.hc-icon{font-size:2rem;margin-bottom:12px}
-.hc h3{font-family:var(--font-h);font-size:1.05rem;font-weight:700;margin-bottom:10px;color:var(--dark)}
-.hc p{font-size:.87rem;color:var(--denim);line-height:1.72}
-.hc-q{font-size:.83rem;color:var(--dark);font-style:italic;margin-top:14px;padding:11px 14px;border-left:3px solid var(--denim);background:var(--denim-light);border-radius:0 6px 6px 0}
+    /* ── Navigation ── */
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      background: rgba(255,255,255,0.97);
+      padding: 14px 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(46,40,69,0.14);
+    }
+    .nav a {
+      padding: 9px 14px;
+      border: 2px solid transparent;
+      background: var(--pale-denim);
+      color: var(--plum);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.83rem;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .nav a:hover { background: var(--mid-denim); color: var(--white); text-decoration: none; }
 
-/* PHASE TABS */
-.ptabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
-.ptab{padding:10px 24px;border-radius:50px;font-size:.84rem;font-weight:700;cursor:pointer;border:2px solid var(--denim);background:transparent;color:var(--denim);transition:all .25s;font-family:var(--font-b)}
-.ptab:hover{border-color:var(--dark);color:var(--dark)}
-.ptab.active{background:var(--pink);border-color:var(--pink);color:var(--white)}
-.ppanel{display:none;animation:up .35s ease}
-.ppanel.on{display:block}
-@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    /* Active nav state */
+    body:not(:has(.section:target)) .nav a[href="#workspace"],
+    body:has(#workspace:target)           .nav a[href="#workspace"]           { background: var(--plum); color: var(--white); }
+    body:has(#skills:target)              .nav a[href="#skills"]              { background: var(--plum); color: var(--white); }
+    body:has(#projects:target)            .nav a[href="#projects"]            { background: var(--plum); color: var(--white); }
+    body:has(#tips:target)                .nav a[href="#tips"]                { background: var(--plum); color: var(--white); }
+    body:has(#global-instructions:target) .nav a[href="#global-instructions"] { background: var(--plum); color: var(--white); }
+    body:has(#nextsteps:target)           .nav a[href="#nextsteps"]           { background: var(--plum); color: var(--white); }
+    body:has(#thankyou:target)            .nav a[href="#thankyou"]            { background: var(--plum); color: var(--white); }
 
-.phead{display:flex;align-items:flex-start;gap:20px;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:28px;margin-bottom:20px}
-@media(max-width:600px){.phead{flex-direction:column}}
-.pbadge{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--denim-light),rgba(37,88,127,.22));display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;box-shadow:0 2px 10px rgba(37,88,127,.18)}
-.ptitle{font-family:var(--font-h);font-size:1.5rem;font-weight:700;color:var(--dark);margin-bottom:6px}
-.psub{font-size:.88rem;color:var(--denim);line-height:1.72;font-weight:300}
+    /* ── Sections - CSS :target navigation ── */
+    .section {
+      display: none;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 14px rgba(46,40,69,0.07);
+      scroll-margin-top: 90px;
+    }
 
-.dg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
-@media(max-width:700px){.dg{grid-template-columns:1fr}}
-.dc{background:var(--denim-light);border-radius:10px;padding:20px}
-.dc-icon{font-size:1.5rem;margin-bottom:10px}
-.dc h4{font-family:var(--font-h);font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:6px}
-.dc p{font-size:.84rem;color:var(--denim);line-height:1.65}
+    .section:target { display: block; animation: fadeIn 0.3s ease; }
+    body:not(:has(.section:target)) #workspace { display: block; }
 
-.steps{display:flex;flex-direction:column;gap:10px}
-.step{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:16px 20px}
-.snum{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--pink),#B5295C);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:var(--white);flex-shrink:0;box-shadow:0 2px 8px rgba(212,51,110,.35)}
-.scontent h4{font-size:.92rem;font-weight:700;color:var(--dark);margin-bottom:3px}
-.scontent p{font-size:.84rem;color:var(--denim);line-height:1.65}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-/* FLIP CARDS */
-.flip-hint{font-size:.82rem;color:var(--denim);margin-bottom:28px;text-align:center}
-.fg{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;padding:4px 0}
-.fc{flex:0 1 260px;max-width:290px;perspective:1000px;cursor:pointer}
-.fci{position:relative;width:100%;transform-style:preserve-3d;transition:transform .6s ease}
-.fc.fl .fci{transform:rotateY(180deg)}
-.fcf{position:relative;width:100%;min-height:240px;backface-visibility:hidden;border-radius:10px;padding:26px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;background:var(--white);border:2px solid var(--denim);transition:border-color .25s}
-.fc:hover .fcf{border-color:var(--pink)}
-.fcb{position:absolute;top:0;left:0;width:100%;height:100%;min-height:240px;backface-visibility:hidden;border-radius:10px;padding:22px;box-sizing:border-box;display:flex;flex-direction:column;overflow-y:auto;background:linear-gradient(145deg,#2E2845 0%,#3D3066 100%);border:2px solid var(--denim-mid);transform:rotateY(180deg)}
-.fco{font-size:1.9rem;margin-bottom:12px}
-.fcf h3{font-family:var(--font-h);font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--dark)}
-.fcf p{font-size:.84rem;color:var(--denim);line-height:1.65}
-.fh{font-size:.7rem;color:rgba(37,88,127,.5);margin-top:10px}
-.fcb-lbl{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--denim-mid);margin-bottom:12px;font-family:var(--font-b)}
-.fe{font-size:.83rem;background:rgba(61,53,96,.5);padding:9px 12px;border-radius:6px;margin:6px 0;border-left:3px solid var(--pink);line-height:1.6;color:var(--cream)}
+    .section h2 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--plum);
+      font-size: 1.75rem;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--pale-denim);
+    }
+    .section h3 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--denim);
+      font-size: 1.15rem;
+      margin: 28px 0 12px;
+    }
+    .section h4 { color: var(--plum); font-size: 0.98rem; font-weight: 700; margin: 16px 0 6px; }
+    .section p { margin-bottom: 10px; }
 
-/* BEFORE / AFTER */
-.bag{display:flex;flex-direction:column;gap:16px}
-.bacard{background:var(--white);border:2px solid var(--denim);border-radius:10px;overflow:hidden}
-.bacard-head{display:flex;align-items:center;gap:14px;padding:18px 24px;border-bottom:1px solid rgba(37,88,127,.15)}
-.bacard-head h3{font-family:var(--font-h);font-size:1.05rem;font-weight:700;color:var(--dark)}
-.bicon{font-size:1.4rem;flex-shrink:0}
-.batabs{display:flex;margin-left:auto}
-.stab{padding:6px 16px;font-size:.73rem;font-weight:700;cursor:pointer;border:none;background:transparent;color:var(--denim);font-family:var(--font-b);border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.06em;text-transform:uppercase}
-.stab.active{color:var(--dark);border-bottom-color:var(--pink)}
-.bastate{display:none;padding:20px 24px}
-.bastate.on{display:block;animation:up .3s ease}
-.ba-lbl{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:50px;display:inline-block;margin-bottom:10px;font-family:var(--font-b)}
-.bl-now  {background:var(--denim-light);color:var(--denim)}
-.bl-after{background:rgba(212,51,110,.1);color:var(--pink)}
-.bastate p{font-size:.9rem;color:var(--denim);line-height:1.8;margin-bottom:8px}
-.bastate p:last-child{margin-bottom:0}
+    /* ── Highlight Boxes ── */
+    .box {
+      padding: 18px 22px;
+      border-radius: 10px;
+      margin: 16px 0;
+      border-left: 4px solid var(--denim);
+      background: var(--pale-denim);
+    }
+    .box.pink  { border-left-color: var(--hot-pink); background: var(--pale-pink); }
+    .box.cream { border-left-color: var(--mid-denim); background: var(--cream); }
 
-/* WHAT STAYS YOURS */
-.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-@media(max-width:700px){.sg{grid-template-columns:1fr}}
-.sc{background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:24px;transition:border-color .25s,box-shadow .25s,transform .25s;box-shadow:0 4px 20px rgba(46,40,69,.08)}
-.sc:hover{border-color:var(--pink);box-shadow:0 6px 28px rgba(212,51,110,.12);transform:translateY(-2px)}
-.sc-icon{font-size:1.5rem;margin-bottom:12px}
-.sc h4{font-family:var(--font-h);font-size:.98rem;font-weight:700;color:var(--dark);margin-bottom:6px}
-.sc p{font-size:.85rem;color:var(--denim);line-height:1.7}
+    /* ── Folder Map ── */
+    .folder-map {
+      background: var(--plum);
+      color: #c4d8ec;
+      padding: 22px 26px;
+      border-radius: 10px;
+      font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 1.9;
+      margin: 16px 0;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .folder-map .f-dir  { color: var(--mid-denim); font-weight: 600; }
+    .folder-map .f-file { color: #e8d8f0; }
+    .folder-map .f-note { color: #7a9bb5; font-style: italic; }
 
-/* HOW IT WORKS */
-.proc{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-@media(max-width:760px){.proc{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:420px){.proc{grid-template-columns:1fr}}
-.pc{background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:28px 22px;text-align:center;transition:all .25s}
-.pc:hover{border-color:var(--pink);transform:translateY(-3px)}
-.pc-n{font-family:var(--font-h);font-size:2.4rem;font-weight:700;margin-bottom:12px;line-height:1;background:linear-gradient(135deg,var(--pink) 0%,var(--denim) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.pc h4{font-family:var(--font-h);font-size:.98rem;font-weight:700;color:var(--dark);margin-bottom:8px}
-.pc p{font-size:.84rem;color:var(--denim);line-height:1.65}
-.pc-note{font-size:.76rem;color:var(--pink);font-weight:700;margin-top:10px;padding-top:10px;border-top:1px solid rgba(37,88,127,.15)}
+    /* ── Skill Cards ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin: 20px 0;
+    }
+    .card {
+      background: var(--white);
+      border: 2px solid var(--pale-denim);
+      border-radius: 12px;
+      padding: 22px;
+      transition: all 0.2s;
+    }
+    .card:hover { border-color: var(--plum); box-shadow: 0 4px 18px rgba(46,40,69,0.1); }
+    .skill-tag {
+      display: inline-block;
+      background: var(--plum);
+      color: var(--white);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .skill-tag.brand { background: var(--hot-pink); }
+    .card h4 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--plum);
+      font-size: 1.02rem;
+      margin: 0 0 8px;
+    }
+    .card p { font-size: 0.88rem; color: #555; line-height: 1.65; margin: 0; }
+    .card .trigger {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--pale-denim);
+      font-size: 0.83rem;
+      color: var(--denim);
+    }
+    .card .trigger strong { display: block; color: var(--plum); margin-bottom: 3px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.4px; }
 
-/* FOOTER */
-footer{padding:72px 32px 56px;text-align:center;background:var(--denim-mid);border-top:1px solid rgba(37,88,127,.2)}
-.ft-script{font-family:var(--font-s);font-size:2.2rem;color:var(--dark);margin-bottom:12px;font-weight:400}
-.ft-h{font-family:var(--font-h);font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--dark);margin-bottom:16px;line-height:1.1}
-.ft-sub{font-size:.94rem;color:var(--dark);margin-bottom:36px;font-weight:300;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.85}
-.btn-pink{display:inline-block;padding:14px 44px;border-radius:50px;background:linear-gradient(135deg,var(--pink),#B5295C);color:var(--white);font-family:var(--font-b);font-weight:700;font-size:.92rem;text-decoration:none;transition:all .25s;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(212,51,110,.4)}
-.btn-pink:hover{background:linear-gradient(135deg,#C72C65,#9C2250);transform:translateY(-2px);box-shadow:0 6px 28px rgba(212,51,110,.5)}
-.ft-note{font-size:.8rem;color:var(--denim);margin-top:18px;font-style:italic}
-.acb{text-align:center;font-size:.72rem;color:rgba(37,88,127,.5);padding:10px 0 36px;letter-spacing:.04em;background:var(--denim-mid)}
+    /* ── Project Cards ── */
+    .project-card {
+      background: var(--white);
+      border: 2px solid var(--pale-denim);
+      border-radius: 14px;
+      padding: 26px;
+      margin: 18px 0;
+      transition: all 0.2s;
+    }
+    .project-card:hover { border-color: var(--plum); box-shadow: 0 4px 18px rgba(46,40,69,0.1); }
+    .project-card h4 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--plum);
+      font-size: 1.1rem;
+      margin: 0 0 8px;
+    }
+    .project-card .project-meta {
+      font-size: 0.83rem;
+      color: #777;
+      margin-bottom: 12px;
+    }
+    .project-card p { font-size: 0.9rem; color: #444; margin-bottom: 10px; }
+    .project-card .trigger {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--pale-denim);
+      font-size: 0.83rem;
+      color: var(--denim);
+    }
+    .project-card .trigger strong { display: block; color: var(--plum); margin-bottom: 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.4px; }
 
-/* BACK TO TOP */
-#rtt{position:fixed;bottom:28px;right:28px;z-index:999;width:46px;height:46px;border-radius:50%;background:var(--pink);color:var(--white);border:none;font-size:1.1rem;font-weight:700;cursor:pointer;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s;display:flex;align-items:center;justify-content:center}
+    /* ── Tables ── */
+    table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.9rem; }
+    th { background: var(--plum); color: var(--white); padding: 12px 16px; text-align: left; font-weight: 600; }
+    td { padding: 11px 16px; border-bottom: 1px solid var(--pale-denim); vertical-align: top; }
+    tr:nth-child(even) td { background: #fafbff; }
 
-/* DIVIDERS */
-.div-soft{height:1px;background:linear-gradient(90deg,transparent,rgba(37,88,127,.2),transparent);margin:0}
-</style>
+    /* ── Prompt Boxes ── */
+    .prompt-box {
+      background: var(--plum);
+      color: #c4d8ec;
+      padding: 44px 20px 18px 20px;
+      border-radius: 10px;
+      margin: 12px 0;
+      font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+      font-size: 0.83rem;
+      white-space: pre-wrap;
+      position: relative;
+      line-height: 1.65;
+    }
+    .prompt-box .copy-btn {
+      position: absolute;
+      top: 11px; right: 11px;
+      background: var(--hot-pink);
+      color: var(--white);
+      border: none;
+      padding: 5px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.73rem;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+    }
+    .prompt-box .copy-btn:hover { background: #b8275e; }
+
+    /* ── Step List ── */
+    .step-list { list-style: none; padding: 0; margin: 14px 0; }
+    .step-list li {
+      display: flex;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--pale-denim);
+      align-items: flex-start;
+    }
+    .step-list li:last-child { border-bottom: none; }
+    .step-num {
+      background: var(--plum);
+      color: var(--white);
+      min-width: 26px; height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── Tip Items ── */
+    .tip-list { display: flex; flex-direction: column; gap: 14px; margin: 16px 0; }
+    .tip-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px;
+      background: var(--cream);
+      border-radius: 10px;
+    }
+    .tip-num {
+      background: var(--hot-pink);
+      color: var(--white);
+      min-width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+    }
+    .tip-content h4 { color: var(--plum); margin: 0 0 5px; }
+    .tip-content p { font-size: 0.9rem; color: #444; margin: 0; }
+    .tip-content p + p { margin-top: 6px; }
+    .tip-content ul { font-size: 0.9rem; color: #444; padding-left: 20px; margin: 6px 0 0; }
+
+    /* ── Action Items ── */
+    .action-item {
+      background: var(--pale-denim);
+      padding: 13px 18px;
+      border-radius: 8px;
+      margin: 9px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .action-item input[type="checkbox"] {
+      margin-top: 3px;
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      accent-color: var(--plum);
+      cursor: pointer;
+    }
+
+    /* ── Revision Box ── */
+    .revision-box {
+      border: 2px solid var(--mid-denim);
+      border-radius: 12px;
+      padding: 24px 26px;
+      background: var(--pale-denim);
+      margin: 22px 0;
+    }
+    .revision-box h3 { margin-top: 0; color: var(--plum); }
+    .revision-box p { margin: 8px 0; font-size: 0.93rem; }
+
+    /* ── Thank You Section ── */
+    .thankyou-box {
+      background: linear-gradient(135deg, var(--plum) 0%, var(--denim) 100%);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 36px;
+      margin-bottom: 28px;
+      text-align: center;
+    }
+    .thankyou-box h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.6rem;
+      margin-bottom: 14px;
+      color: var(--white);
+    }
+    .thankyou-box p { opacity: 0.9; font-size: 0.97rem; line-height: 1.8; margin-bottom: 10px; }
+
+    .testimonial-qs {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 28px 30px;
+      margin: 24px 0;
+    }
+    .testimonial-qs h3 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--plum);
+      font-size: 1.15rem;
+      margin: 0 0 6px;
+    }
+    .testimonial-qs .intro { font-size: 0.9rem; color: #555; margin-bottom: 18px; }
+    .q-item {
+      display: flex;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--pale-denim);
+      align-items: flex-start;
+    }
+    .q-item:last-child { border-bottom: none; }
+    .q-num {
+      background: var(--plum);
+      color: var(--white);
+      min-width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .q-item p { font-size: 0.93rem; color: #333; margin: 0; line-height: 1.7; }
+
+    .mailto-btn {
+      display: inline-block;
+      background: var(--hot-pink);
+      color: var(--white);
+      padding: 14px 30px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-top: 18px;
+      transition: all 0.2s;
+    }
+    .mailto-btn:hover { background: #b8275e; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(212,51,110,0.35); text-decoration: none; }
+
+    /* ── Links ── */
+    a { color: var(--hot-pink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 36px 30px;
+      background: var(--plum);
+      color: var(--white);
+      border-radius: 16px;
+      margin-top: 28px;
+    }
+    .footer h3 { font-family: 'Libre Baskerville', serif; color: var(--white); margin-bottom: 8px; font-size: 1.3rem; }
+    .footer p { font-size: 0.9rem; opacity: 0.8; margin: 4px 0; }
+    .footer a { color: var(--mid-denim); }
+
+    /* ── Responsive ── */
+    @media (max-width: 620px) {
+      .header h1 { font-size: 1.8rem; }
+      .header .subtitle { font-size: 1.25rem; }
+      .nav { position: static; }
+      .nav a { font-size: 0.77rem; padding: 8px 10px; }
+      .section { padding: 24px 18px; }
+      .recording-banner { flex-direction: column; text-align: center; }
+      .recording-banner .rb-left { flex-direction: column; text-align: center; }
+    }
+  </style>
 </head>
 <body>
+<div class="container">
 
-<nav>
-  <div class="nav-brand">AJ Harrington Photos · Your Plan</div>
-  <div class="nav-links">
-    <a href="#heard">What we heard</a>
-    <a href="#build">The build</a>
-    <a href="#deliverables">Deliverables</a>
-    <a href="#next">Next steps</a>
+  <!-- Header -->
+  <div class="header">
+    <h1>Your Claude Setup</h1>
+    <p class="subtitle">AJ Harrington Photography</p>
+    <p class="meta">Built by Tania Carcenac &nbsp;·&nbsp; Out of Your Head &nbsp;·&nbsp; June 2026</p>
   </div>
-</nav>
 
-
-<!-- HERO — pale denim -->
-<section class="hero s-denim-light">
-  <div class="for-tag">Prepared for Amanda Harrington · AJ Harrington Photos</div>
-  <h1>Here's what we'd build<br/>for your business, <em>AJ</em></h1>
-  <p class="hero-p">Based on our conversation, this is a plan for your Out of Your Head setup: three focused builds designed to give your marketing a working foundation so you can spend more of your time on the work that actually matters to you.</p>
-  <div class="pills">
-    <span class="pill">✦ Brand Voice &amp; Messaging</span>
-    <span class="pill">✦ Newsletter &amp; Email</span>
-    <span class="pill">✦ Social Media Strategy</span>
-  </div>
-  <div class="cue" onclick="document.getElementById('heard').scrollIntoView({behavior:'smooth'})">
-    <span>Scroll to explore</span>
-    <span>↓</span>
-  </div>
-</section>
-
-<div class="div-soft"></div>
-
-<!-- WHAT WE HEARD — cream -->
-<section class="sec s-cream" id="heard">
-  <div class="inner">
-    <div class="eyebrow">What we heard</div>
-    <h2>Three things that stood out from our call</h2>
-    <p class="sub">Before we plan anything, it matters that you feel heard. Here's what we took away from your discovery call.</p>
-    <div class="g3">
-
-      <div class="hc">
-        <div class="hc-icon">📸</div>
-        <h3>Your brand is non-negotiable</h3>
-        <p>You have strong branding, consistent standards, and a very clear sense of what sounds like you, and what doesn't. ChatGPT let you down. You need something you can trust to work within your voice, not produce content you have to unpick.</p>
-        <div class="hc-q">"I have a very strong brand. I have a very strong voice."</div>
-      </div>
-
-      <div class="hc">
-        <div class="hc-icon">📋</div>
-        <h3>Marketing keeps getting bumped</h3>
-        <p>You have a VA, a MailerLite account, and content ideas. Marketing still doesn't get done. Not from lack of care, but because the gallery workflows and client delivery fill the available time first. That's the gap we can work on.</p>
-        <div class="hc-q">"Never is it: write a newsletter."</div>
-      </div>
-
-      <div class="hc">
-        <div class="hc-icon">🤝</div>
-        <h3>The client journey stays yours</h3>
-        <p>Dubsado works. Cloudspot works. Your consultation process works. You've built a client experience that reflects your values and you're not looking to disrupt it. This setup builds around what you've created, not over it.</p>
-        <div class="hc-q">"I've automated what I can, and I'm happy with my workflow."</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<div class="div-soft"></div>
-
-<!-- THE BUILD — pale pink -->
-<section class="sec s-pink" id="build">
-  <div class="inner">
-    <div class="eyebrow">The build</div>
-    <h2>Three skills, built around your business</h2>
-    <p class="sub">Your setup gets built in three focused phases. Each one builds on the last. The better the information you bring to the Brain Dump, the closer the result is to how your business actually works.</p>
-
-    <div class="ptabs">
-      <button class="ptab active" onclick="switchPhase('1',this)">Skill 1: Brand Foundation</button>
-      <button class="ptab" onclick="switchPhase('2',this)">Skill 2: Newsletter &amp; Email</button>
-      <button class="ptab" onclick="switchPhase('3',this)">Skill 3: Content Strategy</button>
-    </div>
-
-    <!-- SKILL 1 -->
-    <div id="phase-1" class="ppanel on">
-      <div class="phead">
-        <div class="pbadge">🎯</div>
-        <div>
-          <div class="ptitle">Brand Voice &amp; Business Identity</div>
-          <div class="psub">The foundation everything else is built on. A skill file that captures how you write, what you offer, who you work with, and what you'd never say. Every other skill reads from this one.</div>
-        </div>
-      </div>
-      <div class="dg">
-        <div class="dc">
-          <div class="dc-icon">🎨</div>
-          <h4>Brand identity</h4>
-          <p>Your colours, fonts, aesthetic, photography style, documented so Claude works with your brand rather than against it.</p>
-        </div>
-        <div class="dc">
-          <div class="dc-icon">✍️</div>
-          <h4>Voice and tone</h4>
-          <p>How you write, what you don't say, phrases that feel wrong, examples of writing you love. Built from what you share, not a template.</p>
-        </div>
-        <div class="dc">
-          <div class="dc-icon">💼</div>
-          <h4>Business context</h4>
-          <p>Your services, audience, location and offers, all in one place so Claude has the full picture without you re-explaining it every time.</p>
-        </div>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="snum">1</div>
-          <div class="scontent">
-            <h4>You share your brand assets</h4>
-            <p>Brand style guide, website copy, examples of writing you love (and hate). The Brain Dump Call is where we gather all of this.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="snum">2</div>
-          <div class="scontent">
-            <h4>The skill gets built and tested</h4>
-            <p>Your brand voice skill is drafted, tested with real outputs, and refined until the result sounds like you, not something that needs heavy editing.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="snum">3</div>
-          <div class="scontent">
-            <h4>It runs in the background from here on</h4>
-            <p>Every piece of content Claude helps you with from this point reads your brand skill first. Your voice, every time. As long as you use it.</p>
-          </div>
-        </div>
+  <!-- Recording Banner -->
+  <div class="recording-banner">
+    <div class="rb-left">
+      <span class="icon">🎥</span>
+      <div>
+        <h3>Your Reboot Call Recording</h3>
+        <p>23 June 2026. Everything we walked through, with timestamps and full transcript.</p>
       </div>
     </div>
-
-    <!-- SKILL 2 -->
-    <div id="phase-2" class="ppanel">
-      <div class="phead">
-        <div class="pbadge">📩</div>
-        <div>
-          <div class="ptitle">Newsletter &amp; Email Marketing</div>
-          <div class="psub">A working structure for newsletter writing so you have a consistent starting point instead of a blank screen. Tailored to your MailerLite setup and how you actually write.</div>
-        </div>
-      </div>
-      <div class="dg">
-        <div class="dc">
-          <div class="dc-icon">📅</div>
-          <h4>A repeatable structure</h4>
-          <p>A newsletter writing process that matches your rhythm: fortnightly, monthly, whatever you'll actually stick to.</p>
-        </div>
-        <div class="dc">
-          <div class="dc-icon">🗣️</div>
-          <h4>Your voice, not a template</h4>
-          <p>Because your brand skill is already built, newsletter drafts start from your tone and patterns, not a generic email framework.</p>
-        </div>
-        <div class="dc">
-          <div class="dc-icon">📬</div>
-          <h4>Drafts to MailerLite</h4>
-          <p>A structured draft goes into MailerLite for your review. You refine it. You send it. Claude doesn't send anything on your behalf.</p>
-        </div>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="snum">1</div>
-          <div class="scontent">
-            <h4>You share examples</h4>
-            <p>A couple of past newsletters, or nothing if you haven't sent any. A good example and a bad one are equally useful. This is how we calibrate what sounds right to you.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="snum">2</div>
-          <div class="scontent">
-            <h4>We build your newsletter structure</h4>
-            <p>The sections you use, what you typically cover, how you open and close. Built around your patterns, not a general email framework.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="snum">3</div>
-          <div class="scontent">
-            <h4>You bring the content, Claude structures it</h4>
-            <p>Tell Claude what happened this month, what's on your mind, what you want to say. A draft goes into MailerLite. You review it, adjust what needs adjusting, and send.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SKILL 3 -->
-    <div id="phase-3" class="ppanel">
-      <div class="phead">
-        <div class="pbadge">📊</div>
-        <div>
-          <div class="ptitle">Social Media Strategy &amp; VA Direction</div>
-          <div class="psub">A thinking framework for your marketing strategy and a way to brief your VA with actual direction, so her effort goes somewhere purposeful and you can see whether it's working.</div>
-        </div>
-      </div>
-      <div class="dg">
-        <div class="dc">
-          <div class="dc-icon">🧭</div>
-          <h4>Your content pillars</h4>
-          <p>What topics you talk about, in what proportion and why, so there's intention behind what goes out rather than whatever felt relevant that week.</p>
-        </div>
-        <div class="dc">
-          <div class="dc-icon">📋</div>
-          <h4>A VA briefing framework</h4>
-          <p>A structured brief your VA can work from: this month's focus, what to push, what to hold back. Strategy, not just content.</p>
-        </div>
-        <div class="dc">
-          <div class="dc-icon">🌱</div>
-          <h4>A starting point for growth</h4>
-          <p>A regular check-in structure so you can see what's working, what isn't, and where the gaps are, and make decisions with something to go on.</p>
-        </div>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="snum">1</div>
-          <div class="scontent">
-            <h4>You share where you want to grow</h4>
-            <p>More personal branding clients? More corporate headshots? More reach in Mandurah? The strategy follows your actual goals, not generic photography marketing advice.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="snum">2</div>
-          <div class="scontent">
-            <h4>We map your content pillars</h4>
-            <p>Based on your audience, your services and your goals: a content framework your VA can follow, built around AJ Harrington Photos specifically.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="snum">3</div>
-          <div class="scontent">
-            <h4>Monthly: a quick check-in updates the brief</h4>
-            <p>What changed this month, what's the focus this cycle. Your VA gets a proper brief to work from. How well it works depends on how consistently you use it and update it when things shift.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <a href="https://fathom.video/calls/718792604" target="_blank">Watch Recording →</a>
   </div>
-</section>
 
-<div class="div-soft"></div>
+  <!-- Navigation -->
+  <div class="nav">
+    <a href="#workspace">Your Workspace</a>
+    <a href="#skills">Your Skills</a>
+    <a href="#projects">Your Projects</a>
+    <a href="#tips">Quick Tips</a>
+    <a href="#global-instructions">Global Instructions</a>
+    <a href="#nextsteps">Next Steps</a>
+    <a href="#thankyou">A Note from Tania</a>
+  </div>
 
-<!-- FLIP CARDS — pale denim -->
-<section class="sec s-denim-light" id="deliverables">
-  <div class="inner">
-    <div class="eyebrow">Your deliverables</div>
-    <h2>What you leave with</h2>
-    <p class="sub">Four specific things installed in your Claude account by the end of your Reboot Call. Flip each card to see what's inside.</p>
-    <p class="flip-hint">👆 Click any card to flip it</p>
+  <!-- ═══════════════════════════════════ -->
+  <!-- SECTION: Workspace                 -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="workspace" class="section">
+    <h2>Your Claude Brain</h2>
 
-    <div class="fg">
+    <p>This isn't just a folder of files. It's a system where Claude already knows your business before you type your first message. When you open Claude Cowork and select the <strong>Claude Brain</strong> folder as your workspace, Claude reads your <code>CLAUDE.md</code> automatically — and knows AJ Harrington Photography inside out from the moment you start.</p>
 
-      <div class="fc" onclick="this.classList.toggle('fl')">
-        <div class="fci">
-          <div class="fcf">
-            <div>
-              <div class="fco">🎯</div>
-              <h3>Brand Voice Skill</h3>
-              <p>The document that makes Claude work in your voice rather than a generic one.</p>
-            </div>
-            <div class="fh">Tap to see what's in it →</div>
-          </div>
-          <div class="fcb">
-            <div class="fcb-lbl">What's documented</div>
-            <div class="fe">Your brand colours, fonts and visual style, so Claude describes your aesthetic accurately</div>
-            <div class="fe">Tone guidelines: warm, professional, specific, no marketing clichés</div>
-            <div class="fe">Words and phrases you'd never use (your examples from the call)</div>
-            <div class="fe">Writing examples you love, so the calibration is yours, not generic</div>
-          </div>
+    <h3>What's in the folder</h3>
+    <div class="folder-map"><span class="f-dir">📁 Claude Brain/</span>
+├── <span class="f-file">CLAUDE.md</span>                    <span class="f-note">← The brain. Claude reads this every session.</span>
+├── <span class="f-file">README.md</span>                    <span class="f-note">← Full guide to the system and how to use it.</span>
+├── <span class="f-dir">📁 skills/</span>
+│   ├── <span class="f-dir">📁 brand-voice/</span>           <span class="f-note">← Brand voice skill</span>
+│   ├── <span class="f-dir">📁 brand-guidelines/</span>      <span class="f-note">← Visual identity skill (installed as "visual-identity")</span>
+│   ├── <span class="f-dir">📁 newsletter/</span>            <span class="f-note">← Newsletter writing skill</span>
+│   ├── <span class="f-dir">📁 promo-email/</span>           <span class="f-note">← Promo email skill</span>
+│   └── <span class="f-dir">📁 client-blog-post/</span>      <span class="f-note">← Client blog post skill</span>
+├── <span class="f-dir">📁 templates/</span>
+│   ├── <span class="f-file">VA-monthly-briefing-project-setup.md</span>
+│   ├── <span class="f-file">VA-monthly-content-briefing.md</span>
+│   └── <span class="f-file">newsletter-project-setup.md</span>
+├── <span class="f-dir">📁 brand/</span>                    <span class="f-note">← Drop Jo Wilson's PDF and brand assets here</span>
+├── <span class="f-dir">📁 clients/</span>
+├── <span class="f-dir">📁 content/</span>
+│   ├── <span class="f-dir">📁 newsletters/</span>           <span class="f-note">← Monthly Newsletter project saves here</span>
+│   └── <span class="f-dir">📁 social/</span>               <span class="f-note">← VA Monthly Briefing saves here</span>
+├── <span class="f-dir">📁 products/</span>                 <span class="f-note">← Drop digital product PDFs here</span>
+└── <span class="f-dir">📁 website/</span></div>
+
+    <div class="box cream">
+      <h4>Always select the top-level Claude Brain folder</h4>
+      <p>When opening a project in Cowork, always select <strong>Claude Brain</strong> — the whole folder, not a subfolder inside it. The <code>CLAUDE.md</code> at the top level is what Claude reads first. If you select a subfolder (like <code>content/</code> or <code>skills/</code>), Claude misses that file and loses all your business context.</p>
+    </div>
+
+    <div class="box">
+      <h4>The brand and products folders are waiting for you</h4>
+      <p>The <code>brand/</code> and <code>products/</code> folders are intentionally empty to start. Drop in Jo Wilson's brand guide PDF and any logo files to give your visual identity skill real assets to reference. Add your digital product PDFs (your guides and Lightroom presets) to the <code>products/</code> folder so Claude has the actual product content when writing launch emails.</p>
+    </div>
+
+    <h3>Updating CLAUDE.md</h3>
+    <p>When something changes — new pricing, a new service, a different tool, an updated offer — you never edit the file directly. Just tell Claude:</p>
+    <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Update the CLAUDE.md to reflect that [what's changed]. Also update the README if the folder structure has changed.</div>
+    <p>Claude makes the edit for you. Then your whole system knows about it the next time you open Cowork.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- SECTION: Skills                    -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="skills" class="section">
+    <h2>Your 5 Skills</h2>
+    <p>These are installed and active in Claude. They're what makes Claude work the way it does for AJ Harrington Photography: structured, consistent, and tailored to how you work. You don't have to explain your voice or your visual identity every time — they're already in there.</p>
+
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="skill-tag brand">Brand</div>
+        <h4>Brand Voice</h4>
+        <p>Keeps everything Claude writes sounding like you. Your phrases, your warmth, your sign-off — and a clear list of what you'd never say. Claude reads this automatically for any copy task.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          "Use my brand voice skill to write [X]" — or just describe what you want and Claude pulls it in.
         </div>
       </div>
 
-      <div class="fc" onclick="this.classList.toggle('fl')">
-        <div class="fci">
-          <div class="fcf">
-            <div>
-              <div class="fco">📩</div>
-              <h3>Newsletter Skill</h3>
-              <p>A structured writing process so newsletters have a clear starting point.</p>
-            </div>
-            <div class="fh">Tap to see how it works →</div>
-          </div>
-          <div class="fcb">
-            <div class="fcb-lbl">How it works</div>
-            <div class="fe">You share what happened this month, no structure required from you</div>
-            <div class="fe">A draft is structured to your format and sent to MailerLite for review</div>
-            <div class="fe">You read it, change what needs changing, and send. Claude doesn't send on your behalf</div>
-            <div class="fe">The more you use it and refine it, the better it gets at matching your voice</div>
-          </div>
+      <div class="card">
+        <div class="skill-tag brand">Brand</div>
+        <h4>Visual Identity</h4>
+        <p>Your complete visual system. All seven brand colours with exact HEX codes, font hierarchy (Gloock, Manrope, Sumatra), logo rules, and design principles by context — personal brand, corporate, and trades are each handled differently.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          "Use my visual identity skill" when reviewing any designed piece, creating Canva templates, or making colour decisions.
+          <br><br>
+          <em style="font-size:0.8rem; color:#888;">Note: the file in your folder is named brand-guidelines — installed under a different name to avoid a conflict. Both refer to the same thing.</em>
         </div>
       </div>
 
-      <div class="fc" onclick="this.classList.toggle('fl')">
-        <div class="fci">
-          <div class="fcf">
-            <div>
-              <div class="fco">📊</div>
-              <h3>Content Strategy Skill</h3>
-              <p>A documented marketing framework to think from, not a system that runs itself.</p>
-            </div>
-            <div class="fh">Tap to see what it covers →</div>
-          </div>
-          <div class="fcb">
-            <div class="fcb-lbl">What's inside</div>
-            <div class="fe">Your content pillars and their purpose, so there's intention behind what goes out</div>
-            <div class="fe">Where you're focused on growing and what you're not pushing right now</div>
-            <div class="fe">A monthly briefing structure your VA can work from with real direction</div>
-            <div class="fe">A check-in format to review what's working and adjust when it isn't</div>
-          </div>
+      <div class="card">
+        <div class="skill-tag">Content</div>
+        <h4>Newsletter Writing</h4>
+        <p>Your monthly newsletter brain. Claude asks five questions, you answer conversationally, and it drafts a complete newsletter — opening, emoji-headed sections, Quick Tips, and three subject line options — in your voice, ready for MailerLite.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          Run via the Monthly Newsletter project. Say: "Let's write the newsletter" to get started.
         </div>
       </div>
 
-      <div class="fc" onclick="this.classList.toggle('fl')">
-        <div class="fci">
-          <div class="fcf">
-            <div>
-              <div class="fco">🧠</div>
-              <h3>Your Knowledge Base</h3>
-              <p>Everything saved in a format that's yours to keep, wherever you go.</p>
-            </div>
-            <div class="fh">Tap to see what this means →</div>
-          </div>
-          <div class="fcb">
-            <div class="fcb-lbl">Why this matters</div>
-            <div class="fe">All files in Obsidian-compatible format, not locked inside any one tool</div>
-            <div class="fe">Works with the RAW folder structure already set up from your Claude Camp work</div>
-            <div class="fe">If Claude ever maxes out mid-month, you take the same files anywhere</div>
-            <div class="fe">The knowledge lives on your computer. The tools are just where you use it</div>
-          </div>
+      <div class="card">
+        <div class="skill-tag">Content</div>
+        <h4>Promo Email</h4>
+        <p>Writes promotional and launch emails grounded in Tahryn Bolt's messaging framework. Mini Brand Series, digital products, big packages — tell Claude what you're promoting and who you're sending to, and it handles the rest.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          "Use my promo email skill. I'm promoting [Mini Brand Series / Snap Sell Succeed / big package]. Going to [cold list / subscribers / past clients]."
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="skill-tag">Content</div>
+        <h4>Client Blog Post</h4>
+        <p>Turns a shoot into a published blog post. Claude interviews you with five or six questions about the client and session — no prepared notes needed — then writes a 400–600 word spotlight post with three headline options, a meta description, and keyword suggestions.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          "Use my client blog post skill" after any shoot. Use your Caps Lock voice shortcut to answer the questions — no typing needed.
         </div>
       </div>
 
     </div>
-  </div>
-</section>
 
-<div class="div-soft"></div>
-
-<!-- BEFORE / AFTER — mid denim -->
-<section class="sec s-denim-mid" id="scenarios">
-  <div class="inner">
-    <div class="eyebrow">What changes in practice</div>
-    <h2>Two moments in your week</h2>
-    <p class="sub">This isn't about what the setup does automatically. It's about what gets easier when you have a proper structure to work from.</p>
-
-    <div class="bag">
-
-      <div class="bacard" id="s1">
-        <div class="bacard-head">
-          <div class="bicon">✍️</div>
-          <h3>Sitting down to write a newsletter</h3>
-          <div class="batabs">
-            <button class="stab stab-now active" onclick="showState('s1','now')">Now</button>
-            <button class="stab stab-after" onclick="showState('s1','after')">With your setup</button>
-          </div>
-        </div>
-        <div id="s1-now" class="bastate on">
-          <span class="ba-lbl bl-now">Now</span>
-          <p>Open ChatGPT. Try to explain your business from scratch. Get something that sounds nothing like you. Spend 45 minutes going back and forth. Give up and put it on next week's list. Or: think about doing it, close the tab, it's fine, you'll do it next month.</p>
-        </div>
-        <div id="s1-after" class="bastate">
-          <span class="ba-lbl bl-after">With your setup</span>
-          <p>Tell Claude what happened this month: a shoot you loved, something you noticed, what's coming up. A draft is structured to your template and sitting in MailerLite. You read it, change what doesn't feel right, and send.</p>
-          <p>It's not automatic. You still show up and do the work. But you're starting from something instead of nothing, in a format that already knows your voice.</p>
-        </div>
-      </div>
-
-      <div class="bacard" id="s2">
-        <div class="bacard-head">
-          <div class="bicon">💬</div>
-          <h3>Briefing your VA for the month</h3>
-          <div class="batabs">
-            <button class="stab stab-now active" onclick="showState('s2','now')">Now</button>
-            <button class="stab stab-after" onclick="showState('s2','after')">With your setup</button>
-          </div>
-        </div>
-        <div id="s2-now" class="bastate on">
-          <span class="ba-lbl bl-now">Now</span>
-          <p>Your VA does a great job with what she has: your brand guide and access to your videos. The brief is essentially "do your thing." Content goes out, engagement is okay, growth is slow, and it's hard to know what to change because there's no strategy behind what's happening.</p>
-        </div>
-        <div id="s2-after" class="bastate">
-          <span class="ba-lbl bl-after">With your setup</span>
-          <p>A monthly check-in with Claude helps you think through this month's focus: what to push, what to hold off on, what pillar content matters most. Your VA gets a proper brief with actual direction.</p>
-          <p>How much traction you get depends on the strategy you build and how consistently you brief her. The skill gives you a framework. The results come from using it.</p>
-        </div>
-      </div>
-
+    <h3>Updating a skill</h3>
+    <div class="box pink">
+      <p>When you refine a skill through Claude, always ask it to save the update back to your folder as well. The version in Claude and the SKILL.md file need to stay in sync — otherwise you iterate forward in Claude but the file falls behind.</p>
+      <div class="prompt-box" style="margin-top: 14px;"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Update the [skill name] skill to [what needs to change]. Save the updated version to the SKILL.md file in my Claude Brain folder too.</div>
     </div>
   </div>
-</section>
 
-<div class="div-soft"></div>
+  <!-- ═══════════════════════════════════ -->
+  <!-- SECTION: Projects                  -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="projects" class="section">
+    <h2>Your 2 Projects</h2>
+    <p>These live in both Claude Chat (cloud backup) and Cowork (desktop), both pointing to your Claude Brain folder. Each project keeps a running conversation history — the more you use them, the better they understand your business and how you work.</p>
 
-<!-- WHAT STAYS YOURS — cream -->
-<section class="sec s-cream" id="stays">
-  <div class="inner">
-    <div class="eyebrow">What stays exactly as it is</div>
-    <h2>Not here to fix what isn't broken</h2>
-    <p class="sub">You've built a client experience that reflects your standards. Here's what this setup doesn't touch.</p>
-    <div class="sg">
+    <div class="box cream">
+      <h4>Projects live in two places — that's intentional</h4>
+      <p>Your projects were created in Claude Chat first (cloud backup), then imported into Cowork (desktop). If anything ever happens with your Cowork install or subscription, your projects are still safe in Claude Chat. To run them day-to-day, use Cowork — that's where all the connectors (Google Drive, Gmail, Instagram) are active.</p>
+    </div>
 
-      <div class="sc">
-        <div class="sc-icon">🔒</div>
-        <h4>Your booking and delivery workflow</h4>
-        <p>Dubsado handles your bookings well and Cloudspot handles your galleries. Neither needs to change. We build around them, not into them.</p>
+    <div class="project-card">
+      <h4>Monthly Newsletter</h4>
+      <div class="project-meta">Run once a month &nbsp;·&nbsp; Uses: Newsletter Writing skill</div>
+      <p>Asks you five questions about the month — what happened, tips to share, what's coming, any client wins, anything personal. You answer conversationally (Caps Lock voice shortcut works perfectly here), and Claude drafts your complete newsletter in your voice.</p>
+      <p>Output saves to <strong>content/newsletters</strong> in Claude Brain and to the <strong>Newsletters folder in your Google Drive</strong> so your VA can format it in MailerLite.</p>
+      <div class="trigger">
+        <strong>How to run it</strong>
+        Open the Monthly Newsletter project in Cowork → start a new chat → say:<br><br>
+        <div class="prompt-box" style="margin-top:8px;"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Let's write the newsletter</div>
+        Claude will ask questions one at a time. Rough answers are completely fine — it does the shaping.
+      </div>
+    </div>
+
+    <div class="project-card">
+      <h4>VA Monthly Briefing</h4>
+      <div class="project-meta">Run once a month &nbsp;·&nbsp; Uses: Google Drive, Gmail, Instagram via Chrome</div>
+      <p>Starts by auditing your Instagram grid — post types, content themes, what's been going out. Then interviews you about the month ahead (what to push, what's coming up, what the focus is) and produces a strategic brief for your VA.</p>
+      <p>Output saves to the <strong>Monthly Briefing folder</strong> inside your existing VA Google Drive folder. Your VA already has access — no extra sharing needed.</p>
+
+      <div class="box" style="margin: 14px 0;">
+        <h4>Before you run it</h4>
+        <p>Make sure Instagram is open and logged in on your desktop Chrome. Claude uses this to audit your grid — it can see post types and captions, but not private Insights data. If a post stood out in your Insights, screenshot it and drop it into the chat for extra context.</p>
       </div>
 
-      <div class="sc">
-        <div class="sc-icon">👩‍💼</div>
-        <h4>Your VA and what she does</h4>
-        <p>She stays, she keeps creating. What changes is the brief she works from, so the effort has a clearer purpose behind it.</p>
+      <div class="box pink" style="margin: 14px 0;">
+        <h4>Calendar privacy note</h4>
+        <p>Claude can access your Google Calendar and may pull in private booking details (shoot appointments, personal appointments). If you'd rather keep that out of the VA briefing document, you can remove the calendar question from the project instructions — it's a simple edit. Just open the project in Cowork, click the settings icon, and delete that section from the instructions.</p>
       </div>
 
-      <div class="sc">
-        <div class="sc-icon">🤝</div>
-        <h4>Your client relationships</h4>
-        <p>The consultation, the connection, the care you put into every shoot. That's yours and it stays that way. This is happening in the background, not in front of your clients.</p>
+      <div class="trigger">
+        <strong>How to run it</strong>
+        Open the VA Monthly Briefing project in Cowork → start a new chat → say:<br><br>
+        <div class="prompt-box" style="margin-top:8px;"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Let's brief my VA, start by asking me the questions from the instructions</div>
+        The second part of that phrase matters — it tells Claude to interview you first before generating the document.
       </div>
+    </div>
 
+    <h3>When to use a project vs. when to use Chat</h3>
+    <table>
+      <tr>
+        <th>Use Cowork projects when...</th>
+        <th>Use Claude Chat when...</th>
+      </tr>
+      <tr>
+        <td>You want Claude to access Google Drive, Gmail, Calendar, or Instagram</td>
+        <td>You're brainstorming, thinking out loud, or exploring an idea</td>
+      </tr>
+      <tr>
+        <td>You want output saved somewhere automatically</td>
+        <td>You just need a quick answer or a draft to copy</td>
+      </tr>
+      <tr>
+        <td>Running your newsletter or VA briefing</td>
+        <td>Drafting a caption, writing a quick email, trying something new</td>
+      </tr>
+    </table>
+    <p style="font-size:0.88rem; color:#666; margin-top:6px;">Cowork uses more tokens because Claude is doing more. Chat is lighter. Use Chat for thinking, Cowork for doing.</p>
+
+    <h3>Starting a new project in future</h3>
+    <p>If you want to build something new — a project around client onboarding, a new product launch workflow, or anything else — always create it in Claude Chat first (it runs in the cloud and gets backed up), then import it into Cowork. Open Cowork → Projects → New Project → Import, and point it to your Claude Brain folder.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- SECTION: Tips                      -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="tips" class="section">
+    <h2>Quick Tips</h2>
+    <p>Six things that will make a real difference as you get comfortable using this.</p>
+
+    <div class="tip-list">
+      <div class="tip-item">
+        <div class="tip-num">1</div>
+        <div class="tip-content">
+          <h4>Update skills in both places</h4>
+          <p>When you refine a skill through Claude, always ask it to save the update to your folder too. The version in Claude and the SKILL.md file need to stay in sync. Otherwise you iterate in Claude but the file falls behind.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">2</div>
+        <div class="tip-content">
+          <h4>Don't let chats run too long</h4>
+          <p>Long chats burn through tokens fast and Claude has to reread everything each time. When a chat gets long, ask for a handover and start fresh:</p>
+          <div class="prompt-box" style="margin-top: 10px;"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Summarise everything we've covered in this chat in a handover document so I can start a fresh conversation.</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">3</div>
+        <div class="tip-content">
+          <h4>Check your token usage</h4>
+          <p>Go to <strong>Settings → your name at the bottom → Usage</strong> to see how much you've used in the current period and when it resets. Good to know before doing heavier Cowork sessions.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">4</div>
+        <div class="tip-content">
+          <h4>Choose your model before you start</h4>
+          <p>Pick your model at the start of a chat — you can't change it mid-stream:</p>
+          <ul>
+            <li><strong>Haiku</strong>: quick questions, short tasks, light back-and-forth</li>
+            <li><strong>Sonnet</strong>: the everyday workhorse — quality and speed balanced</li>
+            <li><strong>Opus</strong>: deep thinking, strategy, nuanced writing</li>
+            <li><strong>Adaptive</strong>: Claude decides what each part of the task needs</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">5</div>
+        <div class="tip-content">
+          <h4>Ask yourself: can Claude do this for me?</h4>
+          <p>When you're doing something repetitive — copying a Dubsado note into a document, pulling transcript highlights, turning a shoot into a blog post — pause and ask whether Claude could handle it. Give it the outcome you want, not just the task. "I want to turn my session notes into a client blog post" is better than "write a blog post about Sarah."</p>
+          <p>The more you work with Claude, the more you'll spot where it can take work off your hands.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">6</div>
+        <div class="tip-content">
+          <h4>Use Cowork's memory toggle</h4>
+          <p>Inside any Cowork project, there's a memory toggle that shows you what Claude is remembering across sessions. Check it occasionally — it builds up over time and is a good way to see whether Claude has the right picture of your business. If something's wrong, you can clear or correct it.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Quick reference</h3>
+    <table>
+      <tr>
+        <th>I want to...</th>
+        <th>Say or do this</th>
+      </tr>
+      <tr>
+        <td>Write a caption or email</td>
+        <td>"Use my brand voice skill to write [X]"</td>
+      </tr>
+      <tr>
+        <td>Check if a design is on-brand</td>
+        <td>"Use my visual identity skill to review this"</td>
+      </tr>
+      <tr>
+        <td>Write a promo email</td>
+        <td>"Use my promo email skill. Promoting [X], going to [audience]"</td>
+      </tr>
+      <tr>
+        <td>Write a client blog post</td>
+        <td>"Use my client blog post skill" — after any shoot</td>
+      </tr>
+      <tr>
+        <td>Write my newsletter</td>
+        <td>Monthly Newsletter project → "Let's write the newsletter"</td>
+      </tr>
+      <tr>
+        <td>Brief my VA</td>
+        <td>VA Monthly Briefing project → "Let's brief my VA, start by asking me the questions from the instructions"</td>
+      </tr>
+      <tr>
+        <td>Update CLAUDE.md</td>
+        <td>"Update the CLAUDE.md to reflect that [what changed]"</td>
+      </tr>
+      <tr>
+        <td>Update a skill</td>
+        <td>"Update my [skill name] to [change] — also update the SKILL.md file in Claude Brain"</td>
+      </tr>
+      <tr>
+        <td>Start a new project</td>
+        <td>Create in Claude Chat first → then import into Cowork → point to Claude Brain folder</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- SECTION: Global Instructions       -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="global-instructions" class="section">
+    <h2>Your Global Instructions</h2>
+
+    <p>These are the standing instructions that live in your Claude Cowork account. They tell Claude who you are and how you work — so even in a brand new chat or a fresh session, Claude already has your core context without you having to explain anything.</p>
+
+    <h3>Where to paste this</h3>
+    <ol class="step-list">
+      <li><span class="step-num">1</span><span>Open Claude Cowork</span></li>
+      <li><span class="step-num">2</span><span>Click <strong>Customise</strong> in the left sidebar</span></li>
+      <li><span class="step-num">3</span><span>Click on <strong>Cowork</strong> (the subsection, not the top-level menu)</span></li>
+      <li><span class="step-num">4</span><span>Scroll down to <strong>Global Instructions</strong></span></li>
+      <li><span class="step-num">5</span><span>Paste the block below and save</span></li>
+    </ol>
+
+    <h3>Your instructions block</h3>
+    <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>You are assisting Amanda (AJ) Harrington, a commercial photographer based in Mandurah, Western Australia.
+
+Business: AJ Harrington Photography
+Website: ajharringtonphotos.com | Instagram: @ajharringtonphotos
+
+What AJ does: Personal brand photography, product photography, corporate headshots, trades and services photography, and digital products (photography guides and Lightroom presets). Solo operator with a part-time VA who manages social media content.
+
+Who AJ serves: Primarily women in small business — coaches, consultants, product sellers, personal brands. Also corporate teams and trades/services businesses. Mainly Mandurah and surrounds, Western Australia.
+
+Brand colours:
+- Focus Teal #00A7A2 — primary brand colour (always anchor any design with this)
+- Blush Light #F7DAD4
+- Soft Coral #EDB0AB
+- Dusty Mustard #DABD79
+- Studio Light #F2F2F3 — primary background colour
+- Backdrop Green #3A6866
+- Deep Tide #1B404A
+
+Fonts: Gloock (logo only), Manrope (headings and body), Sumatra (script accent — maximum once per design)
+
+Brand voice: Warm, knowledgeable, authentic. Conversational but polished. Genuine enthusiasm — never manufactured hype. Expert without jargon. Always Australian English.
+
+Never use: scroll-stopping, game-changing, leverage, crushing it, hustle, corporate language, multiple exclamation marks.
+
+Sign-off for all emails and newsletters: "Stay focused and keep smiling, AJ"
+
+Core belief: All women are beautiful as they are. Confidence is built through the process, not a prerequisite for it. Consistency matters more than perfection.
+
+Tech stack: Dubsado (bookings/CRM), MailerLite (email marketing), Cloudspot (gallery delivery), Socialmonials, Canva, ManyChat, Xero, Google Workspace.
+
+Workspace: Folder called "Claude Brain" on this device. Always read CLAUDE.md at the root of this folder for full business context before starting any task. Always select the top-level Claude Brain folder — never a subfolder.
+
+For any business or strategic question, check the Claude Brain CLAUDE.md file first. It has the context you need.</div>
+
+    <div class="box cream">
+      <h4>What this does</h4>
+      <p>Once pasted, every Cowork session starts with Claude already knowing your name, your business, your brand colours, your voice rules, and where to find your full context. You won't need to explain yourself at the start of a new chat — it's already in there.</p>
     </div>
   </div>
-</section>
 
-<div class="div-soft"></div>
+  <!-- ═══════════════════════════════════ -->
+  <!-- SECTION: Next Steps                -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="nextsteps" class="section">
+    <h2>Next Steps</h2>
 
-<!-- HOW IT WORKS — pale pink -->
-<section class="sec s-pink" id="next">
-  <div class="inner">
-    <div class="eyebrow">What happens next</div>
-    <h2>How the process works</h2>
-    <p class="sub">As a mastermind member, your investment is $195, paid when you book your Brain Dump Call. That covers the full build and your Reboot Call.</p>
-    <div class="proc">
+    <h3>Your immediate to-do list</h3>
 
-      <div class="pc">
-        <div class="pc-n">01</div>
-        <h4>Book your Brain Dump Call</h4>
-        <p>$195 paid at booking. That's your only payment. It covers the Brain Dump, the full build and your Reboot Call.</p>
-        <div class="pc-note">Confirms your spot</div>
-      </div>
+    <div class="action-item">
+      <input type="checkbox">
+      <span><strong>Paste your Global Instructions</strong> into Cowork → Customise → Cowork → Global Instructions (the block is in the Global Instructions tab above, ready to copy)</span>
+    </div>
+    <div class="action-item">
+      <input type="checkbox">
+      <span><strong>Drop your brand assets</strong> into the <code>brand/</code> folder in Claude Brain — Jo Wilson's brand guide PDF, logo files, any design elements — so your visual identity skill has actual files to reference</span>
+    </div>
+    <div class="action-item">
+      <input type="checkbox">
+      <span><strong>Drop your digital product PDFs</strong> into the <code>products/</code> folder — Snap Sell Succeed, Snap Edit Shine, Lightroom Presets — so the promo email skill can draw from the actual product content</span>
+    </div>
+    <div class="action-item">
+      <input type="checkbox">
+      <span><strong>Run your first newsletter</strong> — open the Monthly Newsletter project in Cowork, say "Let's write the newsletter" and answer as many questions as feels comfortable. Even rough answers work.</span>
+    </div>
+    <div class="action-item">
+      <input type="checkbox">
+      <span><strong>Before running the VA Briefing</strong>, make sure Instagram is open and logged in on your desktop Chrome — Claude uses this to audit your recent grid</span>
+    </div>
+    <div class="action-item">
+      <input type="checkbox">
+      <span><strong>Cowork tokens are doubled until 5 July 2026</strong> — a good time to run both projects and experiment without worrying about limits. Have a play.</span>
+    </div>
 
-      <div class="pc">
-        <div class="pc-n">02</div>
-        <h4>The Brain Dump Call</h4>
-        <p>We go deep on your business: brand assets, voice examples, processes, goals. This is what the build is made from.</p>
-        <div class="pc-note">60–90 mins via Zoom</div>
-      </div>
-
-      <div class="pc">
-        <div class="pc-n">03</div>
-        <h4>Tania builds</h4>
-        <p>Your three skills get built and tested. You'll hear from Tania with a summary before the Reboot Call.</p>
-        <div class="pc-note">Approx. one week</div>
-      </div>
-
-      <div class="pc">
-        <div class="pc-n">04</div>
-        <h4>Your Reboot Call</h4>
-        <p>We screen share into your Claude account together. Everything gets installed and you walk away knowing how to use it.</p>
-        <div class="pc-note">Included in your $195</div>
-      </div>
-
+    <h3>Revision window</h3>
+    <div class="revision-box">
+      <h3>Two rounds of revisions included</h3>
+      <p>If something in your setup isn't quite right — a skill that needs adjusting, a project that needs a tweak, something that doesn't feel like you — get in touch and we'll fix it.</p>
+      <p><strong>Revision window closes:</strong> 7 July 2026</p>
+      <p><strong>What counts:</strong> Adjustments and refinements to what's already built. Not new skills or additional deliverables — those are a separate conversation I'd love to have with you when you're ready for the next phase.</p>
+      <p><strong>How to request a revision:</strong> Email Tania at <a href="mailto:tania@aiwithintent.com.au">tania@aiwithintent.com.au</a> and clearly describe what needs adjusting. I'll get back to you within 2 working days.</p>
     </div>
   </div>
-</section>
 
-<!-- FOOTER — mid denim -->
-<footer>
-  <div class="ft-script">ready when you are, AJ</div>
-  <h2 class="ft-h">Let's get your<br/>marketing off your plate</h2>
-  <p class="ft-sub">This plan was put together specifically for your business, based on your discovery call. The next step is booking your Brain Dump Call. That's where the build begins.</p>
-  <a href="https://taniacarcenac.myflodesk.com/ooyh-braindump" class="btn-pink">Book your Brain Dump Call · $195</a>
-  <p class="ft-note">Or reply to Tania's email directly and she'll send you the booking link.</p>
-</footer>
-<div class="acb">Prepared by Tania Carcenac · AI with Intent · 2026</div>
+  <!-- ═══════════════════════════════════ -->
+  <!-- SECTION: A Note from Tania         -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="thankyou" class="section">
+    <h2>A Note from Tania</h2>
 
-<button id="rtt" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <div class="thankyou-box">
+      <h3>I appreciate you.</h3>
+      <p>Thank you for your time and patience as we built the Claude foundation for your business — it was a learning curve for both of us (twice!) It's really tough when all you want to do is press pause on life while you process and cope with all it throws at you sometimes, but you showed up and worked through the whole reboot.</p>
+      <p>You ended the call saying it was really worth it — that meant loads to me to hear. I hope what we built together gives you back some time and space in the weeks ahead. Your 'brain' is in good hands now, so go let Claude DO some of the tasks for you.</p>
+      <p>Take care of yourself, the business will often wait. If you need to rant/vent/be heard... give me a shout. I so admire you and all you do!</p>
+    </div>
 
+    <div class="testimonial-qs">
+      <h3>Would you share your experience?</h3>
+      <p class="intro">A short testimonial from you makes a real difference for other business owners who are wondering whether something like this is right for them. The form has everything you need — it only takes a few minutes and your honest words are more valuable than you know.</p>
+
+      <div style="text-align: center; margin-top: 24px;">
+        <a href="https://forms.gle/oU7L2ZNQiC433u8G9" target="_blank" class="mailto-btn">Share Your Experience →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <h3>Out of Your Head</h3>
+    <p>AI Setup for Solopreneurs &nbsp;·&nbsp; <a href="mailto:tania@aiwithintent.com.au">tania@aiwithintent.com.au</a></p>
+  </div>
+
+</div>
 
 <script>
-function switchPhase(id, btn) {
-  document.querySelectorAll('.ppanel').forEach(p => p.classList.remove('on'));
-  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
-  document.getElementById('phase-' + id).classList.add('on');
-  btn.classList.add('active');
-}
-
-function showState(cardId, state) {
-  document.getElementById(cardId + '-now').classList.toggle('on',   state === 'now');
-  document.getElementById(cardId + '-after').classList.toggle('on', state === 'after');
-  document.querySelectorAll('#' + cardId + ' .stab').forEach(t => t.classList.remove('active'));
-  document.querySelector('#' + cardId + ' .stab-' + state).classList.add('active');
-}
-
-const rtt = document.getElementById('rtt');
-window.addEventListener('scroll', () => {
-  const show = window.scrollY > window.innerHeight * .8;
-  rtt.style.opacity = show ? '1' : '0';
-  rtt.style.transform = show ? 'translateY(0)' : 'translateY(10px)';
-});
-
-const obs = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
-}), { threshold: .08 });
-document.querySelectorAll('.hc,.dc,.fc,.pc,.sc,.bacard').forEach(el => {
-  el.style.opacity = '0'; el.style.transform = 'translateY(14px)';
-  el.style.transition = 'opacity .4s ease, transform .4s ease';
-  obs.observe(el);
-});
+  function copyPrompt(btn) {
+    const box = btn.parentElement;
+    const text = box.textContent.replace('Copy', '').replace('Copied!', '').trim();
+    navigator.clipboard.writeText(text);
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  }
 </script>
 </body>
 </html>
