@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Claude Setup | Pen and Paper Girl</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --plum:       #2E2845;
+      --denim:      #25587F;
+      --mid-denim:  #95B6D7;
+      --pale-denim: #D6E7F7;
+      --cream:      #EEE6DE;
+      --pale-pink:  #FAEFF3;
+      --hot-pink:   #D4336E;
+      --white:      #ffffff;
+      --text:       #1a1a2e;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(140deg, var(--pale-denim) 0%, var(--cream) 100%);
+      min-height: 100vh;
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 24px 20px; }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      padding: 50px 30px 42px;
+      background: var(--plum);
+      color: var(--white);
+      border-radius: 16px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 260px; height: 260px;
+      background: rgba(212,51,110,0.12);
+      border-radius: 50%;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 180px; height: 180px;
+      background: rgba(149,182,215,0.08);
+      border-radius: 50%;
+    }
+    .header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .header .subtitle {
+      font-size: 1.6rem;
+      color: var(--mid-denim);
+      font-weight: 600;
+      position: relative;
+    }
+    .header .meta {
+      margin-top: 14px;
+      font-size: 0.88rem;
+      opacity: 0.6;
+      position: relative;
+    }
+
+    /* ── Recording Banner ── */
+    .recording-banner {
+      background: linear-gradient(135deg, var(--hot-pink) 0%, #b8275e 100%);
+      color: var(--white);
+      padding: 22px 28px;
+      border-radius: 12px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .recording-banner .rb-left { display: flex; align-items: center; gap: 16px; flex: 1; min-width: 220px; }
+    .recording-banner .icon { font-size: 2.2rem; flex-shrink: 0; }
+    .recording-banner h3 { font-family: 'Libre Baskerville', serif; font-size: 1.05rem; margin-bottom: 3px; }
+    .recording-banner p { font-size: 0.88rem; opacity: 0.9; }
+    .recording-banner a {
+      background: var(--white);
+      color: var(--hot-pink);
+      padding: 11px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .recording-banner a:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
+
+    /* ── Navigation ── */
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      background: rgba(255,255,255,0.97);
+      padding: 14px 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(46,40,69,0.14);
+    }
+    .nav a {
+      padding: 9px 14px;
+      border: 2px solid transparent;
+      background: var(--pale-denim);
+      color: var(--plum);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.83rem;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .nav a:hover { background: var(--mid-denim); color: var(--white); text-decoration: none; }
+
+    /* Active nav state - CSS-only via :has() */
+    body:not(:has(.section:target)) .nav a[href="#workspace"],
+    body:has(#workspace:target)     .nav a[href="#workspace"] { background: var(--plum); color: var(--white); }
+    body:has(#skills:target)        .nav a[href="#skills"]    { background: var(--plum); color: var(--white); }
+    body:has(#tasks:target)         .nav a[href="#tasks"]     { background: var(--plum); color: var(--white); }
+    body:has(#tips:target)          .nav a[href="#tips"]      { background: var(--plum); color: var(--white); }
+    body:has(#nextsteps:target)     .nav a[href="#nextsteps"] { background: var(--plum); color: var(--white); }
+    body:has(#thankyou:target)      .nav a[href="#thankyou"]  { background: var(--plum); color: var(--white); }
+
+    /* ── Sections - CSS :target navigation ── */
+    .section {
+      display: none;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 14px rgba(46,40,69,0.07);
+      scroll-margin-top: 90px;
+    }
+
+    .section:target { display: block; animation: fadeIn 0.3s ease; }
+    body:not(:has(.section:target)) #workspace { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section h2 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--plum);
+      font-size: 1.75rem;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--pale-denim);
+    }
+    .section h3 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--denim);
+      font-size: 1.15rem;
+      margin: 28px 0 12px;
+    }
+    .section h4 { color: var(--plum); font-size: 0.98rem; font-weight: 700; margin: 16px 0 6px; }
+    .section p { margin-bottom: 10px; }
+
+    /* ── Highlight Boxes ── */
+    .box {
+      padding: 18px 22px;
+      border-radius: 10px;
+      margin: 16px 0;
+      border-left: 4px solid var(--denim);
+      background: var(--pale-denim);
+    }
+    .box.pink  { border-left-color: var(--hot-pink); background: var(--pale-pink); }
+    .box.cream { border-left-color: var(--mid-denim); background: var(--cream); }
+
+    /* ── Folder Map ── */
+    .folder-map {
+      background: var(--plum);
+      color: #c4d8ec;
+      padding: 22px 26px;
+      border-radius: 10px;
+      font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 1.9;
+      margin: 16px 0;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .folder-map .f-dir  { color: var(--mid-denim); font-weight: 600; }
+    .folder-map .f-file { color: #e8d8f0; }
+    .folder-map .f-note { color: #7a9bb5; font-style: italic; }
+
+    /* ── Skill Cards ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin: 20px 0;
+    }
+    .card {
+      background: var(--white);
+      border: 2px solid var(--pale-denim);
+      border-radius: 12px;
+      padding: 22px;
+      transition: all 0.2s;
+    }
+    .card:hover { border-color: var(--plum); box-shadow: 0 4px 18px rgba(46,40,69,0.1); }
+    .skill-tag {
+      display: inline-block;
+      background: var(--plum);
+      color: var(--white);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .skill-tag.brand { background: var(--hot-pink); }
+    .card h4 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--plum);
+      font-size: 1.02rem;
+      margin: 0 0 8px;
+    }
+    .card p { font-size: 0.88rem; color: #555; line-height: 1.65; margin: 0; }
+    .card .trigger {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--pale-denim);
+      font-size: 0.83rem;
+      color: var(--denim);
+    }
+    .card .trigger strong { display: block; color: var(--plum); margin-bottom: 3px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.4px; }
+
+    /* ── Tables ── */
+    table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.9rem; }
+    th { background: var(--plum); color: var(--white); padding: 12px 16px; text-align: left; font-weight: 600; }
+    td { padding: 11px 16px; border-bottom: 1px solid var(--pale-denim); vertical-align: top; }
+    tr:nth-child(even) td { background: #fafbff; }
+
+    /* ── Prompt Boxes ── */
+    .prompt-box {
+      background: var(--plum);
+      color: #c4d8ec;
+      padding: 44px 20px 18px 20px;
+      border-radius: 10px;
+      margin: 12px 0;
+      font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+      font-size: 0.83rem;
+      white-space: pre-wrap;
+      position: relative;
+      line-height: 1.65;
+    }
+    .prompt-box .copy-btn {
+      position: absolute;
+      top: 11px; right: 11px;
+      background: var(--hot-pink);
+      color: var(--white);
+      border: none;
+      padding: 5px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.73rem;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+    }
+    .prompt-box .copy-btn:hover { background: #b8275e; }
+
+    /* ── Step List ── */
+    .step-list { list-style: none; padding: 0; margin: 14px 0; }
+    .step-list li {
+      display: flex;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--pale-denim);
+      align-items: flex-start;
+    }
+    .step-list li:last-child { border-bottom: none; }
+    .step-num {
+      background: var(--plum);
+      color: var(--white);
+      min-width: 26px; height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── Tip Items ── */
+    .tip-list { display: flex; flex-direction: column; gap: 14px; margin: 16px 0; }
+    .tip-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px;
+      background: var(--cream);
+      border-radius: 10px;
+    }
+    .tip-num {
+      background: var(--hot-pink);
+      color: var(--white);
+      min-width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+    }
+    .tip-content h4 { color: var(--plum); margin: 0 0 5px; }
+    .tip-content p { font-size: 0.9rem; color: #444; margin: 0; }
+    .tip-content ul { font-size: 0.9rem; color: #444; padding-left: 20px; margin: 6px 0 0; }
+
+    /* ── Action Items ── */
+    .action-item {
+      background: var(--pale-denim);
+      padding: 13px 18px;
+      border-radius: 8px;
+      margin: 9px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .action-item input[type="checkbox"] {
+      margin-top: 3px;
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      accent-color: var(--plum);
+      cursor: pointer;
+    }
+
+    /* ── Revision Box ── */
+    .revision-box {
+      border: 2px solid var(--mid-denim);
+      border-radius: 12px;
+      padding: 24px 26px;
+      background: var(--pale-denim);
+      margin: 22px 0;
+    }
+    .revision-box h3 { margin-top: 0; color: var(--plum); }
+    .revision-box p { margin: 8px 0; font-size: 0.93rem; }
+
+    /* ── Thank You Section ── */
+    .thankyou-box {
+      background: linear-gradient(135deg, var(--plum) 0%, var(--denim) 100%);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 36px;
+      margin-bottom: 28px;
+      text-align: center;
+    }
+    .thankyou-box h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.6rem;
+      margin-bottom: 14px;
+      color: var(--white);
+    }
+    .thankyou-box p { opacity: 0.9; font-size: 0.97rem; line-height: 1.8; margin-bottom: 10px; }
+
+    .testimonial-qs {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 28px 30px;
+      margin: 24px 0;
+    }
+    .testimonial-qs h3 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--plum);
+      font-size: 1.15rem;
+      margin: 0 0 6px;
+    }
+    .testimonial-qs .intro { font-size: 0.9rem; color: #555; margin-bottom: 18px; }
+
+    .mailto-btn {
+      display: inline-block;
+      background: var(--hot-pink);
+      color: var(--white);
+      padding: 14px 30px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-top: 18px;
+      transition: all 0.2s;
+    }
+    .mailto-btn:hover { background: #b8275e; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(212,51,110,0.35); text-decoration: none; }
+
+    a { color: var(--hot-pink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .footer {
+      text-align: center;
+      padding: 36px 30px;
+      background: var(--plum);
+      color: var(--white);
+      border-radius: 16px;
+      margin-top: 28px;
+    }
+    .footer h3 { font-family: 'Libre Baskerville', serif; color: var(--white); margin-bottom: 8px; font-size: 1.3rem; }
+    .footer p { font-size: 0.9rem; opacity: 0.8; margin: 4px 0; }
+    .footer a { color: var(--mid-denim); }
+
+    @media (max-width: 620px) {
+      .header h1 { font-size: 1.8rem; }
+      .header .subtitle { font-size: 1.25rem; }
+      .nav { position: static; }
+      .nav a { font-size: 0.77rem; padding: 8px 10px; }
+      .section { padding: 24px 18px; }
+      .recording-banner { flex-direction: column; text-align: center; }
+      .recording-banner .rb-left { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Your Claude Setup</h1>
+    <p class="subtitle">Pen and Paper Girl</p>
+    <p class="meta">Built by Tania Carcenac &nbsp;·&nbsp; Out of Your Head &nbsp;·&nbsp; June 2026</p>
+  </div>
+
+  <!-- Recording Banner -->
+  <div class="recording-banner">
+    <div class="rb-left">
+      <span class="icon">🎥</span>
+      <div>
+        <h3>Your Reboot Call Recording</h3>
+        <p>24 June 2026. The walkthrough of your skills, connections, and first task being set up.</p>
+      </div>
+    </div>
+    <a href="https://fathom.video/share/rwheuuywhbKwcBg6jsEVwGBAyzWEUubS" target="_blank">Watch Recording →</a>
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav">
+    <a href="#workspace">Your Workspace</a>
+    <a href="#skills">Your Skills</a>
+    <a href="#tasks">Your Tasks</a>
+    <a href="#tips">Quick Tips</a>
+    <a href="#nextsteps">Next Steps</a>
+    <a href="#thankyou">A Note from Tania</a>
+  </div>
+
+  <!-- WORKSPACE -->
+  <div id="workspace" class="section">
+    <h2>Your Pen and Paper Girl Workspace</h2>
+
+    <div class="box pink">
+      <p>Before anything technical: on our very first call, you described the six steps behind every Coffee at the Coast booking — the happy dance when a ticket sells, the Trello card, the tracker, the reminder, the thank-you with everyone's handles, adding them to your list — and you said it plainly: <em>"Without me, I want to show up. That's it."</em> Everything in this workspace is built around that one sentence, not around giving you more to manage.</p>
+      <p style="margin-top: 10px;">You also told me, right at the start, that you were a little scared to even open the Claude desktop app. The pieces below that are ready are simple, and you genuinely cannot break them by having a go.</p>
+    </div>
+
+    <p>This isn't just a folder of files. It's a system where Claude already knows your business before you type your first message. When you open Claude Cowork and select the <strong>Pen and Paper Girl</strong> folder as your workspace, Claude reads your <code>CLAUDE.md</code> automatically and has full context — your two businesses, your brand voice, your Coffee at the Coast workflow, your tools — from the moment you start.</p>
+
+    <h3>What's in the folder</h3>
+    <div class="folder-map"><span class="f-dir">📁 Pen and Paper Girl/</span>
+├── <span class="f-file">CLAUDE.md</span>                                  <span class="f-note">← The brain. Claude reads this every session.</span>
+├── <span class="f-dir">📁 01-coffee-at-the-coast/</span>
+│   ├── <span class="f-file">skill-catc-workflow.md</span>                 <span class="f-note">← Your monthly event cycle, start to finish</span>
+│   ├── <span class="f-file">skill-ig-content.md</span>                    <span class="f-note">← Monthly Instagram content planning</span>
+│   ├── <span class="f-file">apps-script-booking-sync-setup.md</span>      <span class="f-note">← Booking automation — see Your Tasks page</span>
+│   ├── <span class="f-file">Attendee Tracker.xlsx</span>
+│   ├── <span class="f-file">Social Content.xlsx</span>
+│   ├── <span class="f-dir">📁 email-templates/</span>
+│   └── <span class="f-dir">📁 testimonials/</span>
+├── <span class="f-dir">📁 02-brand-and-voice/</span>
+│   ├── <span class="f-file">skill-brand-voice.md</span>                   <span class="f-note">← How you write, sign off, what you'd never say</span>
+│   └── <span class="f-file">skill-brand-guidelines.md</span>              <span class="f-note">← Your colours, fonts, visual identity</span>
+├── <span class="f-dir">📁 03-pa-services/</span>                          <span class="f-note">← PA in a Day context, client templates</span>
+└── <span class="f-dir">📁 04-reboot-call/</span>                          <span class="f-note">← Reference only — setup guides, not day-to-day</span></div>
+
+    <h3>Two businesses, one workspace</h3>
+    <p>Pen and Paper Girl and Coffee at the Coast live together in this one folder, because Coffee at the Coast is part of your Pen and Paper Girl world rather than a separate business. You don't need to switch folders or start a different session for one versus the other — Claude already has both in view.</p>
+
+    <h3>Updating CLAUDE.md</h3>
+    <p>When something changes (a new offer, an updated process, a different tool) you never edit the file directly. Just tell Claude:</p>
+    <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Update the CLAUDE.md to reflect that [what's changed]. Also update the README if the folder structure has changed.</div>
+    <p>Claude makes the edit for you. Simple as that.</p>
+  </div>
+
+  <!-- SKILLS -->
+  <div id="skills" class="section">
+    <h2>Your 4 Skills</h2>
+    <p>These are installed and active in Claude. They're what makes Claude write and think like part of your business, rather than starting from scratch every time you open a chat.</p>
+
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="skill-tag brand">Brand</div>
+        <h4>Brand Voice</h4>
+        <p>How you write — your tone, your sign-offs, the phrases that feel wrong, examples of writing you love. Built from your real emails and newsletters, not a generic template.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          Runs automatically in the background. Just start chatting — no need to mention it by name.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="skill-tag brand">Brand</div>
+        <h4>Brand Guidelines</h4>
+        <p>Your colours, fonts and visual identity, documented so Claude describes and works with your brand accurately whenever visuals come up.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          Runs automatically in the background — no need to mention it by name.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="skill-tag">Workflow</div>
+        <h4>Coffee at the Coast Workflow</h4>
+        <p>This is a skill, not a project or a task — there's nothing to open or click. It's the reference document that tells Claude exactly what goes in your Reminder and Thank-You emails and when each one should go out (see Your Tasks).</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          You don't — it works quietly in the background. The only time you'd mention it by name is if you want to change how your reminder or thank-you emails are worded.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="skill-tag">Workflow</div>
+        <h4>Coffee at the Coast Instagram Content</h4>
+        <p>Guides the monthly content planning conversation — checks what's already been posted, interviews you about the last event, drafts five ready-to-use captions.</p>
+        <div class="trigger">
+          <strong>How to trigger it</strong>
+          Lives inside your Instagram Content Project — open the project and start a new chat (see Your Tasks).
+        </div>
+      </div>
+
+    </div>
+
+    <h3>Getting more from these, day to day</h3>
+    <p>These four skills aren't only for Coffee at the Coast tasks — they're available the moment you open any chat. A few ways to put them to work:</p>
+    <div class="tip-list">
+      <div class="tip-item">
+        <div class="tip-num">1</div>
+        <div class="tip-content">
+          <h4>Writing anything outside Coffee at the Coast</h4>
+          <p>A Pen and Paper Girl client email, a line for your monthly note newsletter, a one-off thank-you note — just ask Claude to write it. Your Brand Voice skill means it already sounds like you, no extra explaining needed.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">2</div>
+        <div class="tip-content">
+          <h4>Describing your brand to someone else</h4>
+          <p>Need a quick paragraph about your visual style for a guest post, directory listing, or collaboration? Ask Claude — your Brand Guidelines skill already has your colours and aesthetic ready to describe.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">3</div>
+        <div class="tip-content">
+          <h4>Want to change your email wording?</h4>
+          <p>If you ever want to tweak how your reminder or thank-you email reads, just tell Claude what to change. It updates the template behind both, so every future draft uses the new wording automatically — no need to edit anything by hand.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">4</div>
+        <div class="tip-content">
+          <h4>Need one extra caption between sessions</h4>
+          <p>A quick sold-out announcement, a last-minute update — open any chat and ask. Claude already knows your caption style from the Instagram Content skill, even outside the monthly project.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Updating a skill</h3>
+    <div class="box pink">
+      <p>When you refine a skill through Claude, always ask it to save the update back to your folder as well. The version in Claude and the file in your workspace need to stay in sync. Otherwise you iterate in Claude but the file falls behind.</p>
+      <div class="prompt-box" style="margin-top: 14px;"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Update the [skill name] skill to [what needs to change]. Save the updated version to the skill file in my Pen and Paper Girl folder too.</div>
+    </div>
+  </div>
+
+  <!-- TASKS -->
+  <div id="tasks" class="section">
+    <h2>Your 2 Tasks &amp; 1 Project</h2>
+    <p>The two tasks below live in Claude's <strong>Scheduled</strong> section, set to <strong>manual mode</strong>, so you trigger them when you're ready — nothing runs automatically. Each one is built to draft an email and leave it sitting in your Gmail for you to check before it ever goes out.</p>
+
+    <div class="box pink">
+      <h4>Honest flag: neither task has been test-run yet</h4>
+      <p>I set both of these up and saved them during our calls, but didn't get to actually click "Run now" on either one before time ran out. So the first time you run each of these, treat it as a test — open the draft straight after and check it carefully (names, dates, BCC list) before sending. If anything looks off, email me and I'll fix it.</p>
+      <p style="margin-top: 10px;">One thing I can tell you with real confidence though: neither task edits your Attendee Tracker. Both only read it — to pull the right names and emails — then create a brand new Gmail draft. They never touch the existing spreadsheet, so they don't run into the same wall as the bookings or the Instagram content table.</p>
+    </div>
+
+    <div class="box cream">
+      <h4>Quick thing to check first</h4>
+      <p>The Monthly Reminder task was set up across two separate calls, so it may have accidentally been created twice. Open <strong>Scheduled</strong> and look for "Coffee at the Coast — Monthly Reminder Email Draft." If you see it listed twice, delete one — doesn't matter which. If you only see it once, there's nothing to do.</p>
+    </div>
+
+    <h3>How to run a task</h3>
+    <ol class="step-list">
+      <li><span class="step-num">1</span><span>Open Claude Cowork → go to <strong>Scheduled</strong> → find the task you want</span></li>
+      <li><span class="step-num">2</span><span>Click the three dots next to it, then <strong>Run now</strong></span></li>
+      <li><span class="step-num">3</span><span>Claude reads (never edits) your Attendee Tracker to see who's booked or attended that month, and pulls their email addresses for the BCC list — for the Thank-You draft it also pulls Instagram handles for the "here's everyone's handles" section</span></li>
+      <li><span class="step-num">4</span><span>Within a minute or two, the draft appears in your Gmail <strong>Drafts</strong> folder</span></li>
+      <li><span class="step-num">5</span><span>Open it, read it over, make any tweaks, then send it yourself when you're ready</span></li>
+    </ol>
+
+    <div class="box cream">
+      <h4>Before running the Reminder task</h4>
+      <p>Make sure the next Coffee at the Coast event is already sitting in your Google Calendar with "Coffee at the Coast" somewhere in the title — that's how Claude finds it. No event in the calendar means no reminder draft.</p>
+    </div>
+
+    <h3>Your tasks</h3>
+    <table>
+      <tr>
+        <th>Task name</th>
+        <th>What it produces</th>
+      </tr>
+      <tr>
+        <td><strong>Coffee at the Coast — Monthly Reminder Email Draft</strong></td>
+        <td>A Gmail draft reminder, BCC'd to everyone booked for the next event. Run it around the 23rd of the month.</td>
+      </tr>
+      <tr>
+        <td><strong>Coffee at the Coast — Post-Event Thank-You Email Draft</strong></td>
+        <td>A Gmail draft thank-you with attendees' Instagram handles already included. Run it the afternoon of, or the day after, the event — once you've updated the tracker.</td>
+      </tr>
+    </table>
+
+    <h3>Your monthly project (not a scheduled task)</h3>
+    <p>Your <strong>Coffee at the Coast — Instagram Content</strong> project works a little differently — it's a Project, not a Scheduled Task, so you won't find it in the same list. A Project remembers what's happened across every session, which matters here because it tracks what you've already posted, and it gets better the more you give it to work with.</p>
+    <ol class="step-list">
+      <li><span class="step-num">1</span><span>Open Claude Cowork → go to <strong>Projects</strong> → click <strong>Coffee at the Coast — Instagram Content</strong></span></li>
+      <li><span class="step-num">2</span><span>Start a new chat inside the project — just say something like "Let's plan this month's content" and Claude picks it up from there</span></li>
+      <li><span class="step-num">3</span><span>Claude asks how the last event went — answer naturally, like you're telling a friend, including any testimonials or stand-out moments</span></li>
+      <li><span class="step-num">4</span><span>Walk away with five captions, ready to use</span></li>
+    </ol>
+
+    <div class="box cream">
+      <h4>Giving the project more to work with</h4>
+      <p>Inside the project, look for "Add files" (or the project's knowledge/files area). Drop in extra material whenever you have it — new testimonial screenshots, captions you've loved from past months, photos worth referencing. The more real examples it has, the closer the captions sound like you.</p>
+    </div>
+
+    <div class="box pink">
+      <h4>Where your monthly content actually ends up</h4>
+      <p>Claude gives you five ready-to-use captions, plus a content table, right there in the chat — that part always works. What it can't do on its own yet is drop that table into your existing Social Content spreadsheet (same reason as the bookings: Claude can read your spreadsheets but has no way to write into one that already exists).</p>
+      <p>Here's the easy workaround: once you've got your content for the month, just ask Claude in the same chat — <em>"Please save this as a new Google Doc in a folder called IG Content, named [Month Year] C@TC Content."</em> Claude creates the IG Content folder the first time, and from then on just adds a new document into it each month. Open that one folder whenever you want last month's captions or this month's plan — no digging through old chats.</p>
+      <p>If you'd still like everything centralised in your Social Content spreadsheet too, just copy it across.</p>
+    </div>
+
+    <h3>What each draft contains</h3>
+    <p>Every email draft is written in your brand voice, addressed and BCC'd correctly, and left sitting in Gmail rather than sent automatically. Nothing leaves your account without you reading it first and clicking send yourself.</p>
+
+    <div class="box pink">
+      <h4>A quick, honest note about new bookings</h4>
+      <p>I tried two different ways to make new Humanitix bookings add themselves to your Attendee Tracker automatically, and neither has worked reliably yet. That's on me, not on anything you did — I didn't want to leave you guessing about why a booking might still need a manual check.</p>
+      <p>For now, keep doing this part exactly the way you did before any of this started:</p>
+      <ol class="step-list" style="margin-top: 4px;">
+        <li><span class="step-num">1</span><span>A Humanitix order email lands in your Gmail, subject line "Order for Coffee at the Coast - [Month] '[YY]"</span></li>
+        <li><span class="step-num">2</span><span>Open your Attendee Tracker, find or add the person, mark the right month column, add their Instagram handle if the form caught one</span></li>
+        <li><span class="step-num">3</span><span>If they shared a coffee order, that's still sitting in the same email — copy it across to wherever you keep your café list for now</span></li>
+      </ol>
+      <p style="margin-top: 12px;">I'm continuing to work on the automated version behind the scenes. The moment it's ready and properly tested, you'll hear from me — everything else on this page keeps working exactly the same in the meantime.</p>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div id="tips" class="section">
+    <h2>Quick Tips</h2>
+    <p>Five things that will make a real difference as you get comfortable using this.</p>
+
+    <div class="tip-list">
+      <div class="tip-item">
+        <div class="tip-num">1</div>
+        <div class="tip-content">
+          <h4>Update skills in both places</h4>
+          <p>When you refine a skill through Claude, always ask it to save the update to your folder too. The version in Claude and the file saved in your workspace need to stay in sync. Otherwise you iterate in Claude but the file falls behind.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">2</div>
+        <div class="tip-content">
+          <h4>Don't let chats run too long</h4>
+          <p>Long chats burn through tokens fast, so Claude has to reread everything each time. When a chat gets long, ask for a handover and start fresh:</p>
+          <div class="prompt-box" style="margin-top: 10px;"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Summarise everything we've covered in this chat in a handover document so I can start a fresh conversation.</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">3</div>
+        <div class="tip-content">
+          <h4>Check your token usage</h4>
+          <p>Go to <strong>Settings → your name at the bottom → Usage</strong> to see how much you've used in your current session and when it resets. Handy for planning when to do heavier work.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">4</div>
+        <div class="tip-content">
+          <h4>Choose your model before you start</h4>
+          <p>Once you've opened a project chat, you can't change the model mid-stream, so pick intentionally at the start:</p>
+          <ul>
+            <li><strong>Haiku</strong>: quick questions, short tasks, general back-and-forth</li>
+            <li><strong>Sonnet</strong>: the everyday workhorse, quality and speed balanced</li>
+            <li><strong>Opus</strong>: deep thinking, complex strategy, nuanced analysis</li>
+            <li><strong>Adaptive</strong>: Claude decides what each part of the task needs</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">5</div>
+        <div class="tip-content">
+          <h4>Your skills aren't just for Coffee at the Coast</h4>
+          <p>Your brand voice skill works for anything you write — Pen and Paper Girl client emails, PA in a Day outreach, anything at all — not only Coffee at the Coast content. Next time you're drafting something for the other side of your business, just ask Claude. It already sounds like you.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Quick reference</h3>
+    <table>
+      <tr>
+        <th>What you want to do</th>
+        <th>What to say or do</th>
+      </tr>
+      <tr>
+        <td>A new booking has come in</td>
+        <td>Add it to the Attendee Tracker manually (see Your Tasks) — for now</td>
+      </tr>
+      <tr>
+        <td>It's around the 23rd of the month</td>
+        <td>Scheduled → Monthly Reminder Email Draft → Run now</td>
+      </tr>
+      <tr>
+        <td>An event just happened</td>
+        <td>Update the tracker, then Scheduled → Post-Event Thank-You Email Draft → Run now</td>
+      </tr>
+      <tr>
+        <td>You're planning next month's Instagram content</td>
+        <td>Projects → Coffee at the Coast — Instagram Content → start a new chat</td>
+      </tr>
+      <tr>
+        <td>Update CLAUDE.md</td>
+        <td>"Update the CLAUDE.md to reflect that [what changed]"</td>
+      </tr>
+      <tr>
+        <td>Update a skill</td>
+        <td>"Update the [skill name] to [change], and save the update to my folder too"</td>
+      </tr>
+      <tr>
+        <td>Manage a long chat</td>
+        <td>"Summarise this chat as a handover document" → start a fresh chat</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- NEXT STEPS -->
+  <div id="nextsteps" class="section">
+    <h2>Next Steps</h2>
+
+    <h3>Your immediate to-do list</h3>
+    <div class="action-item">
+      <input type="checkbox">
+      <span>Bookmark this page so it's easy to find whenever you need a reminder</span>
+    </div>
+    <div class="action-item">
+      <input type="checkbox">
+      <span>Try running the Monthly Reminder task once, even if it's not due yet, just to see it work</span>
+    </div>
+    <div class="action-item">
+      <input type="checkbox">
+      <span>Keep adding new bookings to your tracker manually for now — I'll let you know the moment that part is automated</span>
+    </div>
+
+    <h3>Revision window</h3>
+    <div class="revision-box">
+      <h3>Two rounds of revisions included</h3>
+      <p>If something in your setup isn't quite right (a skill that needs adjusting, wording that feels off, a task that needs a tweak) get in touch and I'll fix it.</p>
+      <p><strong>Revision window closes:</strong> 9 July 2026</p>
+      <p><strong>What counts:</strong> Adjustments and refinements to what's already built. Not new skills or additional deliverables. Those are a separate conversation. One I'd love to have with you when you're ready to tackle the next phase!</p>
+      <p>This doesn't include the booking automation, by the way — that one's still mine to finish properly, no revision request needed. I'm hoping to get you a working version in person as soon as I can.</p>
+      <p><strong>How to request a revision</strong></p>
+      <p>Email Tania at <a href="mailto:tania@aiwithintent.com.au">tania@aiwithintent.com.au</a> clearly outlining what needs revising. I'll get back to you within 2 working days.</p>
+    </div>
+  </div>
+
+  <!-- A NOTE FROM TANIA -->
+  <div id="thankyou" class="section">
+    <h2>A Note from Tania</h2>
+
+    <div class="thankyou-box">
+      <h3>You hung in there.</h3>
+      <p>There was a lot of troubleshooting across these calls — more than either of us wanted — and you stayed with it the whole way through, trying things, asking the right questions, never once giving up on it. That's exactly why this is going to work for you.</p>
+      <p>It just takes a little time to feel confident with anything new, and the only way through that part is to actually have a go. Next time you're home from a Coffee at the Coast morning, run the thank-you task and see what happens. Open the Instagram Content project and just start talking to it. You really can't break anything here — it gets easier every single time you use it.</p>
+      <p>The one piece still properly unfinished is capturing new bookings automatically — that's mine to finish, not something for you to keep managing in the meantime. I'd like to sort it with you in person next time, so you're not also fighting a slow connection or an overloaded computer while we get it right.</p>
+      <p>You told me right at the start what this was all for — just showing up at Coffee at the Coast without carrying the six steps behind it. That's still exactly the goal, and what's working already gets you closer to it.</p>
+    </div>
+
+    <div class="testimonial-qs">
+      <h3>Would you share your experience?</h3>
+      <p class="intro">A short testimonial from you makes a real difference for other business owners who are wondering whether something like this is right for them. The form has everything you need — it only takes a few minutes and your honest words are more valuable than you know.</p>
+
+      <div style="text-align: center; margin-top: 24px;">
+        <a href="https://forms.gle/oU7L2ZNQiC433u8G9" target="_blank" class="mailto-btn">Share Your Experience →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <h3>Out of Your Head</h3>
+    <p>AI Setup for Solopreneurs &nbsp;·&nbsp; <a href="mailto:tania@aiwithintent.com.au">tania@aiwithintent.com.au</a></p>
+  </div>
+
+</div>
+
+<script>
+  function copyPrompt(btn) {
+    const box = btn.parentElement;
+    const text = box.textContent.replace('Copy', '').trim();
+    navigator.clipboard.writeText(text);
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  }
+</script>
+</body>
+</html>
