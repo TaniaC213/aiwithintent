@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Your AI Foundation Audit | Premiere Events</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --plum:       #2E2845;
+      --denim:      #25587F;
+      --mid-denim:  #95B6D7;
+      --pale-denim: #D6E7F7;
+      --cream:      #EEE6DE;
+      --pale-pink:  #FAEFF3;
+      --hot-pink:   #D4336E;
+      --white:      #ffffff;
+      --text:       #1a1a2e;
+    }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(140deg, var(--pale-denim) 0%, var(--cream) 100%);
+      min-height: 100vh;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 24px 20px; }
+    .header {
+      text-align: center;
+      padding: 50px 30px 42px;
+      background: var(--plum);
+      color: var(--white);
+      border-radius: 16px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 260px; height: 260px;
+      background: rgba(212,51,110,0.12);
+      border-radius: 50%;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 180px; height: 180px;
+      background: rgba(149,182,215,0.08);
+      border-radius: 50%;
+    }
+    .header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; font-weight: 700; margin-bottom: 8px; position: relative; }
+    .header .subtitle { font-size: 1.4rem; color: var(--mid-denim); font-weight: 600; position: relative; }
+    .header .meta { margin-top: 14px; font-size: 0.88rem; opacity: 0.6; position: relative; }
+    .nav {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 24px;
+      position: sticky; top: 10px; z-index: 100;
+      background: rgba(255,255,255,0.97);
+      padding: 14px 16px; border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(46,40,69,0.14);
+    }
+    .nav a {
+      padding: 9px 14px;
+      border: 2px solid transparent;
+      background: var(--pale-denim);
+      color: var(--plum);
+      border-radius: 8px;
+      font-size: 0.83rem; font-weight: 700;
+      transition: all 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    .nav a:hover { background: var(--mid-denim); color: var(--white); }
+    body:not(:has(.section:target)) .nav a[href="#welcome"],
+    body:has(#welcome:target)       .nav a[href="#welcome"]       { background: var(--plum); color: var(--white); }
+    body:has(#possibilities:target) .nav a[href="#possibilities"] { background: var(--plum); color: var(--white); }
+    body:has(#audit:target)         .nav a[href="#audit"]         { background: var(--plum); color: var(--white); }
+    body:has(#notes:target)         .nav a[href="#notes"]         { background: var(--plum); color: var(--white); }
+    body:has(#nextsteps:target)     .nav a[href="#nextsteps"]     { background: var(--plum); color: var(--white); }
+    body:has(#note:target)          .nav a[href="#note"]          { background: var(--plum); color: var(--white); }
+    .section {
+      display: none;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 14px rgba(46,40,69,0.07);
+      scroll-margin-top: 90px;
+    }
+    .section:target { display: block; animation: fadeIn 0.3s ease; }
+    body:not(:has(.section:target)) #welcome { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .section h2 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--plum);
+      font-size: 1.75rem;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--pale-denim);
+    }
+    .section h3 { font-family: 'Libre Baskerville', serif; color: var(--denim); font-size: 1.15rem; margin: 28px 0 12px; }
+    .section p { margin-bottom: 10px; }
+    .box { padding: 18px 22px; border-radius: 10px; margin: 16px 0; border-left: 4px solid var(--denim); background: var(--pale-denim); }
+    .box.pink  { border-left-color: var(--hot-pink); background: var(--pale-pink); }
+    .box.cream { border-left-color: var(--mid-denim); background: var(--cream); }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin: 20px 0; }
+    .card { background: var(--white); border: 2px solid var(--pale-denim); border-radius: 12px; padding: 22px; transition: all 0.2s; }
+    .card:hover { border-color: var(--plum); box-shadow: 0 4px 18px rgba(46,40,69,0.1); }
+    .skill-tag {
+      display: inline-block; background: var(--plum); color: var(--white);
+      font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+      margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .skill-tag.brand { background: var(--hot-pink); }
+    .skill-tag.later { background: var(--mid-denim); color: var(--plum); }
+    .card h4 { font-family: 'Libre Baskerville', serif; color: var(--plum); font-size: 1.02rem; margin: 0 0 8px; }
+    .card p { font-size: 0.88rem; color: #555; line-height: 1.65; margin: 0; }
+    table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.9rem; }
+    th { background: var(--plum); color: var(--white); padding: 12px 16px; text-align: left; font-weight: 600; }
+    td { padding: 11px 16px; border-bottom: 1px solid var(--pale-denim); vertical-align: top; }
+    tr:nth-child(even) td { background: #fafbff; }
+    .step-list { list-style: none; padding: 0; margin: 14px 0; }
+    .step-list li { display: flex; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--pale-denim); align-items: flex-start; }
+    .step-list li:last-child { border-bottom: none; }
+    .step-num {
+      background: var(--plum); color: var(--white);
+      min-width: 26px; height: 26px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--hot-pink); color: var(--white);
+      padding: 14px 28px; border-radius: 10px;
+      text-decoration: none; font-weight: 700; font-size: 1rem;
+      transition: all 0.2s; margin: 10px 0;
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(212,51,110,0.35); }
+    .footer { text-align: center; padding: 26px 20px 40px; font-size: 0.85rem; color: var(--plum); opacity: 0.75; }
+    .footer a { color: var(--hot-pink); }
+    ul.plain { margin: 8px 0 12px 22px; }
+    ul.plain li { margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <h1>Your AI Foundation Audit</h1>
+      <div class="subtitle">Premiere Events &middot; Australian 4WD &amp; Adventure Shows</div>
+      <div class="meta">Prepared for Karen, Peter and the team &middot; July 2026 &middot; Tania Carcenac, AI with Intent</div>
+    </div>
+
+    <nav class="nav">
+      <a href="#welcome">What I Heard</a>
+      <a href="#possibilities">Where AI Could Help</a>
+      <a href="#audit">How the Audit Works</a>
+      <a href="#notes">Points to Note</a>
+      <a href="#nextsteps">Next Steps</a>
+      <a href="#note">A Note from Tania</a>
+    </nav>
+
+    <div id="welcome" class="section">
+      <h2>Lovely to meet you both</h2>
+      <p>Thank you for such a generous, open conversation. You gave me a really clear picture of Premiere Events, and I want to play back what I heard so you can check I've understood your world properly.</p>
+
+      <h3>Two businesses in one</h3>
+      <p>You're running two substantial operations side by side. There's the <strong>event management arm</strong>, with around 600 exhibitors across your shows each year, working through a cycle that never really stops: selling space, bookings and communications, electrical forms, then the delivery of the shows themselves. Then there's a <strong>full in-house marketing function</strong>: social media across three cities, copywriting, graphic design, video and a television program on Channel 7.</p>
+
+      <h3>The patterns I noticed</h3>
+      <ul class="plain">
+        <li><strong>The same work happens three times.</strong> Newsletters, social content and exhibitor communications run per show, largely by hand, for Sydney, Adelaide and Perth.</li>
+        <li><strong>Your systems don't talk to each other.</strong> The custom database has served you for a decade, but getting information between it, your invoicing and your website involves manual re-entry that eats hours.</li>
+        <li><strong>Repetitive exhibitor admin.</strong> Booking confirmations, form chasing and updates for hundreds of exhibitors follow the same patterns every cycle, and each one is still handled individually.</li>
+        <li><strong>A capable team carrying it manually.</strong> You, Ann and your accounts manager each hold a big piece of how everything runs, mostly in your heads and your inboxes.</li>
+      </ul>
+      <div class="box pink">
+        <p><strong>None of this is a criticism, by the way.</strong> A business that has grown steadily for this long, by adding what each season needed, is a business that works. What you're feeling now is simply that the tools have jumped ahead, and it's the right moment to let them carry some of the load.</p>
+      </div>
+    </div>
+
+    <div id="possibilities" class="section">
+      <h2>Where AI could support Premiere Events</h2>
+      <p>You mentioned some genuinely exciting possibilities on our call, including the production-system integration you saw at Cub Campers. I want to be straight with you about the order I'd recommend, because it's the difference between AI that sticks and AI that gets abandoned.</p>
+      <div class="box">
+        <p><strong>The foundation comes first.</strong> Your team hasn't worked with Claude yet, so the first build needs to deliver visible wins quickly, teach everyone how these tools think, and build the confidence that makes everything after it possible. Complex integrations built before that foundation tend to become expensive things nobody quite trusts.</p>
+      </div>
+
+      <h3>The foundation layer (where we'd likely start)</h3>
+      <div class="card-grid">
+        <div class="card">
+          <span class="skill-tag brand">Foundation</span>
+          <h4>Your business, taught to AI once</h4>
+          <p>Your brand voice, your shows, your audiences and your standard information, structured so Claude knows Premiere Events before anyone types a word. This is what stops AI outputs sounding generic.</p>
+        </div>
+        <div class="card">
+          <span class="skill-tag brand">Foundation</span>
+          <h4>Exhibitor communications</h4>
+          <p>Booking confirmations, electrical form reminders, follow-ups and updates drafted in seconds in your voice, from templates built around how your cycle actually runs.</p>
+        </div>
+        <div class="card">
+          <span class="skill-tag brand">Foundation</span>
+          <h4>Skills for your repeated tasks</h4>
+          <p>Your standard operating procedures turned into Skills, so the tasks you do the same way every time (drafting, formatting, checking) happen consistently and in your voice, whoever runs them.</p>
+        </div>
+        <div class="card">
+          <span class="skill-tag brand">Foundation</span>
+          <h4>Projects for your bodies of work</h4>
+          <p>Each show, campaign or ongoing area of work kept together in its own Project, with all its context in one place. On a Team plan these can be shared, so everyone works from the same picture.</p>
+        </div>
+        <div class="card">
+          <span class="skill-tag brand">Foundation</span>
+          <h4>Scheduled Tasks for the automatable</h4>
+          <p>Pieces of work that can run on a schedule without anyone driving them, like a regular data dashboard or a recurring report, set up once and delivered to you on repeat.</p>
+        </div>
+      </div>
+
+      <h3>Later horizons</h3>
+      <div class="card-grid">
+        <div class="card">
+          <span class="skill-tag later">Later</span>
+          <h4>Exhibitor social activity digest</h4>
+          <p>A regular summary of what your exhibitors are posting. Genuinely useful, and it needs investigation during the audit, because the social platforms limit how their data can be gathered.</p>
+        </div>
+        <div class="card">
+          <span class="skill-tag later">Later</span>
+          <h4>Database and invoicing connections</h4>
+          <p>Reducing the manual re-entry between your database, MYOB and the website. I won't promise this before investigating what your systems allow. Some connections read easily but can't be written to, and finding the honest answer is part of the audit's job.</p>
+        </div>
+        <div class="card">
+          <span class="skill-tag later">Later</span>
+          <h4>Deeper automation</h4>
+          <p>The Cub Campers style of integration you admired sits here. It becomes realistic once the foundation is in, the team is fluent and we know exactly which workflows earn the investment.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="audit" class="section">
+      <h2>How the audit works</h2>
+      <p>The AI Foundation Audit is how we get from "there's so much we could do" to a clear, honest plan for your specific business. Here's the whole process.</p>
+
+      <ol class="step-list">
+        <li><span class="step-num">1</span><div><strong>Secure your audit.</strong> Payment confirms your spot, and you'll be taken straight to my calendar to choose your AI Audit call time. <br><a class="cta-btn" href="https://buy.stripe.com/4gM9AU9EN2yYf9y5w52VG00">Secure your audit ($900) &rarr;</a></div></li>
+        <li><span class="step-num">2</span><div><strong>A little preparation, each of you.</strong> Karen suggested this on our call and it's exactly right: before we meet, you, Ann and your accounts manager each jot some notes about your own area. Short prompts for each of you are below.</div></li>
+        <li><span class="step-num">3</span><div><strong>The AI Audit call.</strong> 90 minutes to two hours online, recorded so nothing gets lost, with screens shared. You show me how the work actually runs. Given how much ground your three areas cover, we may split this into two shorter calls.</div></li>
+        <li><span class="step-num">4</span><div><strong>Your Findings &amp; Roadmap document, within five working days of your AI Audit call.</strong> What's working, what's costing you time it shouldn't, what's missing, and a plan mapping which of your processes should become Skills, which bodies of work belong in Projects, what could run as Scheduled Tasks, and any plugins or customisations worth considering. From there, you decide what to have built for you and what to take on yourselves. It comes with a short video of me walking you through it, so you can watch when it suits and share it with anyone who needs to see it.</div></li>
+        <li><span class="step-num">5</span><div><strong>A follow-up call, included.</strong> Optional, booked by you within two weeks of receiving the document, for questions or to scope what comes next.</div></li>
+      </ol>
+
+      <h3>Your preparation prompts</h3>
+      <div class="card-grid">
+        <div class="card">
+          <span class="skill-tag">Karen — Marketing</span>
+          <p>What does a normal week look like? Which content gets created more than once for different cities? What do you repeat every show cycle? If you could hand one task over tomorrow, what would it be?</p>
+        </div>
+        <div class="card">
+          <span class="skill-tag">Ann — Events</span>
+          <p>Walk through one exhibitor's journey from enquiry to show day. Which communications do you send again and again? Where do things get stuck waiting on forms or replies? What eats your time in the last month before a show?</p>
+        </div>
+        <div class="card">
+          <span class="skill-tag">Accounts</span>
+          <p>Where does information get typed in twice? What's the path from booking to invoice to payment, and where does it slow down? Which reports take longest to pull together?</p>
+        </div>
+      </div>
+
+      <h3>The investment</h3>
+      <table>
+        <tr><th>What</th><th>Detail</th></tr>
+        <tr><td>AI Foundation Audit</td><td>$900, paid to confirm your booking</td></tr>
+        <tr><td>Any build work</td><td>Quoted separately from your roadmap, so the price reflects exactly what you choose to have built</td></tr>
+        <tr><td>Audit credit</td><td>Half your audit fee comes off any build booked within 30 days</td></tr>
+        <tr><td>In-person options</td><td>Being local, I can run the setup and training with your whole team in the same room when we get to a build</td></tr>
+      </table>
+      <p>One timing thought rather than a deadline: with Sydney in September, the show season could be a lovely first proving ground for a new foundation, depending on when we get started.</p>
+    </div>
+
+    <div id="notes" class="section">
+      <h2>Points to note</h2>
+      <p>A few practical things worth knowing before we begin, so there are no surprises later.</p>
+
+      <h3>Your computers</h3>
+      <p>Claude's desktop app needs <strong>Windows 10 or newer</strong>, or <strong>macOS 11 (Big Sur) or newer</strong>. Any reasonably recent office computer will be fine. Worth a quick check across the team's machines before a build.</p>
+
+      <h3>A Claude subscription, held by you</h3>
+      <p>Everything I build lives in your accounts and belongs to you, which means the subscription is yours too. For a team like yours the natural fit is the <strong>Claude Team plan</strong>:</p>
+      <ul class="plain">
+        <li>Priced per person in US dollars: US$25 each per month (or US$20 on annual billing)</li>
+        <li><strong>The plan has a five-seat minimum</strong>, so a four-person team still pays for five seats. That's roughly A$190 per month at current exchange rates, and entering your ABN at checkout means GST isn't added</li>
+        <li>What you get for it: central billing and admin, everyone managed in one place, higher usage than individual plans, and your business content isn't used for model training by default</li>
+      </ul>
+      <p>The lighter alternative is individual <strong>Claude Pro</strong> accounts at US$20 per person per month (about A$30 each), which works well but leaves each account managed separately. The roadmap will include my recommendation either way, and I can help you set up whichever you choose.</p>
+
+      <h3>How we'll work</h3>
+      <p>The audit itself happens online, because recording the calls means I can go back through every detail rather than relying on notes. When we get to a build, I'm very happy to come to you for the setup and installation session so the whole team learns together.</p>
+
+      <h3>Other tools, only if they earn it</h3>
+      <p>Depending on what the roadmap surfaces, one or two purpose-specific tools might be worth a small subscription, for example a social scheduling tool for posting across all your platforms from one place. My rule is simple: nothing gets recommended unless the audit shows it clearly paying for itself, and anything we do add is chosen so your setup stays yours, not locked to one vendor. Some ideas, like gathering exhibitor social activity, also need checking against the platforms' own rules, and that honesty check is part of the audit.</p>
+    </div>
+
+    <div id="nextsteps" class="section">
+      <h2>Next steps</h2>
+      <ol class="step-list">
+        <li><span class="step-num">1</span><div><strong>Chat with Ann when she's back.</strong> It makes complete sense to align as a team first, and these notes plus the preparation prompts should give her the full picture quickly.</div></li>
+        <li><span class="step-num">2</span><div><strong>When you're set, secure the audit.</strong> Payment confirms your booking and takes you straight to the calendar. <br><a class="cta-btn" href="https://buy.stripe.com/4gM9AU9EN2yYf9y5w52VG00">Secure your audit ($900) &rarr;</a></div></li>
+        <li><span class="step-num">3</span><div><strong>Gather your supporting documents.</strong> Use the prompts above as your guide for what to pull together from each of your areas.</div></li>
+        <li><span class="step-num">4</span><div><strong>The AI Audit call.</strong> Bring all the pieces that will help build the foundation of your AI knowledge, and show me how the work really runs.</div></li>
+        <li><span class="step-num">5</span><div><strong>Your roadmap arrives</strong> within five working days, with the video walkthrough. From there, every next step is your choice.</div></li>
+      </ol>
+      <div class="box">
+        <p>Questions in the meantime? Reply to my email or write to <a href="mailto:tania@aiwithintent.com.au">tania@aiwithintent.com.au</a> and I'll get back to you.</p>
+      </div>
+    </div>
+
+    <div id="note" class="section">
+      <h2>A note from Tania</h2>
+      <p>Karen and Peter, thank you again for Tuesday's conversation. I came away genuinely energised by what you've built: three major shows, a television program and six hundred exhibitors, run by a small team that clearly knows its business inside out.</p>
+      <p>Sixteen years of a steadily growing business speaks for itself. The manual load you're carrying is simply what happens when capable people keep it all running by hand, and the repetitive part of that load is exactly what these tools are best at carrying, once they're taught your business properly.</p>
+      <p>That's what the audit is for: a clear-eyed look at how everything runs, and an honest plan for what to hand over first. I'd love to do this work with you.</p>
+      <p style="margin-top:18px;"><strong>Tania Carcenac</strong><br>AI with Intent<br><a href="mailto:tania@aiwithintent.com.au">tania@aiwithintent.com.au</a> &middot; <a href="https://www.aiwithintent.com.au">aiwithintent.com.au</a></p>
+    </div>
+
+    <div class="footer">
+      Prepared by AI with Intent for Premiere Events &middot; July 2026<br>
+      AI setup and foundations, done for you &middot; <a href="https://www.aiwithintent.com.au">aiwithintent.com.au</a>
+    </div>
+
+  </div>
+</body>
+</html>
