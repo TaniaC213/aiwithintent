@@ -33,6 +33,12 @@
 
 
   <url>
+    <loc>https://www.aiwithintent.com.au/claude-cowork-connected</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
     <loc>https://www.aiwithintent.com.au/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
