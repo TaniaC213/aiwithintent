@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Set Up Your First Claude Project — free guide from AI With Intent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --dark:       #2E2845;
+  --denim:      #25587F;
+  --denim-mid:  #95B6D7;
+  --denim-light:#D6E7F7;
+  --cream:      #EEE6DE;
+  --pale-pink:  #FAEFF3;
+  --pink:       #D4336E;
+  --white:      #FFFFFF;
+  --font-h: 'Libre Baskerville', Georgia, serif;
+  --font-b: 'Nunito', system-ui, sans-serif;
+  --font-s: 'Caveat', cursive;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--denim-light);color:var(--dark);overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased;font-size:17px}
+
+.s-denim-light{background:linear-gradient(150deg,#D6E7F7 0%,#C2D8EE 100%)}
+.s-cream      {background:linear-gradient(150deg,#EEE6DE 0%,#E2D9CF 100%)}
+
+.sec{padding:64px 32px}
+.inner{max-width:900px;margin:0 auto}
+.eyebrow{font-family:var(--font-s);font-size:1.9rem;font-weight:700;color:var(--pink);display:inline-block;margin-bottom:6px}
+h2{font-family:var(--font-h);font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;line-height:1.15;color:var(--dark);margin-bottom:14px}
+.sub{font-size:.96rem;color:var(--dark);max-width:620px;line-height:1.85;margin-bottom:30px;font-weight:400}
+
+/* HERO */
+.hero{min-height:82vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 32px 50px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 72% 15%,rgba(212,51,110,.14),transparent 48%),radial-gradient(ellipse at 18% 82%,rgba(37,88,127,.18),transparent 45%),radial-gradient(ellipse at 50% 105%,rgba(149,182,215,.35),transparent 55%);pointer-events:none}
+.for-tag{font-family:var(--font-b);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--denim);border:1.5px solid rgba(37,88,127,.3);padding:7px 22px;border-radius:50px;display:inline-block;margin-bottom:26px;background:rgba(255,255,255,.5)}
+.hero h1{font-family:var(--font-h);font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;line-height:1.12;color:var(--dark);margin-bottom:18px;max-width:760px}
+.hero h1 em{color:var(--pink);font-style:italic}
+.hero-p{font-size:clamp(.96rem,2vw,1.08rem);color:var(--dark);max-width:640px;margin:0 auto 12px;line-height:1.85;font-weight:400}
+.cue{color:var(--denim);font-size:.82rem;display:flex;flex-direction:column;align-items:center;gap:6px;animation:bob 3s ease-in-out infinite;cursor:pointer;margin-top:26px}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* TABS */
+.atabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+.atab{padding:10px 22px;border-radius:50px;font-size:.85rem;font-weight:700;cursor:pointer;border:2px solid var(--denim);background:transparent;color:var(--denim);transition:all .25s;font-family:var(--font-b)}
+.atab:hover{border-color:var(--dark);color:var(--dark)}
+.atab.active{background:var(--pink);border-color:var(--pink);color:var(--white)}
+.apanel{display:none;animation:up .35s ease}
+.apanel.on{display:block}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.ahead{display:flex;align-items:flex-start;gap:20px;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:28px;margin-bottom:20px}
+@media(max-width:600px){.ahead{flex-direction:column}}
+.abadge{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--denim-light),rgba(37,88,127,.22));display:flex;align-items:center;justify-content:center;font-size:1.7rem;flex-shrink:0;box-shadow:0 2px 10px rgba(37,88,127,.18)}
+.atitle{font-family:var(--font-h);font-size:1.4rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.asub{font-size:.9rem;color:var(--dark);line-height:1.72;font-weight:400}
+.dg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+@media(max-width:700px){.dg{grid-template-columns:1fr}}
+.dc{background:var(--white);border-radius:10px;padding:20px;border:1px solid rgba(37,88,127,.18)}
+.dc-icon{font-size:1.5rem;margin-bottom:10px}
+.dc h4{font-family:var(--font-h);font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.dc p{font-size:.84rem;color:var(--dark);line-height:1.65}
+.steps{display:flex;flex-direction:column;gap:10px}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:16px 20px}
+.snum{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--pink),#B5295C);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:var(--white);flex-shrink:0;box-shadow:0 2px 8px rgba(212,51,110,.35)}
+.scontent h4{font-size:.92rem;font-weight:700;color:var(--dark);margin-bottom:3px}
+.scontent p{font-size:.84rem;color:var(--dark);line-height:1.65}
+
+.gap-note{font-size:.94rem;color:var(--dark);line-height:1.85;margin-top:8px;max-width:760px}
+.gap-note strong{color:var(--pink)}
+
+/* PROMPT BOX */
+.pbox{background:var(--dark);border-radius:12px;padding:22px 24px;margin:16px 0;position:relative}
+.pbox-label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin-bottom:10px;display:block}
+.pbox p{font-family:'Courier New',monospace;font-size:.86rem;color:var(--cream);line-height:1.65;margin:0}
+.pbox-copy{margin-top:14px;background:transparent;border:1.5px solid rgba(238,230,222,.4);color:var(--cream);font-family:var(--font-b);font-size:.78rem;font-weight:700;padding:7px 16px;border-radius:50px;cursor:pointer;transition:all .2s}
+.pbox-copy:hover{border-color:var(--pink);color:var(--pink)}
+
+/* VIDEO */
+.vwrap{background:var(--white);border:2px solid var(--denim);border-radius:14px;padding:24px;margin-top:20px}
+.vwrap h4{font-family:var(--font-h);font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:10px}
+.vframe{position:relative;padding-top:56.25%;background:var(--denim-light);border-radius:8px;overflow:hidden}
+.vframe iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.vplaceholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--denim)}
+.vplaceholder .vp-icon{font-size:2rem}
+.vplaceholder p{font-size:.82rem;max-width:280px;text-align:center;line-height:1.5}
+
+/* SERIES NOD */
+.series{font-size:.85rem;color:var(--dark);margin-top:10px}
+.series strong{color:var(--pink)}
+
+/* UPSELL TEASER */
+.teaser{background:var(--white);border:2px solid var(--pink);border-radius:14px;padding:32px;margin-top:10px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.teaser-icon{font-size:2.2rem;flex-shrink:0}
+.teaser h3{font-family:var(--font-h);font-size:1.2rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.teaser p{font-size:.88rem;color:var(--dark);line-height:1.65}
+.teaser-cta{margin-left:auto;flex-shrink:0}
+@media(max-width:640px){.teaser-cta{margin-left:0}}
+
+/* FOOTER */
+footer{padding:64px 32px 48px;text-align:center;background:var(--denim-mid);border-top:1px solid rgba(37,88,127,.2)}
+.ft-script{font-family:var(--font-s);font-size:2.1rem;color:var(--dark);margin-bottom:10px;font-weight:400}
+.ft-h{font-family:var(--font-h);font-size:clamp(1.7rem,4.5vw,2.4rem);font-weight:700;color:var(--dark);margin-bottom:14px;line-height:1.15}
+.ft-sub{font-size:.94rem;color:var(--dark);margin-bottom:28px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.8}
+.btn-pink{display:inline-block;padding:14px 36px;border-radius:50px;background:linear-gradient(135deg,var(--pink),#B5295C);color:var(--white);font-family:var(--font-b);font-weight:700;font-size:.9rem;text-decoration:none;transition:all .25s;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(212,51,110,.4)}
+.btn-pink:hover{background:linear-gradient(135deg,#C72C65,#9C2250);transform:translateY(-2px);box-shadow:0 6px 28px rgba(212,51,110,.5)}
+.acb{text-align:center;font-size:.72rem;color:rgba(37,88,127,.55);padding:10px 0 0;letter-spacing:.04em}
+.div-soft{height:1px;background:linear-gradient(90deg,transparent,rgba(37,88,127,.2),transparent)}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero s-denim-light">
+  <div class="for-tag">A free guide from AI With Intent</div>
+  <h1>Stop living in <em>100 long chats</em></h1>
+  <p class="hero-p">If you're part of the 69% using AI but not yet seeing the results you hoped for, this is one of the fastest fixes. Only 5% of businesses using AI are actually set up well enough to get real value from it. Using it and actually benefiting from it are two very different things, and one of the best ways to start closing that gap today is Projects.</p>
+  <div class="cue" onclick="document.getElementById('teach').scrollIntoView({behavior:'smooth'})">
+    <span>See how ↓</span>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- TEACHING -->
+<section class="sec s-cream" id="teach">
+  <div class="inner">
+    <div class="eyebrow">set up your first project</div>
+    <h2>The department manager for one part of your business</h2>
+    <p class="sub">Global instructions cover you, generally, everywhere. A Project covers what you're actually working on, one specific stream of work, with everything it needs to know about that part of your business.</p>
+
+    <div class="atabs">
+      <button class="atab active" onclick="switchTab('1',this)">What is it?</button>
+      <button class="atab" onclick="switchTab('2',this)">What's inside it?</button>
+      <button class="atab" onclick="switchTab('3',this)">How to set one up</button>
+      <button class="atab" onclick="switchTab('4',this)">What you get</button>
+    </div>
+
+    <div id="tab-1" class="apanel on">
+      <div class="ahead">
+        <div class="abadge">🗂️</div>
+        <div>
+          <div class="atitle">A dedicated workspace for one stream of work</div>
+          <div class="asub">Instead of 100's of disconnected long chats, a Project is a dedicated workspace for one body of work. Client Comms, Content, whatever department it covers. It already knows what it's for the moment you open it.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-2" class="apanel">
+      <div class="ahead">
+        <div class="abadge">📦</div>
+        <div>
+          <div class="atitle">Three things you set up, one Claude builds for you</div>
+          <div class="asub"><strong>Instructions</strong>, dedicated to this project.<br/><strong>Context</strong>, a folder or files Claude should work from.<br/><strong>Scheduled Tasks</strong> that belong to this project.<br/><strong>Memory</strong>, which Claude builds on its own as you work, genuinely dedicated so nothing leaks to other projects or standalone chats.</div>
+        </div>
+      </div>
+      <div class="dg">
+        <div class="dc"><div class="dc-icon">📋</div><h4>Instructions</h4><p>Specific to this project, not your general rules. What is this stream of work, who is it for, how should it be handled.</p></div>
+        <div class="dc"><div class="dc-icon">📁</div><h4>Context</h4><p>The actual folder or files Claude should reference for this project.</p></div>
+        <div class="dc"><div class="dc-icon">🧠</div><h4>Memory (built for you)</h4><p>What Claude learns from working inside this project, over time, automatically. You don't write this part.</p></div>
+      </div>
+    </div>
+
+    <div id="tab-3" class="apanel">
+      <div class="ahead">
+        <div class="abadge">🛠️</div>
+        <div>
+          <div class="atitle">Setting up your first Project</div>
+          <div class="asub">Simpler than it sounds, four steps to a working department manager.</div>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="scontent"><h4>Create the Project</h4><p>Name it for the department or stream of work it covers, e.g. "Client Comms" or "Content."</p></div></div>
+        <div class="step"><div class="snum">2</div><div class="scontent"><h4>Tell Claude what it's for, let it draft the instructions</h4><p>Describe what this Project is for and what's going into it, and Claude can write the first draft of its own instructions for you to check over.</p></div></div>
+        <div class="step"><div class="snum">3</div><div class="scontent"><h4>Point it at a folder</h4><p>Whatever files this stream of work actually needs Claude to reference. This is usually wherever your files already live, a folder in Google Drive, Dropbox, or right on your own device. You don't need to move anything first. Inside the Project, use the paperclip or Add Context option and link straight to that folder.</p></div></div>
+        <div class="step"><div class="snum">4</div><div class="scontent"><h4>Start working inside it</h4><p>Memory builds itself from here, every conversation adds to what it knows. Every chat you have inside this Project stays listed there too, so you can scroll back and find a past conversation instead of losing it in your main chat history.</p></div></div>
+      </div>
+
+      <div class="pbox">
+        <span class="pbox-label">Stuck on step 2? Copy this into your new Project</span>
+        <p id="prompt-text">Interview me about this Project so you can write clear instructions for it. Ask me what it's for, who it's for, and how I want output handled, one question at a time. Once you've got enough, draft the instructions based on my answers and show me for approval.</p>
+        <button class="pbox-copy" onclick="copyPrompt()">📋 Copy prompt</button>
+      </div>
+
+      <div class="vwrap">
+        <h4>Prefer to watch it happen?</h4>
+        <div style="position: relative; padding-bottom: 58.759521218715996%; height: 0; border-radius: 8px; overflow: hidden;"><iframe src="https://www.loom.com/embed/04a8f996027b41e69b125a22256f577c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+      </div>
+    </div>
+
+    <div id="tab-4" class="apanel">
+      <div class="ahead">
+        <div class="abadge">✅</div>
+        <div>
+          <div class="atitle">Better with every conversation</div>
+          <div class="asub">Outside a Project, every chat starts fresh except for your general instructions. Inside one, every conversation adds to what Claude already knows about that piece of your business. It gets more useful the more you use it, instead of starting from zero every time.</div>
+          <div class="asub" style="margin-top:12px;">There's a practical bonus too. Files linked in as context are read directly, rather than pasted into every message. That uses far fewer tokens than copying the same document into chat again and again, so a Project is also a more efficient use of your usage limits.</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="gap-note" style="margin-top:8px;"><strong>Do this today:</strong> set one up. Give it instructions, point it at a folder, and watch what happens after a few real conversations.</p>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- UPSELL TEASER -->
+<section class="sec s-cream">
+  <div class="inner">
+    <div class="teaser">
+      <div class="teaser-icon">🗺️</div>
+      <div>
+        <h3>This is one of five ways to close the gap</h3>
+        <p>Projects is the fastest fix, but there are four more, plus a bonus, that push you further from basic use into intermediate. The full Close the Gap guide walks through all of them, with real screenshots and a step-by-step for each.</p>
+        <p class="series">Part of a free series on the small, specific fixes that make Claude worth what you're paying for it. <strong>Next up:</strong> Skills and Scheduled Tasks.</p>
+      </div>
+      <div class="teaser-cta">
+        <a href="https://taniacarcenac.myflodesk.com/gap-guide" class="btn-pink">Get the full guide</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-script">need a hand?</div>
+  <h2 class="ft-h">Let's build this<br/>with you, properly</h2>
+  <p class="ft-sub">If you need help actually setting all this up, building your first skills, Projects, tasks and your AI Brain, that's exactly what Out of Your Head does for you.</p>
+  <a href="https://www.aiwithintent.com.au/out-of-your-head.html" class="btn-pink">See how Out of Your Head works</a>
+</footer>
+<div class="acb">Created with care by AI With Intent · aiwithintent.com.au</div>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.apanel').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.atab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('on');
+  btn.classList.add('active');
+}
+function copyPrompt() {
+  const text = document.getElementById('prompt-text').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.pbox-copy');
+    const original = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => { btn.textContent = original; }, 1800);
+  });
+}
+</script>
+</body>
+</html>
