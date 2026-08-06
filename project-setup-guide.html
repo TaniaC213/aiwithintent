@@ -112,7 +112,9 @@ h2{font-family:var(--font-h);font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;
 footer{padding:64px 32px 48px;text-align:center;background:var(--denim-mid);border-top:1px solid rgba(37,88,127,.2)}
 .ft-script{font-family:var(--font-s);font-size:2.1rem;color:var(--dark);margin-bottom:10px;font-weight:400}
 .ft-h{font-family:var(--font-h);font-size:clamp(1.7rem,4.5vw,2.4rem);font-weight:700;color:var(--dark);margin-bottom:14px;line-height:1.15}
-.ft-sub{font-size:.94rem;color:var(--dark);margin-bottom:28px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.8}
+.ft-sub{font-size:.94rem;color:var(--dark);margin-bottom:20px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.8}
+.ft-quote{font-family:var(--font-h);font-style:italic;font-size:1rem;color:var(--dark);max-width:440px;margin:0 auto 26px;line-height:1.6;padding:18px 24px;background:rgba(255,255,255,.4);border-radius:12px;border:1px solid rgba(37,88,127,.2)}
+.ft-quote-by{display:block;font-family:var(--font-b);font-style:normal;font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;color:var(--pink);margin-top:8px}
 .btn-pink{display:inline-block;padding:14px 36px;border-radius:50px;background:linear-gradient(135deg,var(--pink),#B5295C);color:var(--white);font-family:var(--font-b);font-weight:700;font-size:.9rem;text-decoration:none;transition:all .25s;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(212,51,110,.4)}
 .btn-pink:hover{background:linear-gradient(135deg,#C72C65,#9C2250);transform:translateY(-2px);box-shadow:0 6px 28px rgba(212,51,110,.5)}
 .acb{text-align:center;font-size:.72rem;color:rgba(37,88,127,.55);padding:10px 0 0;letter-spacing:.04em}
@@ -186,17 +188,6 @@ footer{padding:64px 32px 48px;text-align:center;background:var(--denim-mid);bord
         <div class="step"><div class="snum">3</div><div class="scontent"><h4>Point it at a folder</h4><p>Whatever files this stream of work actually needs Claude to reference. This is usually wherever your files already live, a folder in Google Drive, Dropbox, or right on your own device. You don't need to move anything first. Inside the Project, use the paperclip or Add Context option and link straight to that folder.</p></div></div>
         <div class="step"><div class="snum">4</div><div class="scontent"><h4>Start working inside it</h4><p>Memory builds itself from here, every conversation adds to what it knows. Every chat you have inside this Project stays listed there too, so you can scroll back and find a past conversation instead of losing it in your main chat history.</p></div></div>
       </div>
-
-      <div class="pbox">
-        <span class="pbox-label">Stuck on step 2? Copy this into your new Project</span>
-        <p id="prompt-text">Interview me about this Project so you can write clear instructions for it. Ask me what it's for, who it's for, and how I want output handled, one question at a time. Once you've got enough, draft the instructions based on my answers and show me for approval.</p>
-        <button class="pbox-copy" onclick="copyPrompt()">📋 Copy prompt</button>
-      </div>
-
-      <div class="vwrap">
-        <h4>Prefer to watch it happen?</h4>
-        <div style="position: relative; padding-bottom: 58.759521218715996%; height: 0; border-radius: 8px; overflow: hidden;"><iframe src="https://www.loom.com/embed/04a8f996027b41e69b125a22256f577c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
-      </div>
     </div>
 
     <div id="tab-4" class="apanel">
@@ -209,8 +200,28 @@ footer{padding:64px 32px 48px;text-align:center;background:var(--denim-mid);bord
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <p class="gap-note" style="margin-top:8px;"><strong>Do this today:</strong> set one up. Give it instructions, point it at a folder, and watch what happens after a few real conversations.</p>
+<div class="div-soft"></div>
+
+<!-- TRY IT -->
+<section class="sec s-pink">
+  <div class="inner">
+    <div class="eyebrow">try it now</div>
+    <h2>Set one up today</h2>
+    <p class="sub">Give it instructions, point it at a folder, and watch what happens after a few real conversations.</p>
+
+    <div class="pbox">
+      <span class="pbox-label">Stuck on step 2? Copy this into your new Project</span>
+      <p id="prompt-text">Interview me about this Project so you can write clear instructions for it. Ask me what it's for, who it's for, and how I want output handled, one question at a time. Once you've got enough, draft the instructions based on my answers and show me for approval.</p>
+      <button class="pbox-copy" onclick="copyPrompt()">📋 Copy prompt</button>
+    </div>
+
+    <div class="vwrap">
+      <h4>Watch for a visual walkthrough</h4>
+      <div style="position: relative; padding-bottom: 58.759521218715996%; height: 0; border-radius: 8px; overflow: hidden;"><iframe src="https://www.loom.com/embed/04a8f996027b41e69b125a22256f577c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+    </div>
   </div>
 </section>
 
@@ -219,15 +230,15 @@ footer{padding:64px 32px 48px;text-align:center;background:var(--denim-mid);bord
 <!-- UPSELL TEASER -->
 <section class="sec s-cream">
   <div class="inner">
+    <h2>Keep closing the gap</h2>
     <div class="teaser">
       <div class="teaser-icon">🗺️</div>
       <div>
-        <h3>This is one of five ways to close the gap</h3>
-        <p>Projects is the fastest fix, but there are four more, plus a bonus, that push you further from basic use into intermediate. The full Close the Gap guide walks through all of them, with real screenshots and a step-by-step for each.</p>
-        <p class="series">Part of a series on the small, specific fixes that make Claude worth what you're paying for it.</p>
+        <h3>You've just closed one part of the gap</h3>
+        <p>Projects is one of six ways to move from basic to intermediate use. There are five more, each just as quick to set up: Global Instructions, Skills, Scheduled Tasks, where your docs actually live, and the bonus that pushes Claude from talking about the work into actually doing it. Simple additions, real value each time.</p>
       </div>
       <div class="teaser-cta">
-        <a href="https://taniacarcenac.myflodesk.com/gap-guide" class="btn-pink">Get all the ways to Close the Gap</a>
+        <a href="https://taniacarcenac.myflodesk.com/gap-guide" class="btn-pink">Get the other 5 ways to Close the Gap</a>
       </div>
     </div>
   </div>
@@ -236,9 +247,10 @@ footer{padding:64px 32px 48px;text-align:center;background:var(--denim-mid);bord
 <!-- FOOTER -->
 <footer>
   <div class="ft-script">need a hand?</div>
-  <h2 class="ft-h">Let's build this<br/>with you, properly</h2>
-  <p class="ft-sub">If you need help actually setting all this up, building your first skills, Projects, tasks and your AI Brain, that's exactly what Out of Your Head does for you.</p>
-  <a href="https://www.aiwithintent.com.au/out-of-your-head.html" class="btn-pink">See how Out of Your Head works</a>
+  <h2 class="ft-h">Ready to skip the DIY<br/>and have it built for you?</h2>
+  <p class="ft-sub">You've just learned how to do this yourself, piece by piece. Out of Your Head builds your whole AI architecture for you, built specifically around your business, so you get the finished foundation without doing the work of putting it together yourself.</p>
+  <p class="ft-quote">"150% yes it is worth the investment. Don't even think about it, honestly just do it. Your future self will thank you for it."<span class="ft-quote-by">— Lisa</span></p>
+  <a href="https://www.aiwithintent.com.au/out-of-your-head.html" class="btn-pink">See what's included in OUT OF YOUR HEAD</a>
 </footer>
 <div class="acb">Created with care by AI With Intent · aiwithintent.com.au</div>
 
