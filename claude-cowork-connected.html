@@ -12,18 +12,18 @@
     gtag('config', 'G-8CKBDTV4TB');
   </script>
   <title>Claude Cowork Connected | A hands-on build day in Perth | AI with Intent</title>
-  <meta name="description" content="A hands-on Claude build day for ten business owners in Subiaco, 19 August 2026. Leave with your business brain built, skills, projects and scheduled tasks running." />
+  <meta name="description" content="This event has now closed. Join the waitlist and you'll be the first to hear when the next Claude Cowork Connected opens. Save the date: 27 October 2026, Subiaco." />
 
   <link rel="canonical" href="https://www.aiwithintent.com.au/claude-cowork-connected" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AI with Intent" />
   <meta property="og:url" content="https://www.aiwithintent.com.au/claude-cowork-connected" />
   <meta property="og:title" content="Claude Cowork Connected | A hands-on build day in Perth" />
-  <meta property="og:description" content="A hands-on Claude build day for ten business owners in Subiaco, 19 August 2026. Leave with your business brain built, skills, projects and scheduled tasks running." />
+  <meta property="og:description" content="This event has now closed. Join the waitlist and you'll be the first to hear when the next Claude Cowork Connected opens. Save the date: 27 October 2026, Subiaco." />
   <meta property="og:image" content="https://www.aiwithintent.com.au/images/ccc/og-share.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Claude Cowork Connected | A hands-on build day in Perth" />
-  <meta name="twitter:description" content="A hands-on Claude build day for ten business owners in Subiaco, 19 August 2026. Leave with your business brain built, skills, projects and scheduled tasks running." />
+  <meta name="twitter:description" content="This event has now closed. Join the waitlist and you'll be the first to hear when the next Claude Cowork Connected opens. Save the date: 27 October 2026, Subiaco." />
   <meta name="twitter:image" content="https://www.aiwithintent.com.au/images/ccc/og-share.jpg" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,6 +40,73 @@
     </div>
   </noscript>
   <script defer src="/_vercel/insights/script.js"></script>
+
+  <!-- Waitlist notice — set EVENT_ACTIVE = true when October event opens for bookings -->
+  <script>
+  var EVENT_ACTIVE = false;
+  (function() {
+    if (EVENT_ACTIVE) return;
+    var WAITLIST = 'https://taniacarcenac.myflodesk.com/ccc-waitlist';
+
+    function injectNotice() {
+      if (!document.body) { setTimeout(injectNotice, 50); return; }
+      if (document.getElementById('ccc-notice')) return;
+
+      var bar = document.createElement('div');
+      bar.id = 'ccc-notice';
+      bar.style.cssText = [
+        'position:fixed', 'top:0', 'left:0', 'right:0', 'z-index:99999',
+        'background:#D4336E', 'color:#fff', 'text-align:center',
+        'padding:12px 20px',
+        'font-family:-apple-system,BlinkMacSystemFont,"Nunito",sans-serif',
+        'line-height:1.5'
+      ].join(';');
+      bar.innerHTML =
+        '<div style="font-size:15px;font-weight:600;">' +
+          'Sorry, you’ve missed this event. ' +
+          '<a href="' + WAITLIST + '" style="color:#fff;text-decoration:underline;font-weight:800;">' +
+          'Click here to get on the waitlist for the next one →</a>' +
+        '</div>' +
+        '<div style="font-size:12px;font-weight:400;opacity:0.85;margin-top:3px;">' +
+          'Save the date: 27 October — same venue, same time.' +
+        '</div>';
+      document.body.prepend(bar);
+
+      var h = bar.offsetHeight;
+
+      // Push fixed nav down below banner
+      var nav = document.querySelector('.nav, nav, header');
+      if (nav && getComputedStyle(nav).position === 'fixed') {
+        nav.style.top = h + 'px';
+      }
+
+      // Adjust body top padding
+      var cur = parseInt(getComputedStyle(document.body).paddingTop) || 0;
+      document.body.style.paddingTop = (cur + h) + 'px';
+
+      // Intercept booking button clicks
+      document.addEventListener('click', function(e) {
+        var a = e.target.closest('a[href*="myflodesk.com"]');
+        if (a && !a.href.includes('ccc-waitlist')) {
+          e.preventDefault();
+          window.open(WAITLIST, a.target || '_self');
+        }
+      }, true);
+
+      // Patch any already-rendered links
+      document.querySelectorAll('a[href*="myflodesk.com"]').forEach(function(a) {
+        if (!a.href.includes('ccc-waitlist')) a.href = WAITLIST;
+      });
+    }
+
+    // Intercept when the bundle replaces the document
+    var orig = Element.prototype.replaceWith;
+    Element.prototype.replaceWith = function() {
+      orig.apply(this, arguments);
+      setTimeout(injectNotice, 50);
+    };
+  })();
+  </script>
 </head>
 <body>
   <div id="__bundler_thumbnail">
