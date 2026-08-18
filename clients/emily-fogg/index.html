@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex"/>
+<title>Your Out of Your Head Plan · Emily Fogg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --dark:       #2E2845;
+  --denim:      #25587F;
+  --denim-mid:  #95B6D7;
+  --denim-light:#D6E7F7;
+  --cream:      #EEE6DE;
+  --pale-pink:  #FAEFF3;
+  --pink:       #D4336E;
+  --white:      #FFFFFF;
+  --font-h: 'Libre Baskerville', Georgia, serif;
+  --font-b: 'Nunito', system-ui, sans-serif;
+  --font-s: 'Caveat', cursive;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--denim-light);color:var(--dark);overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased;font-size:17px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(37,88,127,.15);height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 40px}
+.nav-brand{font-family:var(--font-h);font-size:1.05rem;font-weight:400;color:var(--dark);font-style:italic}
+.nav-links{display:flex;gap:24px}
+.nav-links a{font-size:.68rem;font-weight:700;color:var(--denim);text-decoration:none;letter-spacing:.12em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--dark)}
+@media(max-width:680px){.nav-links{display:none}}
+
+/* SECTION BACKGROUNDS */
+.s-denim-light{background:linear-gradient(150deg,#D6E7F7 0%,#C2D8EE 100%)}
+.s-cream      {background:linear-gradient(150deg,#EEE6DE 0%,#E2D9CF 100%)}
+.s-pink       {background:linear-gradient(150deg,#FAEFF3 0%,#F2DFEA 100%)}
+.s-denim-mid  {background:linear-gradient(150deg,#95B6D7 0%,#79A7CE 100%)}
+
+.sec{padding:48px 32px}
+.inner{max-width:1100px;margin:0 auto}
+
+/* TYPOGRAPHY */
+.eyebrow{font-family:var(--font-s);font-size:1.75rem;font-weight:700;color:var(--denim);display:inline-block;margin-bottom:8px}
+h2{font-family:var(--font-h);font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700;line-height:1.1;color:var(--dark);margin-bottom:12px}
+.sub{font-size:.95rem;color:var(--denim);max-width:580px;line-height:1.8;margin-bottom:40px;font-weight:300}
+
+/* HERO */
+.hero{min-height:100vh;background:linear-gradient(160deg,#C8DDEF 0%,#D6E7F7 45%,#C5DCF0 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 32px 40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 72% 15%,rgba(212,51,110,.12),transparent 48%),radial-gradient(ellipse at 18% 82%,rgba(37,88,127,.16),transparent 45%),radial-gradient(ellipse at 50% 105%,rgba(149,182,215,.3),transparent 55%);pointer-events:none}
+.for-tag{font-family:var(--font-b);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--denim);border:1.5px solid rgba(37,88,127,.28);padding:7px 22px;border-radius:50px;display:inline-block;margin-bottom:28px}
+.hero h1{font-family:var(--font-h);font-size:clamp(2.8rem,7vw,5.2rem);font-weight:700;line-height:1.06;color:var(--dark);margin-bottom:18px}
+.hero h1 em{color:var(--denim);font-style:italic}
+.hero-p{font-size:clamp(.96rem,2vw,1.1rem);color:var(--denim);max-width:540px;margin:0 auto 40px;line-height:1.85;font-weight:300}
+.pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:32px}
+.hero-cta{margin-bottom:34px}
+.pill{padding:7px 18px;border-radius:50px;font-size:.78rem;font-weight:700;font-family:var(--font-b);border:1.5px solid rgba(37,88,127,.3);color:var(--denim);background:rgba(37,88,127,.06)}
+.cue{color:var(--denim);font-size:.8rem;display:flex;flex-direction:column;align-items:center;gap:6px;animation:bob 3s ease-in-out infinite;cursor:pointer;font-family:var(--font-b)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* WHAT WE HEARD */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:700px){.g3{grid-template-columns:1fr}}
+.hc{background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:28px;transition:border-color .25s,box-shadow .25s,transform .25s;box-shadow:0 4px 20px rgba(46,40,69,.08)}
+.hc:hover{border-color:var(--pink);box-shadow:0 6px 28px rgba(212,51,110,.12);transform:translateY(-2px)}
+.hc-icon{font-size:2rem;margin-bottom:12px}
+.hc h3{font-family:var(--font-h);font-size:1.05rem;font-weight:700;margin-bottom:10px;color:var(--dark)}
+.hc p{font-size:.87rem;color:var(--denim);line-height:1.72}
+.hc-q{font-size:.83rem;color:var(--dark);font-style:italic;margin-top:14px;padding:11px 14px;border-left:3px solid var(--denim);background:var(--denim-light);border-radius:0 6px 6px 0}
+
+/* PHASE TABS */
+.ptabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+.ptab{padding:10px 24px;border-radius:50px;font-size:.84rem;font-weight:700;cursor:pointer;border:2px solid var(--denim);background:transparent;color:var(--denim);transition:all .25s;font-family:var(--font-b)}
+.ptab:hover{border-color:var(--dark);color:var(--dark)}
+.ptab.active{background:var(--pink);border-color:var(--pink);color:var(--white)}
+.ppanel{display:none;animation:up .35s ease}
+.ppanel.on{display:block}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.phead{display:flex;align-items:flex-start;gap:20px;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:28px;margin-bottom:20px}
+@media(max-width:600px){.phead{flex-direction:column}}
+.pbadge{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--denim-light),rgba(37,88,127,.22));display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;box-shadow:0 2px 10px rgba(37,88,127,.18)}
+.ptitle{font-family:var(--font-h);font-size:1.5rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.psub{font-size:.88rem;color:var(--denim);line-height:1.72;font-weight:300}
+
+.dg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+@media(max-width:700px){.dg{grid-template-columns:1fr}}
+.dc{background:var(--denim-light);border-radius:10px;padding:20px}
+.dc-icon{font-size:1.5rem;margin-bottom:10px}
+.dc h4{font-family:var(--font-h);font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.dc p{font-size:.84rem;color:var(--denim);line-height:1.65}
+
+.steps{display:flex;flex-direction:column;gap:10px}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:16px 20px}
+.snum{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--pink),#B5295C);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:var(--white);flex-shrink:0;box-shadow:0 2px 8px rgba(212,51,110,.35)}
+.scontent h4{font-size:.92rem;font-weight:700;color:var(--dark);margin-bottom:3px}
+.scontent p{font-size:.84rem;color:var(--denim);line-height:1.65}
+
+/* FLIP CARDS */
+.flip-hint{font-size:.82rem;color:var(--denim);margin-bottom:28px;text-align:center}
+.fg{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;padding:4px 0}
+.fc{flex:0 1 260px;max-width:290px;perspective:1000px;cursor:pointer}
+.fci{position:relative;width:100%;transform-style:preserve-3d;transition:transform .6s ease}
+.fc.fl .fci{transform:rotateY(180deg)}
+.fcf{position:relative;width:100%;min-height:240px;backface-visibility:hidden;border-radius:10px;padding:26px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;background:var(--white);border:2px solid var(--denim);transition:border-color .25s}
+.fc:hover .fcf{border-color:var(--pink)}
+.fcb{position:absolute;top:0;left:0;width:100%;height:100%;min-height:240px;backface-visibility:hidden;border-radius:10px;padding:22px;box-sizing:border-box;display:flex;flex-direction:column;overflow-y:auto;background:linear-gradient(145deg,#2E2845 0%,#3D3066 100%);border:2px solid var(--denim-mid);transform:rotateY(180deg)}
+.fco{font-size:1.9rem;margin-bottom:12px}
+.fcf h3{font-family:var(--font-h);font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--dark)}
+.fcf p{font-size:.84rem;color:var(--denim);line-height:1.65}
+.fh{font-size:.7rem;color:rgba(37,88,127,.5);margin-top:10px}
+.fcb-lbl{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--denim-mid);margin-bottom:12px;font-family:var(--font-b)}
+.fe{font-size:.83rem;background:rgba(61,53,96,.5);padding:9px 12px;border-radius:6px;margin:6px 0;border-left:3px solid var(--pink);line-height:1.6;color:var(--cream)}
+
+/* BEFORE / AFTER */
+.bag{display:flex;flex-direction:column;gap:16px}
+.bacard{background:var(--white);border:2px solid var(--denim);border-radius:10px;overflow:hidden}
+.bacard-head{display:flex;align-items:center;gap:14px;padding:18px 24px;border-bottom:1px solid rgba(37,88,127,.15)}
+.bacard-head h3{font-family:var(--font-h);font-size:1.05rem;font-weight:700;color:var(--dark)}
+.bicon{font-size:1.4rem;flex-shrink:0}
+.batabs{display:flex;margin-left:auto}
+.stab{padding:6px 16px;font-size:.73rem;font-weight:700;cursor:pointer;border:none;background:transparent;color:var(--denim);font-family:var(--font-b);border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.06em;text-transform:uppercase}
+.stab.active{color:var(--dark);border-bottom-color:var(--pink)}
+.bastate{display:none;padding:20px 24px}
+.bastate.on{display:block;animation:up .3s ease}
+.ba-lbl{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:50px;display:inline-block;margin-bottom:10px;font-family:var(--font-b)}
+.bl-now  {background:var(--denim-light);color:var(--denim)}
+.bl-after{background:rgba(212,51,110,.1);color:var(--pink)}
+.bastate p{font-size:.9rem;color:var(--denim);line-height:1.8;margin-bottom:8px}
+.bastate p:last-child{margin-bottom:0}
+
+/* WHAT STAYS YOURS */
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:700px){.sg{grid-template-columns:1fr}}
+.sc{background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:24px;transition:border-color .25s,box-shadow .25s,transform .25s;box-shadow:0 4px 20px rgba(46,40,69,.08)}
+.sc:hover{border-color:var(--pink);box-shadow:0 6px 28px rgba(212,51,110,.12);transform:translateY(-2px)}
+.sc-icon{font-size:1.5rem;margin-bottom:12px}
+.sc h4{font-family:var(--font-h);font-size:.98rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.sc p{font-size:.85rem;color:var(--denim);line-height:1.7}
+
+/* HOW IT WORKS */
+.proc{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:760px){.proc{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:420px){.proc{grid-template-columns:1fr}}
+.pc{background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:28px 22px;text-align:center;transition:all .25s}
+.pc:hover{border-color:var(--pink);transform:translateY(-3px)}
+.pc-n{font-family:var(--font-h);font-size:2.4rem;font-weight:700;margin-bottom:12px;line-height:1;background:linear-gradient(135deg,var(--pink) 0%,var(--denim) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.pc h4{font-family:var(--font-h);font-size:.98rem;font-weight:700;color:var(--dark);margin-bottom:8px}
+.pc p{font-size:.84rem;color:var(--denim);line-height:1.65}
+.pc-note{font-size:.76rem;color:var(--pink);font-weight:700;margin-top:10px;padding-top:10px;border-top:1px solid rgba(37,88,127,.15)}
+
+/* FOOTER */
+footer{padding:72px 32px 56px;text-align:center;background:var(--denim-mid);border-top:1px solid rgba(37,88,127,.2)}
+.ft-script{font-family:var(--font-s);font-size:2.2rem;color:var(--dark);margin-bottom:12px;font-weight:400}
+.ft-h{font-family:var(--font-h);font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--dark);margin-bottom:16px;line-height:1.1}
+.ft-sub{font-size:.94rem;color:var(--dark);margin-bottom:36px;font-weight:300;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.85}
+.btn-pink{display:inline-block;padding:14px 44px;border-radius:50px;background:linear-gradient(135deg,var(--pink),#B5295C);color:var(--white);font-family:var(--font-b);font-weight:700;font-size:.92rem;text-decoration:none;transition:all .25s;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(212,51,110,.4)}
+.btn-pink:hover{background:linear-gradient(135deg,#C72C65,#9C2250);transform:translateY(-2px);box-shadow:0 6px 28px rgba(212,51,110,.5)}
+.ft-note{font-size:.8rem;color:var(--denim);margin-top:18px;font-style:italic}
+.acb{text-align:center;font-size:.72rem;color:rgba(37,88,127,.5);padding:10px 0 36px;letter-spacing:.04em;background:var(--denim-mid)}
+
+/* BACK TO TOP */
+#rtt{position:fixed;bottom:28px;right:28px;z-index:999;width:46px;height:46px;border-radius:50%;background:var(--pink);color:var(--white);border:none;font-size:1.1rem;font-weight:700;cursor:pointer;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s;display:flex;align-items:center;justify-content:center}
+
+/* DIVIDERS */
+.div-soft{height:1px;background:linear-gradient(90deg,transparent,rgba(37,88,127,.2),transparent);margin:0}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Emily Fogg · Your Plan</div>
+  <div class="nav-links">
+    <a href="#heard">What we heard</a>
+    <a href="#build">The build</a>
+    <a href="#deliverables">Deliverables</a>
+    <a href="#next">Next steps</a>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero s-denim-light">
+  <div class="for-tag">Prepared for Emily Fogg · Wise Owl Education</div>
+  <h1>Here's what we'd build<br/>for your business, <em>Emily</em></h1>
+  <p class="hero-p">Based on our conversation, this is a plan for your Out of Your Head setup: your teaching IP turned into a resource engine, your scattered files pulled into one place, and a structure that lives outside the AI tools so it stays yours no matter which one you use.</p>
+  <div class="pills">
+    <span class="pill">✦ Brand &amp; Voice</span>
+    <span class="pill">✦ Your AI Brain</span>
+    <span class="pill">✦ Your Resource Engine</span>
+  </div>
+  <a href="https://taniacarcenac.myflodesk.com/ooyh-braindump" class="btn-pink hero-cta">Book your Brain Dump Call · $250</a>
+  <div class="cue" onclick="document.getElementById('heard').scrollIntoView({behavior:'smooth'})">
+    <span>Scroll to explore</span>
+    <span>↓</span>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- WHAT WE HEARD -->
+<section class="sec s-cream" id="heard">
+  <div class="inner">
+    <div class="eyebrow">What we heard</div>
+    <h2>Three things that stood out from our call</h2>
+    <p class="sub">Before we plan anything, it matters that you feel heard. Here's what we took away from your discovery call.</p>
+    <div class="g3">
+
+      <div class="hc">
+        <div class="hc-icon">✋</div>
+        <h3>You're building every worksheet by hand</h3>
+        <p>You write the decodable stories yourself, and that part you love. Then comes the bit that eats your time: building all the matching activities and worksheets from scratch, one book at a time, every single time. That's the piece you want to stop doing manually, and it's exactly the kind of repetitive work these tools are built to carry.</p>
+      </div>
+
+      <div class="hc">
+        <div class="hc-icon">🦉</div>
+        <h3>You've got real IP and a system, not a blank page</h3>
+        <p>Fifteen years of teaching, decodable readers built to the Science of Reading, your own SOPs, templates, the Ready, Set, Read course, and a Tuition on Demand library already in the works. This isn't "help me start from nothing." It's "help me produce more of what I already know how to make, in my own style."</p>
+      </div>
+
+      <div class="hc">
+        <div class="hc-icon">🔑</div>
+        <h3>You've got Claude Pro, but haven't unlocked it</h3>
+        <p>You're already paying for Claude and using it for a bit of email, while sensing there's a lot more under the bonnet you haven't reached yet. That instinct is right. The gap isn't the tool, it's that nothing about your business is written down where Claude can read it and work from it.</p>
+        <div class="hc-q">"I don't know, I'm sure there's lots that are possible."</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- THE BUILD -->
+<section class="sec s-pink" id="build">
+  <div class="inner">
+    <div class="eyebrow">The build</div>
+    <h2>Three skills, built around your business</h2>
+    <p class="sub">Your setup gets built in three focused phases. Each one builds on the last. The better the information you bring to the Brain Dump, the closer the result is to how your business actually works. This plan is a suggestion, not a fixed contract. We finalise exactly what gets built together on the call.</p>
+
+    <div class="ptabs">
+      <button class="ptab active" onclick="switchPhase('1',this)">Skill 1: Brand &amp; Voice</button>
+      <button class="ptab" onclick="switchPhase('2',this)">Skill 2: Your AI Brain</button>
+      <button class="ptab" onclick="switchPhase('3',this)">Skill 3: Your Resource Engine</button>
+    </div>
+
+    <!-- SKILL 1 -->
+    <div id="phase-1" class="ppanel on">
+      <div class="phead">
+        <div class="pbadge">🎯</div>
+        <div>
+          <div class="ptitle">Brand &amp; Voice — Wise Owl, taught to Claude once</div>
+          <div class="psub">The foundation everything else reads from. Your look, your teaching voice, and the way you talk about reading, so anything Claude drafts for you comes out sounding like Wise Owl instead of generic.</div>
+        </div>
+      </div>
+      <div class="dg">
+        <div class="dc">
+          <div class="dc-icon">🎨</div>
+          <h4>Visual identity</h4>
+          <p>Your colours, fonts and the Canva look of your books and worksheets, documented once, so resources come out on brand rather than needing a reformat every time.</p>
+        </div>
+        <div class="dc">
+          <div class="dc-icon">✍️</div>
+          <h4>Your teaching voice</h4>
+          <p>Warm, expert, and affirming of neurodiverse learners. The words you use, the words you'd never use, and the Science of Reading language that keeps your resources pedagogically sound.</p>
+        </div>
+        <div class="dc">
+          <div class="dc-icon">💼</div>
+          <h4>Business context</h4>
+          <p>Your offers, your audience of parents and learners, your fifteen years and your qualifications, in one place, so you stop re-explaining who you are at the start of every chat.</p>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="snum">1</div>
+          <div class="scontent">
+            <h4>You share what you already have</h4>
+            <p>Your decodable readers, sample worksheets, brand guides, the course materials, any avatars or notes on who you serve. Examples you love and examples that miss the mark are equally useful.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="snum">2</div>
+          <div class="scontent">
+            <h4>The skill gets built and tested</h4>
+            <p>Drafted, run against real outputs, and refined until what comes back sounds like you and holds to your methodology, rather than something you have to rewrite.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="snum">3</div>
+          <div class="scontent">
+            <h4>Everything else reads from it</h4>
+            <p>From here on, every worksheet, reader or post Claude drafts starts from your voice and your standards, as long as you use it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILL 2 -->
+    <div id="phase-2" class="ppanel">
+      <div class="phead">
+        <div class="pbadge">🗂️</div>
+        <div>
+          <div class="ptitle">Your AI Brain &amp; Business Operations</div>
+          <div class="psub">The file architecture that sits outside ChatGPT and Claude. Your business documented in plain files on your own machine, with your scattered materials pulled into one place Claude can actually reach.</div>
+        </div>
+      </div>
+      <div class="dg">
+        <div class="dc">
+          <div class="dc-icon">📁</div>
+          <h4>Your scattered files, gathered</h4>
+          <p>Right now your resources live across Google Drive, OneDrive and your desktop. We pull the working materials into one structure so nothing is hunted for and Claude can build from all of it.</p>
+        </div>
+        <div class="dc">
+          <div class="dc-icon">🔓</div>
+          <h4>Nothing locked in a tool</h4>
+          <p>Written in plain markdown files any large language model can read. You can open and edit them yourself. Nothing lives only inside a subscription.</p>
+        </div>
+        <div class="dc">
+          <div class="dc-icon">📚</div>
+          <h4>A Project per reading level</h4>
+          <p>Each age range or reading level can have its own Project, with its own context, so a Year 1 resource and a Year 6 resource never get mixed up. Similar to how a podcast library links its episodes together.</p>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="snum">1</div>
+          <div class="scontent">
+            <h4>We map what you have and where it lives</h4>
+            <p>Drive, OneDrive, your desktop, the templates and SOPs you've already written. We work out what needs to be reachable and what can stay archived.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="snum">2</div>
+          <div class="scontent">
+            <h4>The architecture gets built</h4>
+            <p>Folders, naming, and the core business files, structured so adding the next reading level or the next product later doesn't mean starting again.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="snum">3</div>
+          <div class="scontent">
+            <h4>You install it on your own machine</h4>
+            <p>On the Reboot Call I walk you through putting everything onto your computer and into your Claude account. I keep no copies of your files.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILL 3 -->
+    <div id="phase-3" class="ppanel">
+      <div class="phead">
+        <div class="pbadge">🧭</div>
+        <div>
+          <div class="ptitle">Your Resource Engine — one process, done properly</div>
+          <div class="psub">There are a few things you'd love to hand over, and each is a build of its own. Rather than do three thinly, we pick the one that costs you most right now and build it properly. My recommendation is the decodable resource engine, because it closes your biggest bottleneck. The others can follow later, and the architecture is built so they slot in. We decide together on the call.</div>
+        </div>
+      </div>
+      <div class="dg">
+        <div class="dc">
+          <div class="dc-icon">📖</div>
+          <h4>Recommended: the decodable resource engine</h4>
+          <p>Give Claude a story, your template and the phonics focus, and it drafts the matching activities and worksheets in your house style, landed in a folder for you to review and finalise.</p>
+        </div>
+        <div class="dc">
+          <div class="dc-icon">🎥</div>
+          <h4>Option: YouTube into written content</h4>
+          <p>Drop in a video transcript and get a blog post, a Substack article and a LinkedIn article drafted in your voice, so filming stops being where the content pipeline stalls.</p>
+        </div>
+        <div class="dc">
+          <div class="dc-icon">📦</div>
+          <h4>Option: a running resource library</h4>
+          <p>A scheduled task generates fresh resources on a cadence into a folder or your inbox, to help stock the Tuition on Demand library without you making each one by hand.</p>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="snum">1</div>
+          <div class="scontent">
+            <h4>You pick the one that hurts most</h4>
+            <p>Have a think before the Brain Dump about which of these would give you back the most time. That's the one we build first. We decide together on the call.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="snum">2</div>
+          <div class="scontent">
+            <h4>We map that process properly</h4>
+            <p>Step by step, in your words: what a finished resource needs, how it's structured, the pedagogy behind it, where it ends up. This is the part only you can supply, because I can't invent your methodology.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="snum">3</div>
+          <div class="scontent">
+            <h4>It gets built, tested, and lands where you work</h4>
+            <p>Tested against a real story so you can see it working, with finished drafts arriving in a Google Drive folder or your inbox. You do one simple step to place them into your course or a lesson, which keeps your review in the loop.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- DELIVERABLES -->
+<section class="sec s-denim-light" id="deliverables">
+  <div class="inner">
+    <div class="eyebrow">Your deliverables</div>
+    <h2>What you leave with</h2>
+    <p class="sub">Four specific things installed in your Claude account and on your own computer by the end of your Reboot Call. Flip each card to see what's inside.</p>
+    <p class="flip-hint">👆 Click any card to flip it</p>
+
+    <div class="fg">
+
+      <div class="fc" onclick="this.classList.toggle('fl')">
+        <div class="fci">
+          <div class="fcf">
+            <div>
+              <div class="fco">🎯</div>
+              <h3>Brand &amp; Voice Skill</h3>
+              <p>The document that makes Claude write and design as Wise Owl.</p>
+            </div>
+            <div class="fh">Tap to see what's in it →</div>
+          </div>
+          <div class="fcb">
+            <div class="fcb-lbl">What's documented</div>
+            <div class="fe">Your colours and fonts, so resources come out on brand</div>
+            <div class="fe">Your teaching voice, warm and affirming of neurodiverse learners</div>
+            <div class="fe">The Science of Reading language that keeps resources sound</div>
+            <div class="fe">A good example and a weak one, so the calibration is yours</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('fl')">
+        <div class="fci">
+          <div class="fcf">
+            <div>
+              <div class="fco">🗂️</div>
+              <h3>Business Operations Skill</h3>
+              <p>Your business written down once, with your files finally in one place.</p>
+            </div>
+            <div class="fh">Tap to see what it covers →</div>
+          </div>
+          <div class="fcb">
+            <div class="fcb-lbl">What's inside</div>
+            <div class="fe">Your offers documented: 1:1, group, Ready Set Read and the decodables</div>
+            <div class="fe">Who each one is for, so resources land on the right learner</div>
+            <div class="fe">Your tools and where things live: Go High Level, TutorBird, GSuite</div>
+            <div class="fe">The folder architecture, pulling Drive, OneDrive and desktop together</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('fl')">
+        <div class="fci">
+          <div class="fcf">
+            <div>
+              <div class="fco">🧭</div>
+              <h3>Your Resource Engine Skill</h3>
+              <p>The one process we build together, turning your IP into finished resources.</p>
+            </div>
+            <div class="fh">Tap to see how it works →</div>
+          </div>
+          <div class="fcb">
+            <div class="fcb-lbl">How it works</div>
+            <div class="fe">You choose the process at the Brain Dump, resource engine recommended</div>
+            <div class="fe">It gets mapped in your words, then built and tested on a real story</div>
+            <div class="fe">Finished drafts land in a Drive folder or your inbox to review</div>
+            <div class="fe">You stay the human in the loop, nothing goes out without your eyes on it</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('fl')">
+        <div class="fci">
+          <div class="fcf">
+            <div>
+              <div class="fco">🧠</div>
+              <h3>Your AI Brain</h3>
+              <p>Everything saved in a format that's yours to keep, wherever you go next.</p>
+            </div>
+            <div class="fh">Tap to see what this means →</div>
+          </div>
+          <div class="fcb">
+            <div class="fcb-lbl">Why this matters</div>
+            <div class="fe">Plain markdown files on your own computer, not locked in one subscription</div>
+            <div class="fe">If you ever want to use ChatGPT again, you point it at the same files</div>
+            <div class="fe">You can open and edit any of it yourself, nothing is a black box</div>
+            <div class="fe">I retain no copies. Everything is handed over and stays with you</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- BEFORE / AFTER -->
+<section class="sec s-denim-mid" id="scenarios">
+  <div class="inner">
+    <div class="eyebrow">What changes in practice</div>
+    <h2>Two moments in your week</h2>
+    <p class="sub">This isn't about the setup doing your work for you. It's about what gets easier when there's a structure to start from.</p>
+
+    <div class="bag">
+
+      <div class="bacard" id="s1">
+        <div class="bacard-head">
+          <div class="bicon">📖</div>
+          <h3>Making the resources for a new decodable</h3>
+          <div class="batabs">
+            <button class="stab stab-now active" onclick="showState('s1','now')">Now</button>
+            <button class="stab stab-after" onclick="showState('s1','after')">With your setup</button>
+          </div>
+        </div>
+        <div id="s1-now" class="bastate on">
+          <span class="ba-lbl bl-now">Now</span>
+          <p>You write the story, which is the part you enjoy. Then you sit down and build every worksheet and activity by hand, matching the phonics focus, formatting each one, checking it holds to your methodology. It works, but it's slow, and it's the same shape of job every time.</p>
+        </div>
+        <div id="s1-after" class="bastate">
+          <span class="ba-lbl bl-after">With your setup</span>
+          <p>You give Claude the story, your template and the phonics focus. It drafts the full set of matching activities and worksheets in your style and lands them in a Drive folder for you.</p>
+          <p>You still review each one and decide what's right for your learners. But you're starting from a finished draft that already sounds like Wise Owl, instead of a blank page.</p>
+        </div>
+      </div>
+
+      <div class="bacard" id="s2">
+        <div class="bacard-head">
+          <div class="bicon">🎥</div>
+          <h3>Turning a filmed video into content</h3>
+          <div class="batabs">
+            <button class="stab stab-now active" onclick="showState('s2','now')">Now</button>
+            <button class="stab stab-after" onclick="showState('s2','after')">With your setup</button>
+          </div>
+        </div>
+        <div id="s2-now" class="bastate on">
+          <span class="ba-lbl bl-now">Now</span>
+          <p>You film a video, and then it stalls. Turning it into a blog post, a Substack article and a LinkedIn piece is a whole separate job, so the channel sits paused at a handful of episodes and the content never quite gets out there.</p>
+        </div>
+        <div id="s2-after" class="bastate">
+          <span class="ba-lbl bl-after">With your setup</span>
+          <p>You drop the transcript in and get drafts for a blog post, a Substack article and a LinkedIn article, all in your voice, ready to edit.</p>
+          <p>The filming stops being the end of the line. One video becomes several pieces of content without it turning into another afternoon of work.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- WHAT STAYS YOURS -->
+<section class="sec s-cream" id="stays">
+  <div class="inner">
+    <div class="eyebrow">What stays exactly as it is</div>
+    <h2>Not here to fix what isn't broken</h2>
+    <p class="sub">You've built something real, on genuine expertise. Here's what this setup doesn't touch.</p>
+    <div class="sg">
+
+      <div class="sc">
+        <div class="sc-icon">🔒</div>
+        <h4>Your teaching methodology</h4>
+        <p>The Science of Reading, fifteen years of practice, the way you help neurodiverse learners. That's the expertise, and it stays entirely yours.</p>
+      </div>
+
+      <div class="sc">
+        <div class="sc-icon">✍️</div>
+        <h4>Writing your stories</h4>
+        <p>You write the decodables, and you should. The setup takes the manual resource-building around them, not the creative work you love doing.</p>
+      </div>
+
+      <div class="sc">
+        <div class="sc-icon">🧩</div>
+        <h4>Your tools and funnel</h4>
+        <p>Go High Level, TutorBird and your site stay as they are. Resources land in a folder or your inbox for you to place, so nothing gets rebuilt for the sake of it.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- BEFORE WE START -->
+<section class="sec s-denim-light" id="prep">
+  <div class="inner">
+    <div class="eyebrow">A few things to sort</div>
+    <h2>Before the Brain Dump Call</h2>
+    <p class="sub">None of these are urgent today, but all are worth settling before the build starts.</p>
+    <div class="sg">
+
+      <div class="sc">
+        <div class="sc-icon">✅</div>
+        <h4>You're already on Claude Pro</h4>
+        <p>That's the account side sorted, which puts you a step ahead. If anything, the Brain Dump is where we make that subscription finally earn its keep.</p>
+      </div>
+
+      <div class="sc">
+        <div class="sc-icon">💻</div>
+        <h4>The Claude desktop app</h4>
+        <p>Download it from <a href="https://claude.com/download" style="color:var(--pink);font-weight:700">claude.com/download</a> and follow the steps for your device. You'll need Windows 10 or newer, or macOS 11 (Big Sur) or newer. It runs a small virtual machine on your computer, so give yourself around 25GB of free disk space and 8GB of RAM.</p>
+      </div>
+
+      <div class="sc">
+        <div class="sc-icon">🗃️</div>
+        <h4>Gather your files into one place</h4>
+        <p>Before the call, start pulling your templates, SOPs, sample worksheets and decodables out of Drive, OneDrive and your desktop. Even a rough gather makes the build much sharper.</p>
+      </div>
+
+      <div class="sc">
+        <div class="sc-icon">📤</div>
+        <h4>Your assets in the shared folder</h4>
+        <p>I'll send a Google folder when you book. Drop in brand guides, templates, sample resources, avatars, any process notes. The more that's in there, the closer the build lands.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- HOW IT WORKS -->
+<section class="sec s-pink" id="next">
+  <div class="inner">
+    <div class="eyebrow">What happens next</div>
+    <h2>How the process works</h2>
+    <p class="sub">Your investment is $395 in total, split across two steps: $250 when you book your Brain Dump Call, and $145 when you book your Reboot Call.</p>
+    <div class="proc">
+
+      <div class="pc">
+        <div class="pc-n">01</div>
+        <h4>Book your Brain Dump Call</h4>
+        <p>$250 paid at booking. I send through the shared Google folder so you can start gathering your assets straight away.</p>
+        <div class="pc-note">Confirms your spot</div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-n">02</div>
+        <h4>The Brain Dump Call</h4>
+        <p>We go deep on your business: your IP, your templates, your voice, and the one process we build first.</p>
+        <div class="pc-note">90 mins via Google Meet</div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-n">03</div>
+        <h4>Tania builds</h4>
+        <p>Your three skills and your file architecture get built and tested. You'll get a summary from me before the Reboot Call.</p>
+        <div class="pc-note">Approx. one week</div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-n">04</div>
+        <h4>Your Reboot Call</h4>
+        <p>$145 paid at booking. We screen share into your Claude account, install everything, and walk through how to use each skill.</p>
+        <div class="pc-note">Within two weeks of the build</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-script">ready when you are, Emily</div>
+  <h2 class="ft-h">Let's get it out<br/>of your head</h2>
+  <p class="ft-sub">This plan was put together specifically for your business, based on your discovery call. It's a guide rather than a fixed contract. Final decisions about exactly what gets built are made together on the Brain Dump Call, once I've seen how you actually work. The next step is booking that call. That's where the build begins.</p>
+  <a href="https://taniacarcenac.myflodesk.com/ooyh-braindump" class="btn-pink">Book your Brain Dump Call · $250</a>
+  <p class="ft-note">Balance of $145 is paid when you book your Reboot Call. Any questions, just reply to Tania's email.</p>
+</footer>
+<div class="acb">Prepared by Tania Carcenac · AI with Intent · 2026</div>
+
+<button id="rtt" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+
+<script>
+function switchPhase(id, btn) {
+  document.querySelectorAll('.ppanel').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  document.getElementById('phase-' + id).classList.add('on');
+  btn.classList.add('active');
+}
+
+function showState(cardId, state) {
+  document.getElementById(cardId + '-now').classList.toggle('on',   state === 'now');
+  document.getElementById(cardId + '-after').classList.toggle('on', state === 'after');
+  document.querySelectorAll('#' + cardId + ' .stab').forEach(t => t.classList.remove('active'));
+  document.querySelector('#' + cardId + ' .stab-' + state).classList.add('active');
+}
+
+const rtt = document.getElementById('rtt');
+window.addEventListener('scroll', () => {
+  const show = window.scrollY > window.innerHeight * .8;
+  rtt.style.opacity = show ? '1' : '0';
+  rtt.style.transform = show ? 'translateY(0)' : 'translateY(10px)';
+});
+
+const obs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+}), { threshold: .08 });
+document.querySelectorAll('.hc,.dc,.fc,.pc,.sc,.bacard').forEach(el => {
+  el.style.opacity = '0'; el.style.transform = 'translateY(14px)';
+  el.style.transition = 'opacity .4s ease, transform .4s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
