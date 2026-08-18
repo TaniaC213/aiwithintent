@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Claude Setup | Sarah Bruce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --plum:       #2E2845;
+      --denim:      #25587F;
+      --mid-denim:  #95B6D7;
+      --pale-denim: #D6E7F7;
+      --cream:      #EEE6DE;
+      --pale-pink:  #FAEFF3;
+      --hot-pink:   #D4336E;
+      --white:      #ffffff;
+      --text:       #1a1a2e;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(140deg, var(--pale-denim) 0%, var(--cream) 100%);
+      min-height: 100vh;
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 24px 20px; }
+
+    .header {
+      text-align: center;
+      padding: 50px 30px 42px;
+      background: var(--plum);
+      color: var(--white);
+      border-radius: 16px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before { content:''; position:absolute; top:-60px; right:-60px; width:260px; height:260px; background:rgba(212,51,110,0.12); border-radius:50%; }
+    .header::after { content:''; position:absolute; bottom:-40px; left:-40px; width:180px; height:180px; background:rgba(149,182,215,0.08); border-radius:50%; }
+    .header h1 { font-family:'Libre Baskerville', serif; font-size:2.5rem; font-weight:700; margin-bottom:8px; position:relative; }
+    .header .subtitle { font-size:1.6rem; color:var(--mid-denim); font-weight:600; position:relative; }
+    .header .meta { margin-top:14px; font-size:0.88rem; opacity:0.6; position:relative; }
+
+    .recording-banner {
+      background: linear-gradient(135deg, var(--hot-pink) 0%, #b8275e 100%);
+      color: var(--white); padding: 22px 28px; border-radius: 12px; margin-bottom: 28px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .recording-banner .rb-left { display:flex; align-items:center; gap:16px; flex:1; min-width:220px; }
+    .recording-banner .icon { font-size:2.2rem; flex-shrink:0; }
+    .recording-banner h3 { font-family:'Libre Baskerville', serif; font-size:1.05rem; margin-bottom:3px; }
+    .recording-banner p { font-size:0.88rem; opacity:0.9; }
+    .recording-banner a { background:var(--white); color:var(--hot-pink); padding:11px 22px; border-radius:8px; text-decoration:none; font-weight:700; font-size:0.9rem; transition:all .2s; white-space:nowrap; flex-shrink:0; }
+    .recording-banner a:hover { transform:translateY(-2px); box-shadow:0 4px 14px rgba(0,0,0,0.25); }
+
+    .nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; position:sticky; top:10px; z-index:100; background:rgba(255,255,255,0.97); padding:14px 16px; border-radius:12px; box-shadow:0 2px 16px rgba(46,40,69,0.14); }
+    .nav a { padding:9px 14px; border:2px solid transparent; background:var(--pale-denim); color:var(--plum); border-radius:8px; cursor:pointer; font-size:0.83rem; font-weight:700; font-family:'Nunito', sans-serif; transition:all .2s; text-decoration:none; display:inline-block; }
+    .nav a:hover { background:var(--mid-denim); color:var(--white); text-decoration:none; }
+
+    body:not(:has(.section:target)) .nav a[href="#workspace"],
+    body:has(#workspace:target)     .nav a[href="#workspace"]   { background:var(--plum); color:var(--white); }
+    body:has(#skills:target)        .nav a[href="#skills"]      { background:var(--plum); color:var(--white); }
+    body:has(#tidycal:target)       .nav a[href="#tidycal"]     { background:var(--plum); color:var(--white); }
+    body:has(#projects:target)      .nav a[href="#projects"]    { background:var(--plum); color:var(--white); }
+    body:has(#tips:target)          .nav a[href="#tips"]        { background:var(--plum); color:var(--white); }
+    body:has(#nextsteps:target)     .nav a[href="#nextsteps"]   { background:var(--plum); color:var(--white); }
+    body:has(#thankyou:target)      .nav a[href="#thankyou"]    { background:var(--plum); color:var(--white); }
+
+    .section { display:none; background:var(--white); border-radius:16px; padding:36px; margin-bottom:20px; box-shadow:0 2px 14px rgba(46,40,69,0.07); scroll-margin-top:90px; }
+    .section:target { display:block; animation:fadeIn .3s ease; }
+    body:not(:has(.section:target)) #workspace { display:block; }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+
+    .section h2 { font-family:'Libre Baskerville', serif; color:var(--plum); font-size:1.75rem; margin-bottom:18px; padding-bottom:12px; border-bottom:2px solid var(--pale-denim); }
+    .section h3 { font-family:'Libre Baskerville', serif; color:var(--denim); font-size:1.15rem; margin:28px 0 12px; }
+    .section h4 { color:var(--plum); font-size:0.98rem; font-weight:700; margin:16px 0 6px; }
+    .section p { margin-bottom:10px; }
+
+    .box { padding:18px 22px; border-radius:10px; margin:16px 0; border-left:4px solid var(--denim); background:var(--pale-denim); }
+    .box.pink  { border-left-color:var(--hot-pink); background:var(--pale-pink); }
+    .box.cream { border-left-color:var(--mid-denim); background:var(--cream); }
+
+    .folder-map { background:var(--plum); color:#c4d8ec; padding:22px 26px; border-radius:10px; font-family:'Monaco','Menlo','Courier New',monospace; font-size:0.82rem; line-height:1.9; margin:16px 0; overflow-x:auto; white-space:pre; }
+    .folder-map .f-dir  { color:var(--mid-denim); font-weight:600; }
+    .folder-map .f-file { color:#e8d8f0; }
+    .folder-map .f-note { color:#7a9bb5; font-style:italic; }
+
+    .card-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:18px; margin:20px 0; }
+    .card { background:var(--white); border:2px solid var(--pale-denim); border-radius:12px; padding:22px; transition:all .2s; }
+    .card:hover { border-color:var(--plum); box-shadow:0 4px 18px rgba(46,40,69,0.1); }
+    .skill-tag { display:inline-block; background:var(--plum); color:var(--white); font-size:0.68rem; font-weight:700; padding:3px 10px; border-radius:20px; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.5px; }
+    .skill-tag.brand { background:var(--hot-pink); }
+    .card h4 { font-family:'Libre Baskerville', serif; color:var(--plum); font-size:1.02rem; margin:0 0 8px; }
+    .card p { font-size:0.88rem; color:#555; line-height:1.65; margin:0; }
+    .card .trigger { margin-top:12px; padding-top:12px; border-top:1px solid var(--pale-denim); font-size:0.83rem; color:var(--denim); }
+    .card .trigger strong { display:block; color:var(--plum); margin-bottom:3px; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.4px; }
+
+    .project-card { background:var(--white); border:2px solid var(--pale-denim); border-radius:14px; padding:26px; margin:18px 0; }
+    .project-card h4 { font-family:'Libre Baskerville', serif; color:var(--plum); font-size:1.1rem; margin:0 0 8px; }
+    .project-card p { font-size:0.9rem; color:#444; margin-bottom:10px; }
+    .project-card .trigger { margin-top:14px; padding-top:14px; border-top:1px solid var(--pale-denim); font-size:0.83rem; color:var(--denim); }
+    .project-card .trigger strong { display:block; color:var(--plum); margin-bottom:4px; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.4px; }
+
+    table { width:100%; border-collapse:collapse; margin:18px 0; font-size:0.9rem; }
+    th { background:var(--plum); color:var(--white); padding:12px 16px; text-align:left; font-weight:600; }
+    td { padding:11px 16px; border-bottom:1px solid var(--pale-denim); vertical-align:top; }
+    tr:nth-child(even) td { background:#fafbff; }
+
+    .prompt-box { background:var(--plum); color:#c4d8ec; padding:44px 20px 18px 20px; border-radius:10px; margin:12px 0; font-family:'Monaco','Menlo','Courier New',monospace; font-size:0.83rem; white-space:pre-wrap; position:relative; line-height:1.65; }
+    .prompt-box .copy-btn { position:absolute; top:11px; right:11px; background:var(--hot-pink); color:var(--white); border:none; padding:5px 12px; border-radius:5px; cursor:pointer; font-size:0.73rem; font-family:'Nunito', sans-serif; font-weight:700; }
+    .prompt-box .copy-btn:hover { background:#b8275e; }
+
+    .step-list { list-style:none; padding:0; margin:14px 0; }
+    .step-list li { display:flex; gap:14px; padding:11px 0; border-bottom:1px solid var(--pale-denim); align-items:flex-start; }
+    .step-list li:last-child { border-bottom:none; }
+    .step-num { background:var(--plum); color:var(--white); min-width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:700; flex-shrink:0; margin-top:2px; }
+
+    .tip-list { display:flex; flex-direction:column; gap:14px; margin:16px 0; }
+    .tip-item { display:flex; gap:16px; align-items:flex-start; padding:20px; background:var(--cream); border-radius:10px; }
+    .tip-num { background:var(--hot-pink); color:var(--white); min-width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:0.9rem; }
+    .tip-content h4 { color:var(--plum); margin:0 0 5px; }
+    .tip-content p { font-size:0.9rem; color:#444; margin:0; }
+    .tip-content ul { font-size:0.9rem; color:#444; padding-left:20px; margin:6px 0 0; }
+
+    .action-item { background:var(--pale-denim); padding:13px 18px; border-radius:8px; margin:9px 0; display:flex; align-items:flex-start; gap:12px; }
+    .action-item input[type="checkbox"] { margin-top:3px; flex-shrink:0; width:18px; height:18px; accent-color:var(--plum); cursor:pointer; }
+
+    .revision-box { border:2px solid var(--mid-denim); border-radius:12px; padding:24px 26px; background:var(--pale-denim); margin:22px 0; }
+    .revision-box h3 { margin-top:0; color:var(--plum); }
+    .revision-box p { margin:8px 0; font-size:0.93rem; }
+
+    .thankyou-box { background:linear-gradient(135deg, var(--plum) 0%, var(--denim) 100%); color:var(--white); border-radius:16px; padding:36px; margin-bottom:28px; text-align:center; }
+    .thankyou-box h3 { font-family:'Libre Baskerville', serif; font-size:1.6rem; margin-bottom:14px; color:var(--white); }
+    .thankyou-box p { opacity:0.9; font-size:0.97rem; line-height:1.8; margin-bottom:10px; }
+
+    .testimonial-qs { background:var(--cream); border-radius:12px; padding:28px 30px; margin:24px 0; }
+    .testimonial-qs h3 { font-family:'Libre Baskerville', serif; color:var(--plum); font-size:1.15rem; margin:0 0 6px; }
+    .testimonial-qs .intro { font-size:0.9rem; color:#555; margin-bottom:18px; }
+
+    .mailto-btn { display:inline-block; background:var(--hot-pink); color:var(--white); padding:14px 30px; border-radius:10px; text-decoration:none; font-weight:700; font-size:0.95rem; margin-top:18px; transition:all .2s; }
+    .mailto-btn:hover { background:#b8275e; transform:translateY(-2px); box-shadow:0 4px 14px rgba(212,51,110,0.35); text-decoration:none; }
+
+    a { color:var(--hot-pink); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+
+    .footer { text-align:center; padding:36px 30px; background:var(--plum); color:var(--white); border-radius:16px; margin-top:28px; }
+    .footer h3 { font-family:'Libre Baskerville', serif; color:var(--white); margin-bottom:8px; font-size:1.3rem; }
+    .footer p { font-size:0.9rem; opacity:0.8; margin:4px 0; }
+    .footer a { color:var(--mid-denim); }
+
+    @media (max-width:620px) {
+      .header h1 { font-size:1.8rem; }
+      .header .subtitle { font-size:1.25rem; }
+      .nav { position:static; }
+      .nav a { font-size:0.77rem; padding:8px 10px; }
+      .section { padding:24px 18px; }
+      .recording-banner { flex-direction:column; text-align:center; }
+      .recording-banner .rb-left { flex-direction:column; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>Your Claude Setup</h1>
+    <p class="subtitle">Sarah Bruce</p>
+    <p class="meta">Built by Tania Carcenac &nbsp;·&nbsp; Out of Your Head &nbsp;·&nbsp; August 2026</p>
+  </div>
+
+  <div class="recording-banner">
+    <div class="rb-left">
+      <span class="icon">🎥</span>
+      <div>
+        <h3>Your Reboot Call Recording</h3>
+        <p>18 August 2026. Everything we walked through, exactly as it happened.</p>
+      </div>
+    </div>
+    <a href="https://fathom.video/calls/786508237" target="_blank">Watch Recording →</a>
+  </div>
+
+  <div class="nav">
+    <a href="#workspace">Your Workspace</a>
+    <a href="#skills">Your Skills</a>
+    <a href="#tidycal">Booking Capture</a>
+    <a href="#projects">Client Projects</a>
+    <a href="#tips">Quick Tips</a>
+    <a href="#nextsteps">Next Steps</a>
+    <a href="#thankyou">A Note from Tania</a>
+  </div>
+
+  <!-- WORKSPACE -->
+  <div id="workspace" class="section">
+    <h2>Your Sarah Bruce HQ</h2>
+
+    <p>Everything lives in three places: your Claude account settings, your Skills library, and <strong>Sarah Bruce HQ</strong> in your Drive. That HQ folder is the one you built live on the call.</p>
+
+    <h3>What's in Sarah Bruce HQ</h3>
+    <div class="folder-map"><span class="f-dir">📁 Sarah Bruce HQ/</span>
+├── <span class="f-dir">00 Brand &amp; Voice/</span>                <span class="f-note">← still empty, yours to fill (see Next Steps)</span>
+├── <span class="f-dir">01 Clients/</span>                     <span class="f-note">← Life Coaching folders arrive here automatically</span>
+├── <span class="f-dir">02 Lead Magnets &amp; Ebooks/</span>
+│   └── <span class="f-dir">Business Foundation/</span>        <span class="f-note">← your ten workbook documents are in here now</span>
+├── <span class="f-dir">03 Content — Blog &amp; Social/</span>
+├── <span class="f-dir">04 Admin &amp; Shared/</span>
+└── <span class="f-dir">05 My Claude Setup/</span>
+    ├── <span class="f-dir">skills/</span>                     <span class="f-note">← your 4 skill files</span>
+    └── <span class="f-dir">templates/</span>                  <span class="f-note">← the Business Foundation Project Setup Guide</span></div>
+
+    <div class="box cream">
+      <h4>Your ten workbook documents are already in place</h4>
+      <p>You dragged the full Business Foundation Coaching document series into <code>02 Lead Magnets &amp; Ebooks/Business Foundation</code> during the call — that's done and doesn't need repeating.</p>
+    </div>
+
+    <div class="box pink">
+      <h4>Two folders still need your own copies dropped in</h4>
+      <p><code>00 Brand &amp; Voice</code> is empty — your brand guide and avatar notes need updating with the correct green (see below) before you upload them. Add your README and account instructions into <code>05 My Claude Setup</code> too — the README is your plain-English guide to everything in this setup and how to use it, worth having on hand as your own reference.</p>
+    </div>
+
+    <h3>Double-check your green</h3>
+    <p>Your brand guide had the green recorded as an invalid code. Your brand voice skill currently uses <strong>#4F8C2B</strong> — worth a quick check against your actual brand file, since a couple of different codes came up while we were talking it through on the call.</p>
+
+    <h3>Updating a skill</h3>
+    <div class="box pink">
+      <p>When you refine a skill through Claude, ask it to save a copy of the updated version into <code>05 My Claude Setup/skills</code> in your Drive. Claude can create a new file there through your connected Drive, but it can't overwrite the old one directly — so once the new copy is in, delete the outdated one yourself so you're not left with two versions.</p>
+      <div class="prompt-box" style="margin-top:14px;"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Update the [skill name] skill to [what needs to change]. Then save a copy of the updated version into 05 My Claude Setup/skills in my Google Drive.</div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div id="skills" class="section">
+    <h2>Your 4 Skills</h2>
+    <p>These are installed and active in Claude. They're what makes Claude sound like you and work the way you actually run your business, rather than starting from nothing every time.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="skill-tag brand">Brand</div>
+        <h4>Brand Voice</h4>
+        <p>One identity, two arms — Life Coaching and Business Foundation Coaching. Keeps everything Claude writes sounding like you: your phrases, your warmth, your sign-off, and what you'd never say.</p>
+        <div class="trigger"><strong>How to trigger it</strong>"Use my brand voice skill" — or Claude will often reach for it automatically once it's on.</div>
+      </div>
+      <div class="card">
+        <div class="skill-tag">Content</div>
+        <h4>Blog Writing &amp; SEO</h4>
+        <p>Structure, length and search guidance calibrated against your own published posts, so a blog draft comes back close to publish-ready. Used together with your Blog project.</p>
+        <div class="trigger"><strong>How to trigger it</strong>Open your Blog project and describe what you want to write about.</div>
+      </div>
+      <div class="card">
+        <div class="skill-tag">Workflow</div>
+        <h4>TidyCal Booking Capture</h4>
+        <p>Turns a new discovery-call booking into a ready-to-open prep folder, so you're not copying answers out of Gmail by hand. See the Booking Capture tab for the full picture — this one needs one more test before it's fully proven.</p>
+        <div class="trigger"><strong>How to trigger it</strong>Cowork → Scheduled → Sarah Bruce TidyCal Booking Capture → Run now.</div>
+      </div>
+      <div class="card">
+        <div class="skill-tag">Workflow</div>
+        <h4>Coaching Session Support</h4>
+        <p>Built around your own ten-document Business Foundation Coaching series. Inside a client's Project, add your notes, a transcript, or their completed workbook, and it gives you back a private prep note — never anything written into the client's own workbook.</p>
+        <div class="trigger"><strong>How to trigger it</strong>Inside that client's Project: "use the coaching session support skill for this session."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIDYCAL -->
+  <div id="tidycal" class="section">
+    <h2>Your Booking Capture Task</h2>
+    <p>This lives in Claude's <strong>Scheduled</strong> section, named <strong>Sarah Bruce TidyCal Booking Capture</strong>, set to manual — nothing runs on its own, you trigger it yourself whenever you know a booking's come in.</p>
+
+    <h3>How to run it</h3>
+    <ol class="step-list">
+      <li><span class="step-num">1</span><span>Cowork → <strong>Scheduled</strong></span></li>
+      <li><span class="step-num">2</span><span>Open <strong>Sarah Bruce TidyCal Booking Capture</strong></span></li>
+      <li><span class="step-num">3</span><span>Click <strong>Run now</strong></span></li>
+      <li><span class="step-num">4</span><span>It checks Gmail for a new TidyCal booking, pulls out the client's answers to your 11 questions, and files them into a prep folder in your Drive</span></li>
+    </ol>
+
+    <div class="box pink">
+      <h4>Next step — give it a real booking to work with</h4>
+      <p>We set this up on the call but didn't have a real booking to test it against yet. Make a test booking through your own discovery-call TidyCal link (any name, your own email is fine), then run the task and see what it does.</p>
+      <p>It should know where to file the output based on its own instructions — but when you run it, check the result and, if it asks or if you want to be sure, give it the link to the folder you want it saved into right there in the chat window.</p>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div id="projects" class="section">
+    <h2>Your Business Foundation Coaching Projects</h2>
+    <p>One Project per client, each one keeping their materials together so you're never re-explaining who they are. We set up a practice one together on the call — the real skill is repeating this yourself for every new client.</p>
+
+    <div class="project-card">
+      <h4>Setting up a new client Project</h4>
+      <p>Full step-by-step instructions live in <code>05 My Claude Setup/templates</code> — the Business Foundation Project Setup Guide. It covers the project name, the instructions to paste in, and adding the Workbook Series Roadmap as context.</p>
+      <div class="trigger"><strong>What goes in each session</strong>Your own notes, the transcript, and/or the client's completed workbook — whichever you've got. Then say: "use the coaching session support skill for this session."</div>
+    </div>
+
+    <div class="box cream">
+      <h4>The Workbook Series Roadmap</h4>
+      <p>This is the short index of all ten documents that gives a Project the full roadmap without needing every document pasted in. It saved into your practice Project properly on the call — just check it's also sitting in <code>02 Lead Magnets &amp; Ebooks/Business Foundation</code> in your HQ, so it's easy to find and add to every new client Project going forward.</p>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div id="tips" class="section">
+    <h2>Quick Tips</h2>
+    <p>Five things that'll make a real difference as you get comfortable using this.</p>
+
+    <div class="tip-list">
+      <div class="tip-item">
+        <div class="tip-num">1</div>
+        <div class="tip-content">
+          <h4>Update skills in both places</h4>
+          <p>When you refine a skill through Claude, ask it to also give you the file to save over your Drive copy. Otherwise you iterate in Claude but your saved copy falls behind.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">2</div>
+        <div class="tip-content">
+          <h4>Don't let chats run too long</h4>
+          <p>Long chats burn through tokens fast. When one's getting long, ask for a handover and start fresh:</p>
+          <div class="prompt-box" style="margin-top:10px;"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Summarise everything we've covered in this chat in a handover document so I can start a fresh conversation.</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">3</div>
+        <div class="tip-content">
+          <h4>Check your token usage</h4>
+          <p>Settings → your name at the bottom → Usage. Handy to check before a heavier session.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">4</div>
+        <div class="tip-content">
+          <h4>If a connector says it's expired, just reconnect it</h4>
+          <p>We hit this twice on the call — Google Drive and Gmail both needed reauthorising partway through. It's not something you did wrong, connections just lapse sometimes. Settings → Connectors → disconnect and reconnect the one giving trouble.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">5</div>
+        <div class="tip-content">
+          <h4>Give yourself small, regular practice runs</h4>
+          <p>You said it yourself on the call — thirty minutes a day, even just making up a test appointment and seeing what Claude does with it, will make this feel natural far faster than one long session ever could.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Quick reference</h3>
+    <table>
+      <tr><th>I want to...</th><th>Say or do this</th></tr>
+      <tr><td>Write in my voice</td><td>"Use my brand voice skill"</td></tr>
+      <tr><td>Write a blog post</td><td>Open the Blog project</td></tr>
+      <tr><td>Check for a new booking</td><td>Scheduled → Sarah Bruce TidyCal Booking Capture → Run now</td></tr>
+      <tr><td>Set up a new coaching client</td><td>Follow the Business Foundation Project Setup Guide</td></tr>
+      <tr><td>Get a session prep note</td><td>In that client's Project: "use the coaching session support skill"</td></tr>
+      <tr><td>Update a skill</td><td>Tell Claude, then ask it to give you the file to save over your Drive copy</td></tr>
+    </table>
+  </div>
+
+  <!-- NEXT STEPS -->
+  <div id="nextsteps" class="section">
+    <h2>Next Steps</h2>
+
+    <h3>Your to-do list</h3>
+
+    <div class="action-item"><input type="checkbox"><span><strong>Make a test TidyCal booking</strong> through your own discovery-call link, then run the Sarah Bruce TidyCal Booking Capture task and check the output — this one didn't get a confirmed successful run on the call itself</span></div>
+    <div class="action-item"><input type="checkbox"><span><strong>Check the Workbook Series Roadmap</strong> is also sitting in <code>02 Lead Magnets &amp; Ebooks/Business Foundation</code> in your HQ, so it's easy to find for every new client Project</span></div>
+    <div class="action-item"><input type="checkbox"><span><strong>Update your brand guide</strong> with the correct green (#4F8C2B) and drop it, plus your avatar notes, into <code>00 Brand &amp; Voice</code></span></div>
+    <div class="action-item"><input type="checkbox"><span><strong>Add your own copies</strong> of the README and account instructions into <code>05 My Claude Setup</code> when you get a spare few minutes</span></div>
+    <div class="action-item"><input type="checkbox"><span><strong>Set up a real client Project</strong> for one of your current Business Foundation clients, following the setup guide — or keep practising with a test one first, whichever feels more comfortable</span></div>
+    <div class="action-item"><input type="checkbox"><span><strong>Try writing a blog post</strong> in your Blog project when you're back from your trip</span></div>
+
+    <h3>Revision window</h3>
+    <div class="revision-box">
+      <h3>Two rounds of revisions included</h3>
+      <p>If something isn't quite right — the TidyCal task needs a fix once you've tested it, a skill needs adjusting, anything at all — get in touch and we'll sort it.</p>
+      <p><strong>Revision window closes:</strong> 1 September 2026</p>
+      <p><strong>What counts:</strong> adjustments to what's already built, not new skills or scope. Those are a separate conversation for whenever you're ready.</p>
+      <p><strong>How to request one:</strong> email Tania at <a href="mailto:tania@aiwithintent.com.au">tania@aiwithintent.com.au</a>. I'll get back to you within 2 working days — though I'm travelling myself from 24 August to 4 September, so if anything you raise doesn't get sorted before then, I'll simply extend your window so you're not short-changed by my being away.</p>
+    </div>
+  </div>
+
+  <!-- THANK YOU -->
+  <div id="thankyou" class="section">
+    <h2>A Note from Tania</h2>
+
+    <div class="thankyou-box">
+      <h3>Thank you for trusting me with this.</h3>
+      <p>I hope this gets you jumping in and actually using Claude, not just admiring it from a distance. It's not one-and-done — the more regularly you use it, the faster all the new terminology and concepts stop feeling foreign and start feeling normal. Keep giving it feedback as you go, every correction makes it work better for you next time.</p>
+      <p>And remember it can do real work for you inside the tools you've already connected, not just answer questions — it built your entire Google Drive folder structure from a single instruction on the call. That's the kind of thing to keep leaning on it for.</p>
+    </div>
+
+    <div class="testimonial-qs">
+      <h3>Would you share your experience?</h3>
+      <p class="intro">A short testimonial from you makes a real difference for other business owners wondering whether something like this is right for them. It only takes a few minutes.</p>
+      <div style="text-align:center; margin-top:24px;">
+        <a href="https://forms.gle/oU7L2ZNQiC433u8G9" target="_blank" class="mailto-btn">Share Your Experience →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <h3>Out of Your Head</h3>
+    <p>AI Setup for Solopreneurs &nbsp;·&nbsp; <a href="mailto:tania@aiwithintent.com.au">tania@aiwithintent.com.au</a></p>
+  </div>
+
+</div>
+
+<script>
+  function copyPrompt(btn) {
+    const box = btn.parentElement;
+    const text = box.textContent.replace('Copy', '').replace('Copied!', '').trim();
+    navigator.clipboard.writeText(text);
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  }
+</script>
+</body>
+</html>
