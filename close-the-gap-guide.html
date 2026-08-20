@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Close the Gap — 5 ways to move from basic to intermediate AI use</title>
+<title>Close the Gap — 6 Ways to Move from Basic to Intermediate AI Use</title>
+<meta name="description" content="A free guide series: six real ways to move from basic to intermediate Claude use, each one taught properly, all in one document."/>
+<meta property="og:title" content="Close the Gap — 6 Ways to Move from Basic to Intermediate AI Use"/>
+<meta property="og:description" content="A free guide series: six real ways to move from basic to intermediate Claude use, each one taught properly, all in one document."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.aiwithintent.com.au/close-the-gap-guide.html"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Close the Gap — 6 Ways to Move from Basic to Intermediate AI Use"/>
+<meta name="twitter:description" content="A free guide series: six real ways to move from basic to intermediate Claude use, each one taught properly, all in one document."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet"/>
@@ -25,540 +33,965 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--font-b);background:var(--denim-light);color:var(--dark);overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased;font-size:17px}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(37,88,127,.15);height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 40px}
-.nav-brand{font-family:var(--font-h);font-size:1.05rem;font-weight:400;color:var(--dark);font-style:italic}
-.nav-links{display:flex;gap:22px}
-.nav-links a{font-size:.68rem;font-weight:700;color:var(--denim);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
-.nav-links a:hover{color:var(--pink)}
-@media(max-width:780px){.nav-links{display:none}}
+/* ── PAGE HEADER ── */
+.pageheader{background:var(--dark);color:var(--white);text-align:center;padding:44px 24px 34px;position:relative;overflow:hidden}
+.pageheader::before{content:'';position:absolute;top:-60px;right:-60px;width:260px;height:260px;background:rgba(212,51,110,.12);border-radius:50%}
+.pageheader h1{font-family:var(--font-h);font-size:clamp(2rem,5vw,2.8rem);font-weight:700;position:relative}
+.pageheader h1 em{color:var(--pink);font-style:italic}
+.pageheader p{font-size:.92rem;color:var(--denim-light);opacity:.85;margin-top:8px;position:relative;max-width:560px;margin-left:auto;margin-right:auto}
+
+/* ── TAB NAV ── */
+.navwrap{position:sticky;top:0;z-index:200;background:rgba(238,230,222,.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(37,88,127,.15);padding:10px 16px}
+.navtabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:1100px;margin:0 auto}
+.navtabs a{padding:8px 16px;border-radius:6px;font-size:.8rem;font-weight:700;font-family:var(--font-b);color:var(--denim);background:var(--denim-light);text-decoration:none;transition:all .2s;border:2px solid transparent}
+.navtabs a:hover{border-color:var(--pink);color:var(--pink)}
+body:not(:has(.page:target)) .navtabs a[href="#overview"],
+body:has(#overview:target) .navtabs a[href="#overview"]{background:var(--dark);color:var(--white)}
+body:has(#brain:target) .navtabs a[href="#brain"]{background:var(--dark);color:var(--white)}
+body:has(#connectors:target) .navtabs a[href="#connectors"]{background:var(--dark);color:var(--white)}
+body:has(#globalinstructions:target) .navtabs a[href="#globalinstructions"]{background:var(--dark);color:var(--white)}
+body:has(#projects:target) .navtabs a[href="#projects"]{background:var(--dark);color:var(--white)}
+body:has(#skills:target) .navtabs a[href="#skills"]{background:var(--dark);color:var(--white)}
+body:has(#scheduledtasks:target) .navtabs a[href="#scheduledtasks"]{background:var(--dark);color:var(--white)}
+body:has(#recap:target) .navtabs a[href="#recap"]{background:var(--dark);color:var(--white)}
+
+/* ── PAGE SECTIONS (CSS :target switching) ── */
+.page{display:none;scroll-margin-top:64px}
+.page:target{display:block;animation:fadeIn .3s ease}
+body:not(:has(.page:target)) #overview{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 .s-denim-light{background:linear-gradient(150deg,#D6E7F7 0%,#C2D8EE 100%)}
 .s-cream      {background:linear-gradient(150deg,#EEE6DE 0%,#E2D9CF 100%)}
 .s-pink       {background:linear-gradient(150deg,#FAEFF3 0%,#F2DFEA 100%)}
 .s-denim-mid  {background:linear-gradient(150deg,#95B6D7 0%,#79A7CE 100%)}
 
-.sec{padding:64px 32px}
-.inner{max-width:1100px;margin:0 auto}
-
+.sec{padding:56px 32px}
+.inner{max-width:900px;margin:0 auto}
 .eyebrow{font-family:var(--font-s);font-size:1.9rem;font-weight:700;color:var(--pink);display:inline-block;margin-bottom:6px}
-h2{font-family:var(--font-h);font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700;line-height:1.12;color:var(--dark);margin-bottom:14px}
-.sub{font-size:.96rem;color:var(--dark);max-width:620px;line-height:1.85;margin-bottom:40px;font-weight:400}
+h2{font-family:var(--font-h);font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;line-height:1.15;color:var(--dark);margin-bottom:14px}
+.sub{font-size:.96rem;color:var(--dark);max-width:700px;line-height:1.85;margin-bottom:26px;font-weight:400}
+.intro-p{font-size:1rem;color:var(--dark);max-width:700px;line-height:1.85;margin-bottom:8px;font-weight:400}
+.div-soft{height:1px;background:linear-gradient(90deg,transparent,rgba(37,88,127,.2),transparent)}
 
-/* HERO */
-.hero{min-height:96vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:130px 32px 50px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 72% 15%,rgba(212,51,110,.14),transparent 48%),radial-gradient(ellipse at 18% 82%,rgba(37,88,127,.18),transparent 45%),radial-gradient(ellipse at 50% 105%,rgba(149,182,215,.35),transparent 55%);pointer-events:none}
-.for-tag{font-family:var(--font-b);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--denim);border:1.5px solid rgba(37,88,127,.3);padding:7px 22px;border-radius:50px;display:inline-block;margin-bottom:26px;background:rgba(255,255,255,.5)}
-.hero h1{font-family:var(--font-h);font-size:clamp(2.8rem,7vw,5.2rem);font-weight:700;line-height:1.05;color:var(--dark);margin-bottom:18px}
-.hero h1 em{color:var(--pink);font-style:italic}
-.hero-p{font-size:clamp(.96rem,2vw,1.08rem);color:var(--dark);max-width:640px;margin:0 auto 38px;line-height:1.85;font-weight:400}
-.pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:46px}
+/* ── OVERVIEW-ONLY ── */
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px}
 .pill{padding:8px 20px;border-radius:50px;font-size:.82rem;font-weight:700;font-family:var(--font-b);border:1.5px solid rgba(37,88,127,.3);color:var(--denim);background:rgba(255,255,255,.6)}
 .pill.hl{background:var(--pink);color:var(--white);border-color:var(--pink)}
-.cue{color:var(--denim);font-size:.82rem;display:flex;flex-direction:column;align-items:center;gap:6px;animation:bob 3s ease-in-out infinite;cursor:pointer}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+.diffgrid{display:flex;flex-direction:column;gap:10px;margin:20px 0}
+.diffrow{display:flex;gap:16px;align-items:baseline;background:var(--white);border:1px solid rgba(37,88,127,.18);border-radius:10px;padding:16px 20px}
+.diffrow strong{color:var(--pink);flex-shrink:0;min-width:150px;font-size:.92rem}
+.diffrow span{font-size:.92rem;color:var(--dark);line-height:1.6}
+.gcards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:10px}
+@media(max-width:760px){.gcards{grid-template-columns:1fr}}
+.gcard{display:flex;gap:16px;align-items:flex-start;background:var(--white);border:2px solid var(--denim);border-radius:14px;padding:24px;text-decoration:none;transition:all .25s}
+.gcard:hover{border-color:var(--pink);transform:translateY(-3px)}
+.gcard-num{font-family:var(--font-h);font-size:1.5rem;font-weight:700;color:var(--pink);flex-shrink:0;line-height:1}
+.gcard h3{font-family:var(--font-h);font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:5px}
+.gcard p{font-size:.86rem;color:var(--dark);line-height:1.6}
+.gcard .garrow{font-size:.76rem;font-weight:700;color:var(--pink);margin-top:8px;display:inline-block}
 
-/* THE GAP — 3 card grid */
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:700px){.g3{grid-template-columns:1fr}}
-.hc{background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:28px;transition:all .25s;box-shadow:0 4px 20px rgba(46,40,69,.08)}
-.hc:hover{border-color:var(--pink);box-shadow:0 6px 28px rgba(212,51,110,.14);transform:translateY(-3px)}
-.hc-n{font-family:var(--font-h);font-size:2.2rem;font-weight:700;margin-bottom:10px;line-height:1;background:linear-gradient(135deg,var(--pink) 0%,var(--denim) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hc h3{font-family:var(--font-h);font-size:1.02rem;font-weight:700;margin-bottom:8px;color:var(--dark)}
-.hc p{font-size:.87rem;color:var(--dark);line-height:1.72}
+/* ── SHARED COMPONENTS (used across multiple guides) ── */
+.ahead{display:flex;align-items:flex-start;gap:20px;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:28px;margin:20px 0}
+@media(max-width:600px){.ahead{flex-direction:column}}
+.abadge{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--denim-light),rgba(37,88,127,.22));display:flex;align-items:center;justify-content:center;font-size:1.7rem;flex-shrink:0;box-shadow:0 2px 10px rgba(37,88,127,.18)}
+.atitle{font-family:var(--font-h);font-size:1.3rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.asub{font-size:.96rem;color:var(--dark);line-height:1.75;font-weight:400}
+
+.steps{display:flex;flex-direction:column;gap:10px;margin:20px 0}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:16px 20px}
+.snum{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--pink),#B5295C);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:var(--white);flex-shrink:0;box-shadow:0 2px 8px rgba(212,51,110,.35)}
+.scontent h4{font-size:.96rem;font-weight:700;color:var(--dark);margin-bottom:3px}
+.scontent p{font-size:.92rem;color:var(--dark);line-height:1.68}
+
 .gap-note{font-size:.94rem;color:var(--dark);line-height:1.85;margin-top:8px;max-width:760px}
 .gap-note strong{color:var(--pink)}
 
-/* TABS */
-.atabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
-.atab{padding:10px 22px;border-radius:50px;font-size:.85rem;font-weight:700;cursor:pointer;border:2px solid var(--denim);background:transparent;color:var(--denim);transition:all .25s;font-family:var(--font-b)}
-.atab:hover{border-color:var(--dark);color:var(--dark)}
-.atab.active{background:var(--pink);border-color:var(--pink);color:var(--white)}
-.apanel{display:none;animation:up .35s ease}
-.apanel.on{display:block}
-@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.ahead{display:flex;align-items:flex-start;gap:20px;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:28px;margin-bottom:20px}
-@media(max-width:600px){.ahead{flex-direction:column}}
-.abadge{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--denim-light),rgba(37,88,127,.22));display:flex;align-items:center;justify-content:center;font-size:1.7rem;flex-shrink:0;box-shadow:0 2px 10px rgba(37,88,127,.18)}
-.atitle{font-family:var(--font-h);font-size:1.5rem;font-weight:700;color:var(--dark);margin-bottom:6px}
-.asub{font-size:.9rem;color:var(--dark);line-height:1.72;font-weight:400}
-.dg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
-@media(max-width:700px){.dg{grid-template-columns:1fr}}
+.pbox{background:var(--dark);border-radius:12px;padding:22px 24px;margin:20px 0;position:relative}
+.pbox-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin-bottom:10px;display:block}
+.pbox p{font-family:'Courier New',monospace;font-size:.95rem;color:var(--cream);line-height:1.7;margin:0}
+.pbox-copy{margin-top:14px;background:transparent;border:1.5px solid rgba(238,230,222,.4);color:var(--cream);font-family:var(--font-b);font-size:.78rem;font-weight:700;padding:7px 16px;border-radius:50px;cursor:pointer;transition:all .2s}
+.pbox-copy:hover{border-color:var(--pink);color:var(--pink)}
+
+.vwrap{background:var(--white);border:2px solid var(--denim);border-radius:14px;padding:24px;margin:20px 0}
+.vwrap h4{font-family:var(--font-h);font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:10px}
+
+.dg{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:20px 0}
+.dg3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.dg2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:20px 0}
+.dg4{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:20px 0}
+@media(max-width:700px){.dg,.dg3,.dg2,.dg4{grid-template-columns:1fr}}
 .dc{background:var(--white);border-radius:10px;padding:20px;border:1px solid rgba(37,88,127,.18)}
 .dc-icon{font-size:1.5rem;margin-bottom:10px}
 .dc h4{font-family:var(--font-h);font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:6px}
-.dc p{font-size:.84rem;color:var(--dark);line-height:1.65}
-.steps{display:flex;flex-direction:column;gap:10px}
-.step{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:16px 20px}
-.snum{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--pink),#B5295C);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:var(--white);flex-shrink:0;box-shadow:0 2px 8px rgba(212,51,110,.35)}
-.scontent h4{font-size:.92rem;font-weight:700;color:var(--dark);margin-bottom:3px}
-.scontent p{font-size:.84rem;color:var(--dark);line-height:1.65}
+.dc p{font-size:.92rem;color:var(--dark);line-height:1.68}
+.dc .dc-tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--pink);background:rgba(212,51,110,.08);padding:3px 10px;border-radius:50px;margin-bottom:8px}
 
-/* FLIP CARDS */
-.flip-hint{font-size:.84rem;color:var(--denim);margin-bottom:26px}
+.shot{margin:20px 0;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:20px;max-width:560px}
+.shot img{width:100%;height:auto;border-radius:6px;border:1px solid rgba(37,88,127,.2);display:block}
+.shot-cap{font-size:.92rem;color:var(--denim);line-height:1.6;margin-top:14px}
+.shot-cap strong{color:var(--dark)}
+
+.pfl{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.pf{background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:18px 22px;font-size:.94rem;color:var(--dark);line-height:1.7;margin:6px 0}
+
+/* Flip cards (Skills + Scheduled Tasks) */
+.flip-hint{font-size:.84rem;color:var(--dark);margin-bottom:26px}
 .fg{display:flex;flex-wrap:wrap;gap:20px;padding:4px 0}
 .fc{flex:0 1 270px;max-width:300px;perspective:1000px;cursor:pointer}
 .fci{position:relative;width:100%;transform-style:preserve-3d;transition:transform .6s ease}
 .fc.fl .fci{transform:rotateY(180deg)}
-.fcf{position:relative;width:100%;min-height:230px;backface-visibility:hidden;border-radius:10px;padding:26px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;background:var(--white);border:2px solid var(--denim);transition:border-color .25s}
+.fcf{position:relative;width:100%;min-height:220px;backface-visibility:hidden;border-radius:10px;padding:26px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;background:var(--white);border:2px solid var(--denim);transition:border-color .25s}
 .fc:hover .fcf{border-color:var(--pink)}
-.fcb{position:absolute;top:0;left:0;width:100%;height:100%;min-height:230px;backface-visibility:hidden;border-radius:10px;padding:22px;box-sizing:border-box;display:flex;flex-direction:column;overflow-y:auto;background:linear-gradient(145deg,#2E2845 0%,#3D3066 100%);border:2px solid var(--denim-mid);transform:rotateY(180deg)}
+.fcb{position:absolute;top:0;left:0;width:100%;height:100%;min-height:220px;backface-visibility:hidden;border-radius:10px;padding:22px;box-sizing:border-box;display:flex;flex-direction:column;overflow-y:auto;background:linear-gradient(145deg,#2E2845 0%,#3D3066 100%);border:2px solid var(--denim-mid);transform:rotateY(180deg)}
 .fco{font-size:1.9rem;margin-bottom:12px}
 .fcf h3{font-family:var(--font-h);font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--dark)}
-.fcf p{font-size:.85rem;color:var(--dark);line-height:1.65}
-.fh{font-size:.7rem;color:rgba(37,88,127,.55);margin-top:10px}
-.fcb-lbl{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--denim-mid);margin-bottom:12px;font-family:var(--font-b)}
-.fe{font-size:.84rem;background:rgba(61,53,96,.5);padding:9px 12px;border-radius:6px;margin:6px 0;border-left:3px solid var(--pink);line-height:1.62;color:var(--cream)}
+.fcf p{font-size:.92rem;color:var(--dark);line-height:1.68}
+.fh{font-size:.74rem;color:rgba(37,88,127,.55);margin-top:10px}
+.fcb-lbl{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--denim-mid);margin-bottom:12px;font-family:var(--font-b)}
+.fe{font-size:.92rem;background:rgba(61,53,96,.5);padding:9px 12px;border-radius:6px;margin:6px 0;border-left:3px solid var(--pink);line-height:1.65;color:var(--cream)}
 
-/* BEFORE/AFTER */
-.bacard{background:var(--white);border:2px solid var(--denim);border-radius:10px;overflow:hidden}
-.bacard-head{display:flex;align-items:center;flex-wrap:wrap;gap:14px;padding:20px 26px;border-bottom:1px solid rgba(37,88,127,.15)}
-.bacard-head h3{font-family:var(--font-h);font-size:1.15rem;font-weight:700;color:var(--dark)}
-.batabs{display:flex;margin-left:auto}
-.stab{padding:7px 18px;font-size:.76rem;font-weight:700;cursor:pointer;border:none;background:transparent;color:var(--denim);font-family:var(--font-b);border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.06em;text-transform:uppercase}
-.stab.active{color:var(--pink);border-bottom-color:var(--pink)}
-.bastate{display:none;padding:22px 26px}
-.bastate.on{display:block;animation:up .3s ease}
-.ba-lbl{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:50px;display:inline-block;margin-bottom:12px;font-family:var(--font-b)}
-.bl-before{background:var(--denim-light);color:var(--denim)}
-.bl-after{background:rgba(212,51,110,.12);color:var(--pink)}
-.bastate p{font-size:.92rem;color:var(--dark);line-height:1.82;margin-bottom:8px}
-.bastate ul{padding-left:18px;margin-top:6px}
-.bastate ul li{font-size:.9rem;color:var(--dark);line-height:1.75;margin-bottom:4px}
+/* Tabs (Projects only) */
+.atabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+.atab{padding:10px 22px;border-radius:6px;font-size:.85rem;font-weight:700;cursor:pointer;border:2px solid var(--denim);background:var(--white);color:var(--dark);transition:all .25s;font-family:var(--font-b)}
+.atab:hover{border-color:var(--pink);color:var(--pink)}
+.atab.active{background:var(--denim);border-color:var(--denim);color:var(--white)}
+.apanel{display:none;animation:up .35s ease}
+.apanel.on{display:block}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-/* SCREENSHOT */
-.shot{margin-top:24px;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:20px;max-width:560px}
-.shot img{width:100%;height:auto;border-radius:6px;border:1px solid rgba(37,88,127,.2);display:block}
-.shot-cap{font-size:.85rem;color:var(--denim);line-height:1.6;margin-top:14px}
-.shot-cap strong{color:var(--dark)}
-
-/* FILE TREE */
-.ftree{background:var(--dark);border-radius:12px;padding:26px 30px;margin-top:6px;overflow-x:auto}
+/* AI Brain file tree */
+.ftree{background:var(--dark);border-radius:12px;padding:26px 30px;margin:20px 0;overflow-x:auto}
 .ft-row{display:flex;align-items:baseline;gap:8px;font-family:'Courier New',monospace;font-size:.85rem;white-space:nowrap;padding:3px 0}
 .ft-line{color:rgba(238,230,222,.35)}
-.ft-icon{font-family:var(--font-b)}
 .ft-name{color:var(--cream);font-weight:700}
 .ft-note{margin-left:18px;color:rgba(238,230,222,.5);font-style:italic;font-size:.78rem;font-family:var(--font-b)}
-@media(max-width:600px){.ft-note{display:none}}
+@media(max-width:640px){.ft-note{display:none}}
 
-/* TIPS */
-.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+/* Global Instructions tips */
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:20px 0}
 @media(max-width:820px){.tg{grid-template-columns:1fr}}
-.tp{background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:24px;display:flex;gap:14px;transition:all .25s}
+.tp{background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:22px;display:flex;gap:14px;transition:all .25s}
 .tp:hover{border-color:var(--pink);transform:translateY(-2px)}
 .tn{width:34px;height:34px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.88rem;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--pink),var(--denim))}
 .tb h4{font-size:.96rem;font-weight:700;margin-bottom:5px;color:var(--dark)}
-.tb p{font-size:.85rem;color:var(--dark);line-height:1.65}
+.tb p{font-size:.92rem;color:var(--dark);line-height:1.68}
 
-/* CHECKLIST */
-.cl-section{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-@media(max-width:680px){.cl-section{grid-template-columns:1fr}}
-.cl-cat{background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:26px}
-.cl-cat h3{font-family:var(--font-h);font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--dark)}
-.cl-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(37,88,127,.15);cursor:pointer}
-.cl-item:last-child{border-bottom:none;padding-bottom:0}
-.cl-item input[type="checkbox"]{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:2px solid var(--denim);border-radius:4px;flex-shrink:0;margin-top:2px;cursor:pointer;position:relative;transition:all .2s;background:var(--white)}
-.cl-item input[type="checkbox"]:checked{background:var(--pink);border-color:var(--pink)}
-.cl-item input[type="checkbox"]:checked::after{content:'✓';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:.75rem;font-weight:700}
-.cl-item .label-text{font-size:.9rem;color:var(--dark);line-height:1.55}
-.cl-item.done .label-text{text-decoration:line-through;opacity:.5}
-.cl-progress{display:inline-block;margin-top:18px;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--pink);background:rgba(212,51,110,.1);padding:6px 16px;border-radius:50px}
+/* Skills warning box */
+.warn{background:rgba(212,51,110,.06);border:2px solid var(--pink);border-radius:10px;padding:22px 26px;margin:20px 0}
+.warn h4{font-family:var(--font-h);font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:8px}
+.warn p{font-size:.96rem;color:var(--dark);line-height:1.78}
 
-/* FOOTER */
-footer{padding:80px 32px 56px;text-align:center;background:var(--denim-mid);border-top:1px solid rgba(37,88,127,.2)}
-.ft-script{font-family:var(--font-s);font-size:2.3rem;color:var(--dark);margin-bottom:12px;font-weight:400}
-.ft-h{font-family:var(--font-h);font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--dark);margin-bottom:16px;line-height:1.1}
-.ft-sub{font-size:.95rem;color:var(--dark);margin-bottom:26px;font-weight:400;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.85}
-.ft-quote{font-family:var(--font-h);font-style:italic;font-size:1.05rem;color:var(--dark);max-width:460px;margin:0 auto 30px;line-height:1.6;padding:20px 26px;background:rgba(255,255,255,.4);border-radius:12px;border:1px solid rgba(37,88,127,.2)}
-.ft-quote-by{display:block;font-family:var(--font-b);font-style:normal;font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--pink);margin-top:10px}
-.btn-pink{display:inline-block;padding:15px 42px;border-radius:50px;background:linear-gradient(135deg,var(--pink),#B5295C);color:var(--white);font-family:var(--font-b);font-weight:700;font-size:.92rem;text-decoration:none;transition:all .25s;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(212,51,110,.4)}
+/* Connectors permission states + workaround cards */
+.pstates{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}
+@media(max-width:700px){.pstates{grid-template-columns:1fr}}
+.pstate{background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:18px;text-align:center}
+.pstate .picon{font-size:1.6rem;margin-bottom:8px}
+.pstate h4{font-family:var(--font-h);font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.pstate p{font-size:.86rem;color:var(--dark);line-height:1.6}
+.wcard{background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:24px;margin:16px 0}
+.wcard h4{font-family:var(--font-h);font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:8px}
+.wcard p{font-size:.94rem;color:var(--dark);line-height:1.75}
+.wcard .wtag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--pink);background:rgba(212,51,110,.08);padding:3px 10px;border-radius:50px;margin-bottom:10px}
+
+/* Recap checklist + about card */
+.cklist{display:flex;flex-direction:column;gap:10px;margin:20px 0}
+.ckitem{display:flex;align-items:center;gap:16px;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:16px 20px;cursor:pointer;transition:all .2s}
+.ckitem:hover{border-color:var(--pink)}
+.ckbox{width:26px;height:26px;flex-shrink:0;border-radius:6px;border:2px solid var(--denim);display:flex;align-items:center;justify-content:center;font-size:.9rem;color:transparent;transition:all .2s}
+.ckitem.done .ckbox{background:var(--pink);border-color:var(--pink);color:var(--white)}
+.cktext h4{font-size:.96rem;font-weight:700;color:var(--dark)}
+.cktext p{font-size:.88rem;color:var(--dark);opacity:.8}
+.ckitem.done .cktext h4{text-decoration:line-through;opacity:.55}
+
+.aboutcard{display:flex;gap:32px;align-items:center;background:var(--white);border:2px solid var(--denim);border-radius:14px;padding:34px;margin:20px 0}
+@media(max-width:700px){.aboutcard{flex-direction:column;text-align:center}}
+.avatar{width:190px;height:190px;border-radius:50%;object-fit:cover;flex-shrink:0;border:4px solid var(--pink)}
+.aboutcard h3{font-family:var(--font-h);font-size:1.3rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.aboutcard p{font-size:.95rem;color:var(--dark);line-height:1.8;margin-bottom:14px}
+.alinks{display:flex;gap:10px;flex-wrap:wrap}
+@media(max-width:640px){.alinks{justify-content:center}}
+.alinks a{padding:9px 20px;border-radius:50px;font-size:.82rem;font-weight:700;text-decoration:none;border:1.5px solid var(--denim);color:var(--denim);transition:all .2s}
+.alinks a:hover{background:var(--denim);color:var(--white)}
+
+/* ── FOOTER ── */
+footer{padding:64px 32px 48px;text-align:center;background:var(--denim-mid);border-top:1px solid rgba(37,88,127,.2)}
+.ft-script{font-family:var(--font-s);font-size:2.1rem;color:var(--dark);margin-bottom:10px;font-weight:400}
+.ft-h{font-family:var(--font-h);font-size:clamp(1.7rem,4.5vw,2.4rem);font-weight:700;color:var(--dark);margin-bottom:14px;line-height:1.15}
+.ft-sub{font-size:.94rem;color:var(--dark);margin-bottom:20px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.8}
+.ft-quote{font-family:var(--font-h);font-style:italic;font-size:1rem;color:var(--dark);max-width:440px;margin:0 auto 26px;line-height:1.6;padding:18px 24px;background:rgba(255,255,255,.4);border-radius:12px;border:1px solid rgba(37,88,127,.2)}
+.ft-quote-by{display:block;font-family:var(--font-b);font-style:normal;font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;color:var(--pink);margin-top:8px}
+.btn-pink{display:inline-block;padding:14px 36px;border-radius:50px;background:linear-gradient(135deg,var(--pink),#B5295C);color:var(--white);font-family:var(--font-b);font-weight:700;font-size:.9rem;text-decoration:none;transition:all .25s;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(212,51,110,.4)}
 .btn-pink:hover{background:linear-gradient(135deg,#C72C65,#9C2250);transform:translateY(-2px);box-shadow:0 6px 28px rgba(212,51,110,.5)}
 .acb{text-align:center;font-size:.72rem;color:rgba(37,88,127,.55);padding:10px 0 0;letter-spacing:.04em}
-
-#rtt{position:fixed;bottom:28px;right:28px;z-index:999;width:46px;height:46px;border-radius:50%;background:var(--pink);color:var(--white);border:none;font-size:1.1rem;font-weight:700;cursor:pointer;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s;display:flex;align-items:center;justify-content:center}
-.div-soft{height:1px;background:linear-gradient(90deg,transparent,rgba(37,88,127,.2),transparent)}
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-brand">AI With Intent</div>
-  <div class="nav-links">
-    <a href="#gap">The gap</a>
-    <a href="#docs">AI Brain</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#checklist">Checklist</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero s-denim-light">
-  <div class="for-tag">A free guide from AI With Intent</div>
+<div class="pageheader">
   <h1>Close the <em>Gap</em></h1>
-  <p class="hero-p">You've copied the same background information into a dozen different conversations, cleaned up outputs that came back close but not quite right and told yourself you'd sit down and set Claude up properly when there's a quiet day, when things calm down, on that elusive "someday." That points to a setup gap, not falling behind, and it's one researchers can actually measure. This guide walks you through closing it.</p>
-  <div class="cue" onclick="document.getElementById('gap').scrollIntoView({behavior:'smooth'})">
-    <span>See the gap</span>
-    <span>↓</span>
+  <p>Six real ways to move from basic to intermediate Claude use. Pick a tab to start.</p>
+</div>
+
+<div class="navwrap">
+  <div class="navtabs">
+    <a href="#overview">Overview</a>
+    <a href="#brain">AI Brain</a>
+    <a href="#connectors">Connectors</a>
+    <a href="#globalinstructions">Global Instructions</a>
+    <a href="#projects">Projects</a>
+    <a href="#scheduledtasks">Scheduled Tasks</a>
+    <a href="#skills">Skills</a>
+    <a href="#recap">Recap</a>
   </div>
-</section>
+</div>
 
-<div class="div-soft"></div>
-
-<!-- THE GAP — backstory -->
-<section class="sec s-cream" id="gap">
-  <div class="inner">
-    <div class="eyebrow">the gap</div>
-    <h2>Two very different things</h2>
-    <p class="sub">As of this year, 69% of Australian small businesses are regularly using AI, up from 40% just eighteen months ago. Most of us are in. But using AI and actually getting something out of it are turning out to be two very different things.</p>
-
-    <div class="g3">
-      <div class="hc">
-        <div class="hc-n">69%</div>
-        <h3>Are using AI</h3>
-        <p>Up from 40% just eighteen months ago. Claude or ChatGPT open in a browser tab, reached for when you remember to.</p>
-      </div>
-      <div class="hc">
-        <div class="hc-n">5%</div>
-        <h3>See real value from it</h3>
-        <p>Set up well enough to actually get something out of it, not just using the tool. That's the real gap.</p>
-      </div>
-      <div class="hc">
-        <div class="hc-n">45%</div>
-        <h3>More profit when it's closed</h3>
-        <p>The profitability increase businesses see moving from ad-hoc use to a properly connected setup.</p>
+<!-- ═══════════════════ OVERVIEW ═══════════════════ -->
+<div id="overview" class="page">
+  <section class="sec s-denim-light">
+    <div class="inner">
+      <div class="eyebrow">why this exists</div>
+      <h2>69% of Australian small businesses are regularly using AI</h2>
+      <p class="sub">Only 5% are actually set up well enough to get real value from it. Using AI and actually benefiting from it are two very different things, and this series is the six-part path between them.</p>
+      <div class="pills">
+        <span class="pill">69% using AI</span>
+        <span class="pill hl">Only 5% seeing real value</span>
+        <span class="pill">45% more profit when you close it</span>
       </div>
     </div>
+  </section>
 
-    <p class="gap-note">Separate research into AI maturity backs this up. Businesses tend to split into two groups.</p>
-    <p class="gap-note" style="margin-top:14px;"><strong>"Basic"</strong> means ad-hoc, one-off chats, no real connection to anything else in the business. You open it when you remember to, type in your question, copy the output somewhere, and start from scratch again next time.</p>
-    <p class="gap-note" style="margin-top:14px;"><strong>"Intermediate"</strong> means AI actually integrated into how you work, connected to your real tools, running specific tasks in your actual workflow.</p>
-    <p class="gap-note" style="margin-top:14px;">Closing that exact gap, from basic to intermediate, is what this guide walks you through.</p>
-  </div>
-</section>
+  <div class="div-soft"></div>
 
-<div class="div-soft"></div>
+  <section class="sec s-cream">
+    <div class="inner">
+      <div class="eyebrow">the six guides</div>
+      <h2>Why six separate guides</h2>
+      <p class="sub">Research into AI maturity backs up the 69/5 gap above. Businesses tend to split into two groups. "Basic" means ad-hoc, one-off chats, no real connection to anything else in the business. "Intermediate" means AI actually integrated into how you work, connected to your real tools, running specific tasks in your actual workflow. That shift alone drives a 45% profitability increase.</p>
+      <p class="sub">Closing that gap isn't one big project, it's six small, specific ones. Each tab above teaches exactly one of them properly, with real screenshots, real steps, and a prompt you can copy straight in.</p>
+    </div>
+  </section>
 
-<!-- 1. WHERE DOCS LIVE — BEFORE/AFTER -->
-<section class="sec s-pink" id="docs">
-  <div class="inner">
-    <div class="eyebrow">way 1 of 5</div>
-    <h2>Where your docs actually live</h2>
-    <p class="sub">Anthropic's own research names this as one of three things separating businesses that get real value from AI and those that don't: <strong>reliable data in one place.</strong></p>
+  <div class="div-soft"></div>
 
-    <div class="bacard" id="ba1">
-      <div class="bacard-head">
-        <h3>Your business knowledge</h3>
-        <div class="batabs">
-          <button class="stab stab-before active" onclick="showState('ba1','before')">Before</button>
-          <button class="stab stab-after" onclick="showState('ba1','after')">After</button>
-        </div>
-      </div>
-      <div id="ba1-before" class="bastate on">
-        <div class="ba-lbl bl-before">Before</div>
-        <p>Your business knowledge is scattered across five different apps. A doc here, a note there, a folder you forgot about. Claude can't use any of it properly, no matter how good the tool is.</p>
-        <ul>
-          <li>Brand guide in Canva, voice notes in a Google Doc, processes in your head</li>
-          <li>You retype the same background information every time you open a new chat</li>
-          <li>Output feels generic because Claude genuinely doesn't know your business</li>
-        </ul>
-      </div>
-      <div id="ba1-after" class="bastate">
-        <div class="ba-lbl bl-after">After</div>
-        <p>One central place, sometimes called an AI Brain or AI-HQ, holding your voice, your brand, your business context and your processes. Claude has one clear place to work from instead of scattered fragments.</p>
-        <p style="margin-top:14px;">The trick isn't just dumping every file into one folder. It's setting it up the way you'd set up departments in a real business, one folder per area of your business, each holding only what belongs to that area. Claude can then be pointed at exactly the right department for whatever you're working on, instead of everything at once.</p>
-
-        <div class="ftree">
-          <div class="ft-row"><span class="ft-icon">📁</span><span class="ft-name">Your AI Brain/</span></div>
-          <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">About the Business.md</span><span class="ft-note">← who you are, what you do, who it's for</span></div>
-          <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">Voice Profile.md</span><span class="ft-note">← how you write, words you'd never use</span></div>
-          <div class="ft-row"><span class="ft-line">├──</span><span class="ft-icon">📁</span><span class="ft-name">brand/</span><span class="ft-note">← logo, colours, fonts, style guide</span></div>
-          <div class="ft-row"><span class="ft-line">├──</span><span class="ft-icon">📁</span><span class="ft-name">clients/</span><span class="ft-note">← one subfolder per client or project</span></div>
-          <div class="ft-row"><span class="ft-line">├──</span><span class="ft-icon">📁</span><span class="ft-name">content/</span><span class="ft-note">← emails, social posts, drafts</span></div>
-          <div class="ft-row"><span class="ft-line">└──</span><span class="ft-icon">📁</span><span class="ft-name">operations/</span><span class="ft-note">← processes, templates, how you work</span></div>
-        </div>
-
-        <ul style="margin-top:16px;">
-          <li>One folder per department, not one giant pile of documents</li>
-          <li>Lives on your own device, not locked to any one AI tool</li>
-          <li>You plug the whole thing, or just one department, into whichever tool you choose, now or later</li>
-        </ul>
+  <section class="sec s-pink">
+    <div class="inner">
+      <div class="eyebrow">start wherever your gap is</div>
+      <h2>Jump straight to what you're missing</h2>
+      <div class="gcards">
+        <a href="#brain" class="gcard"><div class="gcard-num">01</div><div><h3>AI Brain</h3><p>One system, not five apps.</p><span class="garrow">Open →</span></div></a>
+        <a href="#connectors" class="gcard"><div class="gcard-num">02</div><div><h3>Connectors</h3><p>Claude, doing the work.</p><span class="garrow">Open →</span></div></a>
+        <a href="#globalinstructions" class="gcard"><div class="gcard-num">03</div><div><h3>Global Instructions</h3><p>Say it once.</p><span class="garrow">Open →</span></div></a>
+        <a href="#projects" class="gcard"><div class="gcard-num">04</div><div><h3>Projects</h3><p>Stop living in 100 long chats.</p><span class="garrow">Open →</span></div></a>
+        <a href="#scheduledtasks" class="gcard"><div class="gcard-num">05</div><div><h3>Scheduled Tasks</h3><p>The admin that happens without you.</p><span class="garrow">Open →</span></div></a>
+        <a href="#skills" class="gcard"><div class="gcard-num">06</div><div><h3>Skills</h3><p>Teach Claude once.</p><span class="garrow">Open →</span></div></a>
       </div>
     </div>
-    <p class="gap-note" style="margin-top:20px;"><strong>Do this today:</strong> list the 3-4 departments your business actually runs on, create a folder for each, and start moving what already exists into the right one.</p>
-  </div>
-</section>
+  </section>
+</div>
 
-<div class="div-soft"></div>
-
-<!-- 2. PROJECTS — TABS -->
-<section class="sec s-denim-mid" id="projects">
-  <div class="inner">
-    <div class="eyebrow">way 2 of 5</div>
-    <h2>Projects</h2>
-    <p class="sub">The department manager for one part of your business. Point it at your AI Brain folder and it already knows your business the moment you open it.</p>
-
-    <div class="atabs">
-      <button class="atab active" onclick="switchTab('1',this)">What is it?</button>
-      <button class="atab" onclick="switchTab('2',this)">What's inside it?</button>
-      <button class="atab" onclick="switchTab('3',this)">How to set one up</button>
-      <button class="atab" onclick="switchTab('4',this)">What you get</button>
+<!-- ═══════════════════ AI BRAIN ═══════════════════ -->
+<div id="brain" class="page">
+  <section class="sec s-denim-light">
+    <div class="inner">
+      <div class="eyebrow">way 1 of 6</div>
+      <h2>One system, not <em>five apps</em></h2>
+      <p class="intro-p">If your business knowledge is scattered across five different apps, a doc here, a note there, a folder you forgot about, Claude can't use any of it properly, no matter how good the tool is.</p>
     </div>
+  </section>
 
-    <div id="tab-1" class="apanel on">
-      <div class="ahead">
-        <div class="abadge">🗂️</div>
-        <div>
-          <div class="atitle">A scoped workspace for one stream of work</div>
-          <div class="asub">Global instructions cover you, generally, everywhere. A Project covers what you're actually working on, one specific part of your business, with everything it needs to know about that part.</div>
-        </div>
+  <div class="div-soft"></div>
+
+  <section class="sec s-cream">
+    <div class="inner">
+      <div class="eyebrow">the ai brain</div>
+      <h2>A system, not a single folder</h2>
+      <p class="sub">Anthropic's own research names this as one of three things separating businesses that get real value from AI and those that don't: <strong>reliable data in one place.</strong><br/><br/>That comes from setting up a system of folders organised around how your business actually works, department by department, so Claude always knows exactly where to look.</p>
+
+      <div class="ftree">
+        <div class="ft-row"><span class="ft-name">Your AI Brain/</span></div>
+        <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">About the Business.md</span><span class="ft-note">← who you are, what you do, who it's for</span></div>
+        <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">Voice Profile.md</span><span class="ft-note">← how you write, words you'd never use</span></div>
+        <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">skills/</span><span class="ft-note">← skills that apply across the whole business</span></div>
+        <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">brand/</span><span class="ft-note">← logo, colours, fonts, style guide</span></div>
+        <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">offers/</span><span class="ft-note">← what you sell, your packages, your pricing</span></div>
+        <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">clients/</span></div>
+        <div class="ft-row"><span class="ft-line">│&nbsp;&nbsp;&nbsp;└──</span><span class="ft-name">client-name/</span></div>
+        <div class="ft-row"><span class="ft-line">│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├──</span><span class="ft-name">About This Client.md</span><span class="ft-note">← context specific to this one client, outputs for them saved right here too</span></div>
+        <div class="ft-row"><span class="ft-line">│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──</span><span class="ft-name">skills/</span><span class="ft-note">← skills that only apply to this client</span></div>
+        <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">content/</span><span class="ft-note">← emails, social posts, drafts, lead magnets, and anything Claude creates for this area</span></div>
+        <div class="ft-row"><span class="ft-line">└──</span><span class="ft-name">operations/</span><span class="ft-note">← processes, templates, how you work</span></div>
       </div>
+
+      <p class="sub">Skills don't all belong in one place either. A skill that applies across your whole business, your standard email format, your brand voice, sits in the top-level <strong>skills/</strong> folder. A skill that only makes sense for one client or project, exactly how they like their reports formatted, lives inside that client's own folder instead, in its own <strong>skills/</strong> subfolder. That way Claude only reaches for it when it's actually working on something for that client, not every time it writes an email for anyone.</p>
+
+      <p class="sub">The same goes for what Claude creates. Content it drafts for you lands in the content folder. Work it does for a specific client lands inside that client's own folder. You give Claude a starting structure and a short map of what's where, and it files what it makes into the relevant department, not one shared pile everything gets dumped into.</p>
+
+      <p class="sub" style="margin-bottom:0;">Most of what goes into these folders already exists somewhere, a brand guide, voice notes, process docs. The work here is gathering and organising it into one system Claude can actually use.</p>
     </div>
+  </section>
 
-    <div id="tab-2" class="apanel">
-      <div class="ahead">
-        <div class="abadge">📦</div>
-        <div>
-          <div class="atitle">Three things you set up, one Claude builds for you</div>
-          <div class="asub">Instructions scoped to this project. Context, a folder or files Claude should work from. Scheduled Tasks that belong to this project. And Memory, which Claude builds on its own as you work, genuinely scoped so nothing leaks to other projects or standalone chats.</div>
-        </div>
+  <div class="div-soft"></div>
+
+  <section class="sec s-denim-mid">
+    <div class="inner">
+      <div class="eyebrow">worth checking today</div>
+      <h2>Claude isn't lost, it's looking where you told it to look</h2>
+      <p class="sub">This is the single most common thing that goes wrong once someone's actually using their AI Brain day to day, and it's rarely talked about.</p>
+
+      <div class="pfl">
+        <div class="pf">A Scheduled Task saved its output inside Claude's own default folder instead of the actual project folder, because nobody had told it exactly where to save to, so it looked finished but the file was nowhere anyone could find it.</div>
+        <div class="pf">Someone's whole folder lived inside Downloads, and it wouldn't link at all. Downloads is treated differently by most software for security reasons, so it's one of the few places your AI Brain shouldn't actually live.</div>
+        <div class="pf">Someone had two copies of the same folder without realising it, one synced from Google Drive, one being edited directly. Claude was reading from the synced copy, so nothing typed into the real one ever showed up.</div>
+        <div class="pf">A finished document landed in the very top level of someone's Google Drive instead of inside the actual client folder, because the destination given was "save it to Drive" instead of the exact folder.</div>
       </div>
-      <div class="dg">
-        <div class="dc"><div class="dc-icon">📋</div><h4>Instructions</h4><p>Specific to this project, not your general rules. What is this stream of work, who is it for, how should it be handled.</p></div>
-        <div class="dc"><div class="dc-icon">📁</div><h4>Context</h4><p>The actual folder or files Claude should reference, your AI Brain, or a subset relevant to this project.</p></div>
-        <div class="dc"><div class="dc-icon">🧠</div><h4>Memory (built for you)</h4><p>What Claude learns from working inside this project, over time, automatically. You don't write this part.</p></div>
-      </div>
+
+      <p class="sub" style="margin-bottom:0;">Each of these takes under a minute to fix once you know to check it. Go take a look at where your own tasks and outputs are actually landing today.</p>
     </div>
+  </section>
 
-    <div id="tab-3" class="apanel">
-      <div class="ahead">
-        <div class="abadge">🛠️</div>
-        <div>
-          <div class="atitle">Setting up your first Project</div>
-          <div class="asub">Simpler than it sounds, four steps to a working department manager.</div>
-        </div>
-      </div>
+  <div class="div-soft"></div>
+
+  <section class="sec s-pink">
+    <div class="inner">
+      <div class="eyebrow">try it now</div>
+      <h2>Set yours up today</h2>
+
       <div class="steps">
-        <div class="step"><div class="snum">1</div><div class="scontent"><h4>Create the Project</h4><p>Name it for the department or stream of work it covers, e.g. "Client Comms" or "Content."</p></div></div>
-        <div class="step"><div class="snum">2</div><div class="scontent"><h4>Point it at your folder</h4><p>Connect the relevant part of your AI Brain as its context.</p></div></div>
-        <div class="step"><div class="snum">3</div><div class="scontent"><h4>Tell Claude what it's for, let it draft the instructions</h4><p>Describe what this Project is for and what's going into it, and Claude can write the first draft of its own instructions for you to check over, rather than you starting from a blank box.</p></div></div>
-        <div class="step"><div class="snum">4</div><div class="scontent"><h4>Start working inside it</h4><p>Memory builds itself from here, every conversation adds to what it knows.</p></div></div>
+        <div class="step"><div class="snum">1</div><div class="scontent"><h4>List your departments</h4><p>Most businesses start with five: brand, offers (what you sell, your packages, your pricing), clients, content (this is where lead magnets and freebies live too), and operations. Add or drop to match what your business actually runs on.</p></div></div>
+        <div class="step"><div class="snum">2</div><div class="scontent"><h4>Create the folders</h4><p>One per department, on your own device or wherever you already store files, nothing needs to move to a new tool.</p></div></div>
+        <div class="step"><div class="snum">3</div><div class="scontent"><h4>Move in what already exists</h4><p>Gather what's already sitting in scattered docs and notes, no new writing required at this step.</p></div></div>
+        <div class="step"><div class="snum">4</div><div class="scontent"><h4>Point Claude at the actual folder</h4><p>The specific folder path, ideally the exact department subfolder for whatever you're working on that day, rather than just "my computer" in general.</p></div></div>
       </div>
-    </div>
 
-    <div id="tab-4" class="apanel">
+      <div class="pbox">
+        <span class="pbox-label">Copy this in to get started</span>
+        <p id="prompt-brain">Interview me about my business so you can help me set up an AI Brain folder structure. Ask me what departments or areas my business actually runs on, what documents already exist for each one, and where they currently live. Once you've got enough, suggest a folder structure specific to my business, not a generic template, and tell me exactly what to move where.</p>
+        <button class="pbox-copy" onclick="copyToClipboard(this, 'prompt-brain')">📋 Copy prompt</button>
+      </div>
+
+      <p class="gap-note" style="margin-top:8px;"><strong>Do this today:</strong> create your folders, move in what already exists, and point Claude at the specific one you need for today's task, not just the top-level folder.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════ CONNECTORS ═══════════════════ -->
+<div id="connectors" class="page">
+  <section class="sec s-denim-light">
+    <div class="inner">
+      <div class="eyebrow">way 2 of 6</div>
+      <h2>Claude, doing the <em>work</em></h2>
+      <p class="intro-p">Without a connector, Claude can only work with what you type or paste in. With one, it can reach into the tools you already use and read from them, or write to them, directly.</p>
+    </div>
+  </section>
+
+  <div class="div-soft"></div>
+
+  <section class="sec s-cream">
+    <div class="inner">
+      <div class="eyebrow">bonus: connectors</div>
+      <h2>Claude, actually reaching into your tools</h2>
+      <p class="sub">Each connector is like a unique plug. Every tool has its own shape, so each one needs its own connector to work with Claude. That's the real line between "Claude gave me an answer" and "Claude went and did the thing."</p>
+
+      <div class="dg">
+        <div class="dc"><div class="dc-icon">📁</div><h4>Google Drive</h4><p>Claude can read from and create files in a folder you choose.</p></div>
+        <div class="dc"><div class="dc-icon">✉️</div><h4>Gmail</h4><p>Read and draft directly from your inbox, without you copying anything across.</p></div>
+        <div class="dc"><div class="dc-icon">📅</div><h4>Calendar</h4><p>Claude can see what's actually on your schedule, not just what you tell it.</p></div>
+        <div class="dc"><div class="dc-icon">📝</div><h4>Notion</h4><p>Work directly with pages and databases you already keep there.</p></div>
+      </div>
+
+      <p class="sub" style="margin-bottom:0;">Find them by selecting Customise in the left menu panel, then Connectors, then Add, then browse connectors.</p>
+    </div>
+  </section>
+
+  <div class="div-soft"></div>
+
+  <section class="sec s-pink">
+    <div class="inner">
+      <div class="eyebrow">you're always in control</div>
+      <h2>You decide exactly what it can do</h2>
+      <p class="sub">Connecting a tool doesn't hand Claude the keys to everything in it. Permissions are set per tool and per action, not one blanket switch.</p>
+
+      <div class="shot">
+        <img src="assets/close-the-gap/connector-permissions.png" alt="Claude's Connectors settings panel showing tool permissions for Canva, grouped into Interactive tools and Read-only tools, each with Always allow, Needs approval, Blocked or Custom"/>
+        <p class="shot-cap">Real settings panel for a connected tool. Actions are grouped, here into <strong>Interactive tools</strong> and <strong>Read-only tools</strong>, and each group gets its own permission. Every individual action underneath can also be set on its own.</p>
+      </div>
+
+      <div class="pstates">
+        <div class="pstate"><div class="picon">✅</div><h4>Always allow</h4><p>Claude just does it, no prompt each time.</p></div>
+        <div class="pstate"><div class="picon">🤚</div><h4>Needs approval</h4><p>Claude asks first, every time this action would run.</p></div>
+        <div class="pstate"><div class="picon">🚫</div><h4>Blocked</h4><p>Claude can't use this action at all, even if asked.</p></div>
+      </div>
+
       <div class="ahead">
-        <div class="abadge">✅</div>
+        <div class="abadge">🔐</div>
         <div>
-          <div class="atitle">Far beyond one conversation</div>
-          <div class="asub">Your AI Brain becomes the foundation everything else is built on, your Projects, your Skills, your Scheduled Tasks, any tool you plug it into going forward. Build it once, use it everywhere.</div>
+          <div class="atitle">A simple rule that actually works</div>
+          <div class="asub">Set anything new to Needs approval while you're still learning what it does, especially anything that writes or changes something rather than just reads it. Loosen individual actions to Always allow once you've watched it work a few times and trust it.</div>
+        </div>
+      </div>
+
+      <div class="pf">One honest thing worth knowing before you assume too much: connectors often can read from a tool but not write to it, or reach some parts of a tool and not others. One real build hit exactly this, a connector could read and create new files in a client's system, but couldn't update an existing spreadsheet already in use there, which broke the workflow it was meant to support. Check what an action list actually shows before assuming a connector does everything a tool can do.</div>
+    </div>
+  </section>
+
+  <div class="div-soft"></div>
+
+  <section class="sec s-denim-mid">
+    <div class="inner">
+      <div class="eyebrow">worth knowing</div>
+      <h2>What if your tool doesn't have one?</h2>
+      <p class="sub">Not every tool has a direct connector yet. That's not a dead end, just a different route in.</p>
+
+      <div class="wcard">
+        <div class="wtag">Start here</div>
+        <h4>Route it through a tool you already have connected</h4>
+        <p>If the tool itself isn't connectable, drop what you need into a folder inside a tool that already is, Google Drive is the obvious one for most people. One real example: a recording tool with no direct Claude connector wasn't a dead end at all, the transcript just gets dropped into a Google Drive folder Claude already has access to, and it gets picked up and actioned from there exactly the same way. No link to the recording tool ever needed.</p>
+      </div>
+
+      <div class="wcard">
+        <div class="wtag">Second option</div>
+        <h4>Claude in Chrome</h4>
+        <p>If a tool has a normal web interface but no official connector, Claude can work directly inside that browser tab. Genuinely useful for the cases routing through a folder doesn't fit.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="div-soft"></div>
+
+  <section class="sec s-cream">
+    <div class="inner">
+      <div class="eyebrow">try it now</div>
+      <h2>Add your first connector today</h2>
+
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="scontent"><h4>Open the Connectors tab</h4><p>Select Customise in the left menu panel, then Connectors, then Add, then browse connectors.</p></div></div>
+        <div class="step"><div class="snum">2</div><div class="scontent"><h4>Connect one tool you actually use</h4><p>Google Drive or Gmail are the easiest starting points for most people.</p></div></div>
+        <div class="step"><div class="snum">3</div><div class="scontent"><h4>Set permissions deliberately</h4><p>Needs approval to start, especially on anything that writes or changes something.</p></div></div>
+        <div class="step"><div class="snum">4</div><div class="scontent"><h4>Loosen it once you trust it</h4><p>Move individual actions to Always allow only once you've watched them work.</p></div></div>
+      </div>
+
+      <p class="gap-note" style="margin-top:8px;"><strong>Do this today:</strong> connect one tool you already use, set it to Needs approval, and watch what Claude actually does with it before deciding what to loosen.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════ GLOBAL INSTRUCTIONS ═══════════════════ -->
+<div id="globalinstructions" class="page">
+  <section class="sec s-denim-light">
+    <div class="inner">
+      <div class="eyebrow">way 3 of 6</div>
+      <h2>Say it <em>once</em></h2>
+      <p class="intro-p">One setting most people never touch is the difference between Claude that already knows you and Claude that starts from zero, every single chat.</p>
+    </div>
+  </section>
+
+  <div class="div-soft"></div>
+
+  <section class="sec s-cream">
+    <div class="inner">
+      <div class="eyebrow">cowork global instructions</div>
+      <h2>Set this once and everything gets a bit better</h2>
+      <p class="sub">Open the Claude desktop app, go to Settings → Cowork, then click Edit next to <span style="white-space:nowrap;">Global Instructions</span>.<br/>Three things to start with.</p>
+
+      <div class="tg">
+        <div class="tp"><div class="tn">1</div><div class="tb"><h4>Who you are and what you do</h4><p>Your business, your role, the basics Claude should already know before any conversation starts.</p></div></div>
+        <div class="tp"><div class="tn">2</div><div class="tb"><h4>Your shorthand and acronyms</h4><p>So Claude doesn't have to ask what "the QBR deck" is, or whatever language is specific to how you work.</p></div></div>
+        <div class="tp"><div class="tn">3</div><div class="tb"><h4>How you like output delivered</h4><p>Format, length, tone, the standing preferences that should apply no matter what you're asking for.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="div-soft"></div>
+
+  <section class="sec s-pink">
+    <div class="inner">
+      <div class="eyebrow">not the same setting</div>
+      <h2>Two different settings, not one</h2>
+      <div class="ahead">
+        <div class="abadge">🎯</div>
+        <div>
+          <div class="atitle">Global Instructions vs Instructions for Claude</div>
+          <div class="asub"><strong>Global Instructions</strong> live at Settings → Cowork, desktop app only, and apply to Cowork sessions specifically. <strong>Instructions for Claude</strong> (sometimes called Personal preferences) live at Settings → General, and apply everywhere, web, mobile and desktop, in every kind of chat.<br/><br/>Fill in Global Instructions only and your phone and regular web chats never see any of it. They're not two versions of the same thing, they cover different territory, and most people only ever find one of them.</div>
         </div>
       </div>
     </div>
+  </section>
 
-    <p class="gap-note" style="margin-top:8px;color:var(--dark);"><strong>Do this today:</strong> create one Project, point it at a folder, and describe what it's for so Claude can help you draft the instructions.</p>
-  </div>
-</section>
+  <div class="div-soft"></div>
 
-<div class="div-soft"></div>
+  <section class="sec s-denim-mid">
+    <div class="inner">
+      <div class="eyebrow">the other half of this setup</div>
+      <h2>There's a second setting working alongside this one: Memory</h2>
+      <p class="sub"><strong>Instructions</strong> are the stable layer, things about you that don't change. <strong>Memory</strong> is the layer that accumulates on its own.<br/><br/>There are two separate toggles for it, under Settings → Capabilities → Memory.</p>
 
-<!-- 3. GLOBAL INSTRUCTIONS — TIPS -->
-<section class="sec s-cream" id="instructions">
-  <div class="inner">
-    <div class="eyebrow">way 3 of 5</div>
-    <h2>Cowork Global Instructions</h2>
-    <p class="sub">Set this once and everything you do in Claude gets a bit better from here on. Open the Claude desktop app, go to Settings → Cowork, then click Edit next to Global instructions.</p>
-    <div class="tg">
-      <div class="tp"><div class="tn">1</div><div class="tb"><h4>Who you are and what you do</h4><p>Your business, your role, the basics Claude should already know before any conversation starts.</p></div></div>
-      <div class="tp"><div class="tn">2</div><div class="tb"><h4>Your shorthand and acronyms</h4><p>So Claude doesn't have to ask what "the QBR deck" is, or whatever language is specific to how you work.</p></div></div>
-      <div class="tp"><div class="tn">3</div><div class="tb"><h4>How you like output delivered</h4><p>Format, length, tone, the standing preferences that should apply no matter what you're asking for.</p></div></div>
+      <div class="dg2">
+        <div class="dc">
+          <div class="dc-tag">On demand</div>
+          <h4>Search and reference chats</h4>
+          <p>Claude actively searches your past conversations when it's relevant. Available on paid plans (Pro, Max, Team, Enterprise).</p>
+        </div>
+        <div class="dc">
+          <div class="dc-tag">Automatic</div>
+          <h4>Generate memory from chat history</h4>
+          <p>Claude quietly builds memory about your role, projects, working style and preferences as you go, in real time. Available on free plans too.</p>
+        </div>
+      </div>
+
+      <div class="ahead">
+        <div class="abadge">🧠</div>
+        <div>
+          <div class="atitle">The two are meant to work together</div>
+          <div class="asub">If Memory is switched off, or was never checked, your Global Instructions are doing all the work alone with nothing backing them up between sessions, so it's worth being thorough there.<br/><br/>If Memory's on, it naturally fills in the gaps your instructions don't need to cover, since it keeps learning as you use Claude.<br/><br/>Most people have never been told these settings are meant to complement each other, or even confirmed both toggles are actually on.</div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="shot">
-      <img src="assets/close-the-gap/cowork-files-settings.png" alt="Claude Cowork settings panel showing Cowork files location and Global instructions"/>
-      <p class="shot-cap">While you're on this settings screen, check <strong>Cowork files</strong> at the top too. That's where Claude saves everything it creates, artifacts and Scheduled Task outputs included. Point it at a folder inside your AI Brain (or create one for it) so everything Claude produces lands somewhere you'll actually find it, instead of a default folder you'll forget about.</p>
+  <div class="div-soft"></div>
+
+  <section class="sec s-cream">
+    <div class="inner">
+      <div class="eyebrow">try it now</div>
+      <h2>Setting all of this up, in order</h2>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="scontent"><h4>Fill in Global Instructions</h4><p>Settings → Cowork → Global Instructions → Edit. Think back to the three ideas shared at the start of this guide for what to include, and use the prompt below if you'd like Claude's help pulling them together.</p></div></div>
+        <div class="step"><div class="snum">2</div><div class="scontent"><h4>Mirror the essentials in Instructions for Claude</h4><p>Settings → General, so your phone and regular web chats get the same grounding, not just Cowork.</p></div></div>
+        <div class="step"><div class="snum">3</div><div class="scontent"><h4>Check both Memory toggles</h4><p>Settings → Capabilities → Memory. Confirm "Search and reference chats" and "Generate memory from chat history" are actually switched on.</p></div></div>
+      </div>
+
+      <div class="pbox">
+        <span class="pbox-label">Copy this in to draft your Global Instructions</span>
+        <p id="prompt-gi">Interview me so you can write my Cowork Global Instructions. Ask me one question at a time: who I am and what I do, the shorthand or acronyms specific to how I work, and exactly how I like output delivered, format, length and tone. If I already have documents that answer any of this, a brand voice guide, a business overview, an About page, I'll point you to them, read those first and only ask me about what's genuinely missing. Once you've got enough, draft the instructions for me to check over.</p>
+        <button class="pbox-copy" onclick="copyToClipboard(this, 'prompt-gi')">📋 Copy prompt</button>
+      </div>
+
+      <p class="gap-note" style="margin-top:8px;"><strong>Do this today:</strong> fill in your Global Instructions, mirror the basics in Instructions for Claude, and check both Memory toggles are switched on.</p>
+
+      <div class="vwrap">
+        <h4>Watch for a visual walkthrough</h4>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; border-radius: 8px; overflow: hidden;"><iframe src="https://www.loom.com/embed/fc10bdec770c48519699d139285fe224" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+      </div>
     </div>
+  </section>
+</div>
 
-    <p class="gap-note" style="margin-top:20px;"><strong>Do this today:</strong> open Settings → Cowork, fill in your global instructions using those three things as your starting list, and set your Cowork files location while you're there.</p>
-  </div>
-</section>
+<!-- ═══════════════════ PROJECTS ═══════════════════ -->
+<div id="projects" class="page">
+  <section class="sec s-denim-light">
+    <div class="inner">
+      <div class="eyebrow">way 4 of 6</div>
+      <h2>Stop living in <em>100 long chats</em></h2>
+      <p class="intro-p">Using Claude and actually benefiting from it are two very different things, and one of the best ways to start closing that gap today is Projects.</p>
+    </div>
+  </section>
 
-<div class="div-soft"></div>
+  <div class="div-soft"></div>
 
-<!-- 4. SKILLS — FLIP CARDS -->
-<section class="sec s-pink" id="skills">
-  <div class="inner">
-    <div class="eyebrow">way 4 of 5</div>
-    <h2>Skills: the recipe card</h2>
-    <p class="sub">Not every skill you build actually works well. Here's what separates the ones that do.</p>
-    <p class="flip-hint">👆 Click any card to flip it</p>
+  <section class="sec s-cream">
+    <div class="inner">
+      <div class="eyebrow">set up your first project</div>
+      <h2>The department manager for one part of your business</h2>
+      <p class="sub">Global instructions cover you, generally, everywhere. A Project covers what you're actually working on, one specific stream of work, with everything it needs to know about that part of your business.</p>
 
-    <div class="fg">
-      <div class="fc" onclick="this.classList.toggle('fl')">
-        <div class="fci">
-          <div class="fcf"><div><div class="fco">🍳</div><h3>What a Skill actually is</h3><p>A recipe card, one task, done your way, every time.</p></div><div class="fh">Tap to learn more →</div></div>
-          <div class="fcb"><div class="fcb-lbl">Why it works</div>
-            <div class="fe">A skill removes the need to re-explain the same task every single time you ask for it.</div>
-            <div class="fe">The difference between a skill that works and one that produces rubbish usually comes down to specificity.</div>
-            <div class="fe">"Write in my voice" is too vague, Claude has to guess.</div>
+      <div class="atabs">
+        <button class="atab active" onclick="switchTab('1',this)">What is it?</button>
+        <button class="atab" onclick="switchTab('2',this)">What's inside it?</button>
+        <button class="atab" onclick="switchTab('3',this)">How to set one up</button>
+        <button class="atab" onclick="switchTab('4',this)">What you get</button>
+      </div>
+
+      <div id="tab-1" class="apanel on">
+        <div class="ahead">
+          <div class="abadge">🗂️</div>
+          <div>
+            <div class="atitle">A dedicated workspace for one stream of work</div>
+            <div class="asub">Instead of 100's of disconnected long chats, a Project is a dedicated workspace for one body of work. Client Comms, Content, whatever department it covers. It already knows what it's for the moment you open it.</div>
           </div>
         </div>
       </div>
 
-      <div class="fc" onclick="this.classList.toggle('fl')">
-        <div class="fci">
-          <div class="fcf"><div><div class="fco">🚰</div><h3>The glass-of-water test</h3><p>How specific is specific enough? Here's a way to think about it.</p></div><div class="fh">Tap to learn more →</div></div>
-          <div class="fcb"><div class="fcb-lbl">The analogy</div>
-            <div class="fe">Think of explaining to a robot how to bring you a glass of water. Where's the tap, do they turn it clockwise or anticlockwise, hot water or cold, fill to the top or half-filled?</div>
-            <div class="fe">Details matter. Otherwise Claude has to guess what you mean, and guessing is where inconsistent results come from.</div>
+      <div id="tab-2" class="apanel">
+        <div class="ahead">
+          <div class="abadge">📦</div>
+          <div>
+            <div class="atitle">Three things you set up, one Claude builds for you</div>
+            <div class="asub"><strong>Instructions</strong>, dedicated to this project.<br/><strong>Context</strong>, a folder or files Claude should work from.<br/><strong>Scheduled Tasks</strong> that belong to this project.<br/><strong>Memory</strong>, which Claude builds on its own as you work, genuinely dedicated so nothing leaks to other projects or standalone chats.</div>
+          </div>
+        </div>
+        <div class="dg3">
+          <div class="dc"><div class="dc-icon">📋</div><h4>Instructions</h4><p>Specific to this project, not your general rules. What is this stream of work, who is it for, how should it be handled.</p></div>
+          <div class="dc"><div class="dc-icon">📁</div><h4>Context</h4><p>The actual folder or files Claude should reference for this project.</p></div>
+          <div class="dc"><div class="dc-icon">🧠</div><h4>Memory (built for you)</h4><p>What Claude learns from working inside this project, over time, automatically. You don't write this part.</p></div>
+        </div>
+      </div>
+
+      <div id="tab-3" class="apanel">
+        <div class="ahead">
+          <div class="abadge">🛠️</div>
+          <div>
+            <div class="atitle">Setting up your first Project</div>
+            <div class="asub">Simpler than it sounds, four steps to a working department manager.</div>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="snum">1</div><div class="scontent"><h4>Create the Project</h4><p>Name it for the department or stream of work it covers, e.g. "Client Comms" or "Content."</p></div></div>
+          <div class="step"><div class="snum">2</div><div class="scontent"><h4>Tell Claude what it's for, let it draft the instructions</h4><p>Describe what this Project is for and what's going into it, and Claude can write the first draft of its own instructions for you to check over.</p></div></div>
+          <div class="step"><div class="snum">3</div><div class="scontent"><h4>Point it at a folder</h4><p>Whatever files this stream of work actually needs Claude to reference. This is usually wherever your files already live, a folder in Google Drive, Dropbox, or right on your own device. You don't need to move anything first. Inside the Project, use the paperclip or Add Context option and link straight to that folder.</p></div></div>
+          <div class="step"><div class="snum">4</div><div class="scontent"><h4>Start working inside it</h4><p>Memory builds itself from here, every conversation adds to what it knows. Every chat you have inside this Project stays listed there too, so you can scroll back and find a past conversation instead of losing it in your main chat history.</p></div></div>
+        </div>
+      </div>
+
+      <div id="tab-4" class="apanel">
+        <div class="ahead">
+          <div class="abadge">✅</div>
+          <div>
+            <div class="atitle">Better with every conversation</div>
+            <div class="asub">Outside a Project, every chat starts fresh except for your general instructions. Inside one, every conversation adds to what Claude already knows about that piece of your business. It gets more useful the more you use it, instead of starting from zero every time.</div>
+            <div class="asub" style="margin-top:12px;">There's a practical bonus too. Files linked in as context are read directly, rather than pasted into every message. That uses far fewer tokens than copying the same document into chat again and again, so a Project is also a more efficient use of your usage limits.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="div-soft"></div>
+
+  <section class="sec s-pink">
+    <div class="inner">
+      <div class="eyebrow">try it now</div>
+      <h2>Set one up today</h2>
+      <p class="sub">Give it instructions, point it at a folder, and watch what happens after a few real conversations.</p>
+
+      <div class="pbox">
+        <span class="pbox-label">Stuck on step 2? Copy this into your new Project</span>
+        <p id="prompt-projects">Interview me about this Project so you can write clear instructions for it. Ask me what it's for, who it's for, and how I want output handled, one question at a time. Once you've got enough, draft the instructions based on my answers and show me for approval.</p>
+        <button class="pbox-copy" onclick="copyToClipboard(this, 'prompt-projects')">📋 Copy prompt</button>
+      </div>
+
+      <div class="vwrap">
+        <h4>Watch for a visual walkthrough</h4>
+        <div style="position: relative; padding-bottom: 58.759521218715996%; height: 0; border-radius: 8px; overflow: hidden;"><iframe src="https://www.loom.com/embed/04a8f996027b41e69b125a22256f577c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════ SCHEDULED TASKS ═══════════════════ -->
+<div id="scheduledtasks" class="page">
+  <section class="sec s-denim-light">
+    <div class="inner">
+      <div class="eyebrow">way 5 of 6</div>
+      <h2>The admin that happens <em>without you</em></h2>
+      <p class="intro-p">A Scheduled Task is instructions you save once, that Claude then repeats on its own, on a schedule, without you needing to remember to ask.</p>
+    </div>
+  </section>
+
+  <div class="div-soft"></div>
+
+  <section class="sec s-cream">
+    <div class="inner">
+      <div class="eyebrow">start with the problem, not the tech</div>
+      <h2>Start with the problem, not the tech</h2>
+      <p class="sub">Don't ask "what can Claude automate." Ask "what's my most expensive, repetitive problem." That's the question that actually points you at a task worth setting up.</p>
+      <p class="flip-hint">👆 Click any card to flip it</p>
+
+      <div class="fg">
+        <div class="fc" onclick="this.classList.toggle('fl')">
+          <div class="fci">
+            <div class="fcf"><div><div class="fco">⏰</div><h3>Trigger</h3><p>When should this run?</p></div><div class="fh">Tap to learn more →</div></div>
+            <div class="fcb"><div class="fcb-lbl">What to name</div>
+              <div class="fe">A day and time. Weekly, daily, whatever matches the task.</div>
+              <div class="fe">Don't start by asking what Claude can do. Start by asking what your headache actually is.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fc" onclick="this.classList.toggle('fl')">
+          <div class="fci">
+            <div class="fcf"><div><div class="fco">📄</div><h3>Output</h3><p>What should it actually produce?</p></div><div class="fh">Tap to learn more →</div></div>
+            <div class="fcb"><div class="fcb-lbl">What to name</div>
+              <div class="fe">A summary, a brief, a draft, whatever the task is meant to hand you.</div>
+              <div class="fe">Pick your most repetitive task first, that's the one worth automating.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fc" onclick="this.classList.toggle('fl')">
+          <div class="fci">
+            <div class="fcf"><div><div class="fco">📥</div><h3>Destination</h3><p>Where should the output go?</p></div><div class="fh">Tap to learn more →</div></div>
+            <div class="fcb"><div class="fcb-lbl">What to name</div>
+              <div class="fe">Your inbox, a folder, a doc, wherever you'll actually see and use it.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="div-soft"></div>
+
+  <section class="sec s-pink">
+    <div class="inner">
+      <div class="eyebrow">a real distinction</div>
+      <h2>Project or standalone?</h2>
+      <p class="sub">There are two ways to set up a Scheduled Task. On its own (standalone), or inside a Project. The instructions work the same either way, what's different is how much the task actually knows when it runs.</p>
+
+      <div class="dg">
+        <div class="dc"><div class="dc-icon">⚙️</div><h4>Standalone</h4><p>Runs with only the instructions you gave it, nothing else. Fine for something simple and self-contained, checking one folder, pulling one report, the same steps every time.</p></div>
+        <div class="dc"><div class="dc-icon">🗂️</div><h4>Inside a Project</h4><p>Runs with the same instructions, plus that Project's own context, files and Memory behind it. Worth it the moment the task needs to make a judgement call, not just repeat a step.</p></div>
+      </div>
+
+      <div class="ahead">
+        <div class="abadge">💡</div>
+        <div>
+          <div class="atitle">Why that difference actually matters</div>
+          <div class="asub">A Scheduled Task can't pause partway through and ask you a question. A weekly newsletter draft set up standalone can hit a decision it has no way to make, which voice to use, which client this update is actually about, and it has nowhere to turn. The same task set up inside a Project already has the brand voice, the client context and past decisions sitting there, so it can just make the call and keep going.</div>
+        </div>
+      </div>
+
+      <p class="sub" style="margin-bottom:0;"><strong>Simple version:</strong> nothing to judge, same steps every time, standalone is fine. Needs real context to make a call, build it inside a Project instead.</p>
+    </div>
+  </section>
+
+  <div class="div-soft"></div>
+
+  <section class="sec s-denim-mid">
+    <div class="inner">
+      <div class="eyebrow">try it now</div>
+      <h2>Setting one up</h2>
+
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="scontent"><h4>Give it a name</h4><p>Specific enough that you'll recognise it in a list of tasks in a month's time.</p></div></div>
+        <div class="step"><div class="snum">2</div><div class="scontent"><h4>Set the trigger</h4><p>The day and time it should run, matched to how often the problem it solves actually comes up.</p></div></div>
+        <div class="step"><div class="snum">3</div><div class="scontent"><h4>Decide Project or standalone</h4><p>Using the test above, does it need judgement calls, or just the same steps every time.</p></div></div>
+        <div class="step"><div class="snum">4</div><div class="scontent"><h4>Write the instructions</h4><p>The part that actually determines whether it runs well. Use the prompt below if you'd like Claude's help pulling it together.</p></div></div>
+        <div class="step"><div class="snum">5</div><div class="scontent"><h4>Connect a tool if it needs one</h4><p>Reaching Gmail, Google Drive or another tool directly needs a connector, covered in the Connectors tab of this guide.</p></div></div>
+      </div>
+
+      <div class="pbox">
+        <span class="pbox-label">Copy this in to draft robust task instructions</span>
+        <p id="prompt-tasks">Interview me about a task I want to run on a schedule, one question at a time: what problem it solves and how often it needs to run, exactly what it should do each time it runs, what information or files it needs to reference, what the finished output should look like (ask me for one good example if I have one), where the output should go, and what it should do if something's missing or unclear, skip it, flag it for me, or make a reasonable assumption and say so. Once you've got enough, draft the full task instructions for me to check over before I save it.</p>
+        <button class="pbox-copy" onclick="copyToClipboard(this, 'prompt-tasks')">📋 Copy prompt</button>
+      </div>
+
+      <p class="gap-note" style="margin-top:8px;"><strong>Do this today:</strong> pick your most repetitive task, work through the prompt above, and set up one Scheduled Task for it.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════ SKILLS ═══════════════════ -->
+<div id="skills" class="page">
+  <section class="sec s-denim-light">
+    <div class="inner">
+      <div class="eyebrow">way 6 of 6</div>
+      <h2>Teach Claude <em>once</em></h2>
+      <p class="intro-p">A well-built skill turns a task you re-explain every single time into one Claude just does properly the moment it recognises it, which is where the real productivity gain actually comes from.</p>
+    </div>
+  </section>
+
+  <div class="div-soft"></div>
+
+  <section class="sec s-cream">
+    <div class="inner">
+      <div class="eyebrow">build your first skill</div>
+      <h2>Skills: the recipe card</h2>
+      <p class="sub">A Skill is a recipe card. One task, done your way, every time. Don't try to pack three recipes into one card, and it can't be your mum's style of recipe with a dash of this and a splash of that. The more precise the card, the more consistent what comes back.</p>
+
+      <h3 style="font-family:var(--font-h);font-size:1.15rem;font-weight:700;color:var(--dark);margin-top:36px;margin-bottom:8px;">What's actually inside a skill</h3>
+      <p class="sub" style="margin-bottom:14px;">A skill isn't just one instruction. It's usually built from four kinds of things working together.</p>
+      <div class="dg4">
+        <div class="dc"><div class="dc-icon">📋</div><h4>Instructions (SKILL.md)</h4><p>The brief that tells Claude what the skill does, when to use it, and how to do it.</p></div>
+        <div class="dc"><div class="dc-icon">🎨</div><h4>Assets</h4><p>Logos, brand templates, slide masters, fonts. The raw materials the skill uses to produce real-looking output.</p></div>
+        <div class="dc"><div class="dc-icon">📚</div><h4>References</h4><p>Examples of good output, style guides, clause libraries. This is how Claude learns what "good" looks like for this kind of work.</p></div>
+        <div class="dc"><div class="dc-icon">⚙️</div><h4>Scripts</h4><p>Small pieces of code Claude can run for the parts of the process that should happen exactly the same way every time.</p></div>
+      </div>
+
+      <h3 style="font-family:var(--font-h);font-size:1.15rem;font-weight:700;color:var(--dark);margin-top:36px;margin-bottom:8px;">Building one, step by step</h3>
+      <p class="sub" style="margin-bottom:14px;">You can build a skill through Skill Creator (below), or just start a new conversation and ask for one directly. Either way, this is what actually needs to happen.</p>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="scontent"><h4>Tell Claude the recurring task</h4><p>Whatever you're tired of re-explaining, one task only, not three loosely related ones bundled together.</p></div></div>
+        <div class="step"><div class="snum">2</div><div class="scontent"><h4>Let it interview you, and give it real examples</h4><p>What good output looks like, what bad output looks like, who it's for, what should never happen. Point at real examples wherever you can, don't just describe them.</p></div></div>
+        <div class="step"><div class="snum">3</div><div class="scontent"><h4>Correct it as you go</h4><p>If something's off once it's built, just tell Claude what to change and ask it to update the skill. No need to start over.</p></div></div>
+      </div>
+
+      <div class="pbox" style="margin-bottom:0;">
+        <span class="pbox-label">Copy this in to build your first one</span>
+        <p id="prompt-skills">I do [describe the task] the same way every time, and I want to turn it into a Skill. Interview me about it one question at a time: what the finished result should look like, who it's for, and what should never happen. Get one good example and one bad example of the output from me before you write anything. Keep this skill to that one task only, don't fold in anything else it loosely relates to. Once you've got enough, build the skill and show it to me before we test it.</p>
+        <button class="pbox-copy" onclick="copyToClipboard(this, 'prompt-skills')">📋 Copy prompt</button>
+      </div>
+
+      <div class="ahead">
+        <div class="abadge">⚡</div>
+        <div>
+          <div class="atitle">You don't call it up, Claude does</div>
+          <div class="asub">Skills are automatically used during a task, right when they're needed. You don't have to invoke one by name, you just start doing the work and Claude reaches for the right skill on its own, provided it's actually relevant to what you're doing.</div>
+        </div>
+      </div>
+
+      <div class="warn">
+        <h4>⚠️ Don't hoard skills you're not using</h4>
+        <p>Claude reads the top description of every skill you have listed to decide which one applies to your task, every single time, whether you end up using it or not. A long list of skills you built once and forgot about doesn't just clutter your Directory, it costs you tokens on every task. Toggle off anything you're not actively using.</p>
+      </div>
+
+      <h3 style="font-family:var(--font-h);font-size:1.15rem;font-weight:700;color:var(--dark);margin-top:36px;margin-bottom:8px;">Recap, benefit from building skills</h3>
+      <p class="flip-hint">👆 Click any card to flip it</p>
+
+      <div class="fg">
+        <div class="fc" onclick="this.classList.toggle('fl')">
+          <div class="fci">
+            <div class="fcf">
+              <div>
+                <div class="fco">🍳</div>
+                <h3>One task per card, not one giant one</h3>
+                <p>The most common way a skill goes wrong isn't vagueness, it's trying to do too much in a single card.</p>
+              </div>
+              <div class="fh">Tap to learn more →</div>
+            </div>
+            <div class="fcb">
+              <div class="fcb-lbl">Why this matters</div>
+              <div class="fe">Instead of one "content creation" skill trying to research, write, design and schedule all at once, build single-task skills: a research skill, a transcript skill, a copywriting skill, an SEO skill, a visual guide skill, a scheduling skill.</div>
+              <div class="fe">Each one stays sharp and gets reused across different projects, not locked into one pipeline.</div>
+              <div class="fe">Need them working together? That's what an orchestrator skill is for, one skill whose only job is calling the others in the right order.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fc" onclick="this.classList.toggle('fl')">
+          <div class="fci">
+            <div class="fcf">
+              <div>
+                <div class="fco">⚖️</div>
+                <h3>Show it a good and a bad example</h3>
+                <p>The one technique that actually fixes vague results.</p>
+              </div>
+              <div class="fh">Tap to learn more →</div>
+            </div>
+            <div class="fcb">
+              <div class="fcb-lbl">Why this works faster</div>
+              <div class="fe">Seeing the contrast between a good example and a bad one teaches Claude faster than describing what you want in the abstract ever does.</div>
+              <div class="fe">Think of explaining to a robot how to bring you a glass of water. Where's the tap, hot or cold, fill to the top or half-filled? Details matter, otherwise Claude has to guess.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fc" onclick="this.classList.toggle('fl')">
+          <div class="fci">
+            <div class="fcf">
+              <div>
+                <div class="fco">🛠️</div>
+                <h3>Skill Creator</h3>
+                <p>A dedicated tool for this, if you'd rather not start from a blank chat.</p>
+              </div>
+              <div class="fh">Tap to learn more →</div>
+            </div>
+            <div class="fcb">
+              <div class="fcb-lbl">Where to find it</div>
+              <div class="fe">Cowork's Customise menu, under Skills, then the plus button to browse.</div>
+              <div class="fe">Search for Skill Creator and add it, then run it the same way, one task, real examples.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fc" onclick="this.classList.toggle('fl')">
+          <div class="fci">
+            <div class="fcf">
+              <div>
+                <div class="fco">🔁</div>
+                <h3>Test it, then refine it</h3>
+                <p>The step most people skip, and the one that actually matters.</p>
+              </div>
+              <div class="fh">Tap to learn more →</div>
+            </div>
+            <div class="fcb">
+              <div class="fcb-lbl">Why it's not optional</div>
+              <div class="fe">Test it a few times after it's built. See what it gets wrong, refine it.</div>
+              <div class="fe">That testing step is what separates a skill that actually works from one that just exists.</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="fc" onclick="this.classList.toggle('fl')">
-        <div class="fci">
-          <div class="fcf"><div><div class="fco">🛠️</div><h3>Skill Creator</h3><p>Claude has a tool built for this exactly.</p></div><div class="fh">Tap to learn more →</div></div>
-          <div class="fcb"><div class="fcb-lbl">Where to find it</div>
-            <div class="fe">Cowork's Customise menu, under Skills, then the plus button to browse.</div>
-            <div class="fe">Search for Skill Creator and add it.</div>
-            <div class="fe">It interviews you and writes the skill properly, in the correct format, no technical knowledge needed.</div>
+      <div class="shot">
+        <img src="assets/close-the-gap/skill-creator-search.png" alt="Cowork Directory panel showing Skills tab with Skill Creator search result"/>
+        <p class="shot-cap">In Cowork's Customise menu, click the <strong>+</strong> next to Skills, then search "skill" to find Skill Creator, built by Anthropic.</p>
+      </div>
+
+      <p class="gap-note" style="margin-top:20px;"><strong>Do this today:</strong> pick one recurring task, copy the prompt above into a new Cowork chat, and test what it builds twice before you trust it.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════ RECAP ═══════════════════ -->
+<div id="recap" class="page">
+  <section class="sec s-denim-light">
+    <div class="inner">
+      <div class="eyebrow">you've made it through</div>
+      <h2>Six ticks, one <em>foundation</em></h2>
+      <p class="intro-p">Click through the six as you set each one up. This is the whole foundation, not six separate errands, so working through them properly is what actually closes the gap.</p>
+    </div>
+  </section>
+
+  <div class="div-soft"></div>
+
+  <section class="sec s-cream">
+    <div class="inner">
+      <div class="eyebrow">the foundation</div>
+      <h2>Your six quick wins</h2>
+      <div class="cklist" id="recap-checklist">
+        <div class="ckitem" onclick="this.classList.toggle('done')"><div class="ckbox">✓</div><div class="cktext"><h4>AI Brain</h4><p>Folders set up, department by department, Claude pointed at the right one.</p></div></div>
+        <div class="ckitem" onclick="this.classList.toggle('done')"><div class="ckbox">✓</div><div class="cktext"><h4>Connectors</h4><p>One tool connected, permissions set deliberately.</p></div></div>
+        <div class="ckitem" onclick="this.classList.toggle('done')"><div class="ckbox">✓</div><div class="cktext"><h4>Global Instructions</h4><p>Filled in, mirrored in Instructions for Claude, Memory toggles checked.</p></div></div>
+        <div class="ckitem" onclick="this.classList.toggle('done')"><div class="ckbox">✓</div><div class="cktext"><h4>Projects</h4><p>One dedicated workspace running for a real stream of work.</p></div></div>
+        <div class="ckitem" onclick="this.classList.toggle('done')"><div class="ckbox">✓</div><div class="cktext"><h4>Scheduled Tasks</h4><p>Your most repetitive task, set to run on its own.</p></div></div>
+        <div class="ckitem" onclick="this.classList.toggle('done')"><div class="ckbox">✓</div><div class="cktext"><h4>Skills</h4><p>One recurring task taught properly, tested and refined.</p></div></div>
+      </div>
+      <p class="gap-note" style="margin-top:8px;"><strong>All six ticked?</strong> That's the setup gap closed. From here it's practice, using what you've built until it's just how you work.</p>
+    </div>
+  </section>
+
+  <div class="div-soft"></div>
+
+  <section class="sec s-pink">
+    <div class="inner">
+      <div class="eyebrow">who put this together</div>
+      <h2>A little about me</h2>
+      <div class="aboutcard">
+        <img class="avatar" src="TC%20Admire%202.jpg" alt="Tania Carcenac"/>
+        <div>
+          <h3>Tania Carcenac</h3>
+          <p>My first career was pharmacy, which is where the habit of seeing the whole person before jumping to a solution came from. That training carried straight through into years of life coaching, helping women get unstuck, which shapes everything about how I work now.</p>
+          <p>When Claude started making real noise, I went down the AI rabbit hole, courses, experiments, information overload, so you don't have to. I came back with something useful on the other side.</p>
+          <p>Now I run AI With Intent, building proper AI foundations for women in small business. Done for you, not another course to work through alone. Not a tech person myself, which is exactly why my clients get the shortcut.</p>
+          <div class="alinks">
+            <a href="https://www.aiwithintent.com.au" target="_blank" rel="noopener">Visit the website</a>
+            <a href="https://www.instagram.com/tania.carcenac" target="_blank" rel="noopener">Follow on Instagram</a>
           </div>
         </div>
       </div>
     </div>
+  </section>
+</div>
 
-    <div class="shot">
-      <img src="assets/close-the-gap/skill-creator-search.png" alt="Cowork Directory panel showing Skills tab with Skill Creator search result"/>
-      <p class="shot-cap">In Cowork's Customise menu, click the <strong>+</strong> next to Skills, then search "skill" to find Skill Creator, built by Anthropic.</p>
-    </div>
-
-    <p class="gap-note" style="margin-top:20px;"><strong>Do this today:</strong> set up your first skill using Skill Creator, with one good and one bad example, then test it twice.</p>
-  </div>
-</section>
-
-<div class="div-soft"></div>
-
-<!-- 5. SCHEDULED TASKS — FLIP CARDS x4 -->
-<section class="sec s-denim-light" id="tasks">
-  <div class="inner">
-    <div class="eyebrow">way 5 of 5</div>
-    <h2>Scheduled Tasks</h2>
-    <p class="sub">This is what you set up so Claude keeps working even when you're not in the app. Instructions you save once, that Claude then repeats on its own, on a schedule.</p>
-    <p class="flip-hint">👆 Click any card to flip it</p>
-
-    <div class="fg">
-      <div class="fc" onclick="this.classList.toggle('fl')">
-        <div class="fci">
-          <div class="fcf"><div><div class="fco">⏰</div><h3>Trigger</h3><p>When should this run?</p></div><div class="fh">Tap to learn more →</div></div>
-          <div class="fcb"><div class="fcb-lbl">What to name</div>
-            <div class="fe">A day and time. Weekly, daily, whatever matches the task.</div>
-            <div class="fe">Don't start by asking what Claude can do. Start by asking what your headache actually is.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="fc" onclick="this.classList.toggle('fl')">
-        <div class="fci">
-          <div class="fcf"><div><div class="fco">📄</div><h3>Output</h3><p>What should it actually produce?</p></div><div class="fh">Tap to learn more →</div></div>
-          <div class="fcb"><div class="fcb-lbl">What to name</div>
-            <div class="fe">A summary, a brief, a draft, whatever the task is meant to hand you.</div>
-            <div class="fe">Pick your most repetitive task first, that's the one worth automating.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="fc" onclick="this.classList.toggle('fl')">
-        <div class="fci">
-          <div class="fcf"><div><div class="fco">📥</div><h3>Destination</h3><p>Where should the output go?</p></div><div class="fh">Tap to learn more →</div></div>
-          <div class="fcb"><div class="fcb-lbl">What to name</div>
-            <div class="fe">Your inbox, a folder, a doc, wherever you'll actually see and use it.</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <p class="gap-note" style="margin-top:10px;"><strong>Do this today:</strong> pick your most repetitive task and set up one Scheduled Task for it.</p>
-  </div>
-</section>
-
-<div class="div-soft"></div>
-
-<!-- BONUS — CONNECTORS -->
-<section class="sec s-denim-mid" id="connectors">
-  <div class="inner">
-    <div class="eyebrow">bonus</div>
-    <h2>Connectors: this is what ups the ante</h2>
-    <p class="sub">Every one of the five ways above already moves you from basic to intermediate use. Connectors are what push it further again. This is the difference between Claude telling you what to do, and Claude actually doing it.</p>
-
-    <div class="ahead">
-      <div class="abadge">🔌</div>
-      <div>
-        <div class="atitle">Claude, doing the work, not just chatting about it</div>
-        <div class="asub">Without a connector, Claude can only work with what you type or paste in. With one, it can actually reach into Google Drive, Gmail, your calendar or another tool and read from it or write to it directly. That's the real line between "Claude gave me an answer" and "Claude went and did the thing."</div>
-      </div>
-    </div>
-
-    <div class="dg">
-      <div class="dc"><div class="dc-icon">🔌</div><h4>What a connector is</h4><p>Called an MCP. Think of it like a unique plug, every tool has its own shape, and each one needs its own connector to work with Claude.</p></div>
-      <div class="dc"><div class="dc-icon">🗂️</div><h4>Where to find them</h4><p>Same Directory panel as Skills, under the Connectors tab, in Cowork's Customise menu.</p></div>
-      <div class="dc"><div class="dc-icon">🔐</div><h4>Permissions</h4><p>Adding one asks for permission to access that specific tool, so it only ever works with what you've approved, nothing more.</p></div>
-    </div>
-
-    <p class="gap-note" style="margin-top:8px;color:var(--dark);"><strong>Do this today:</strong> once your first Scheduled Task is running, add one connector for the tool it actually needs to reach, and watch it do the work instead of just describing it.</p>
-  </div>
-</section>
-
-<div class="div-soft"></div>
-
-<!-- CHECKLIST -->
-<section class="sec s-cream" id="checklist">
-  <div class="inner">
-    <div class="eyebrow">your action list</div>
-    <h2>Six things, six ticks</h2>
-    <p class="sub">Tick each one off as you go. None of these take more than a few minutes to start.</p>
-    <div style="margin-bottom:20px;"><span class="cl-progress" id="cl-progress">0 of 6 complete</span></div>
-
-    <div class="cl-section">
-      <div class="cl-cat">
-        <h3>🗂️ Foundation</h3>
-        <label class="cl-item"><input type="checkbox" onchange="updateChecklist()"><span class="label-text">Create one folder and start moving your key business documents into it</span></label>
-        <label class="cl-item"><input type="checkbox" onchange="updateChecklist()"><span class="label-text">Create one Project, point it at that folder, and describe what it's for so Claude can help draft the instructions</span></label>
-        <label class="cl-item"><input type="checkbox" onchange="updateChecklist()"><span class="label-text">Open Settings → Cowork, fill in your global instructions and set your Cowork files location</span></label>
-      </div>
-      <div class="cl-cat">
-        <h3>⚙️ Quick wins</h3>
-        <label class="cl-item"><input type="checkbox" onchange="updateChecklist()"><span class="label-text">Set up your first skill using Skill Creator, with a good and a bad example</span></label>
-        <label class="cl-item"><input type="checkbox" onchange="updateChecklist()"><span class="label-text">Pick your most repetitive task and set up one Scheduled Task for it</span></label>
-        <label class="cl-item"><input type="checkbox" onchange="updateChecklist()"><span class="label-text">Add one connector for the tool your task actually needs to reach</span></label>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
+<!-- ═══════════════════ FOOTER (always visible) ═══════════════════ -->
 <footer>
   <div class="ft-script">need a hand?</div>
-  <h2 class="ft-h">Let's build all this<br/>with you, properly</h2>
-  <p class="ft-sub">If you need help actually setting all this up, building your first skills, Projects, tasks and your AI Brain, that's exactly what Out of Your Head does for you.</p>
+  <h2 class="ft-h">Ready to skip the DIY<br/>and have it built for you?</h2>
+  <p class="ft-sub">If you'd rather have your whole AI architecture built for you, specifically around your business, that's exactly what Out of Your Head does.</p>
   <p class="ft-quote">"150% yes it is worth the investment. Don't even think about it, honestly just do it. Your future self will thank you for it."<span class="ft-quote-by">— Lisa</span></p>
   <a href="https://www.aiwithintent.com.au/out-of-your-head.html" class="btn-pink">See what's included in OUT OF YOUR HEAD</a>
 </footer>
 <div class="acb">Created with care by AI With Intent · aiwithintent.com.au</div>
 
-<button id="rtt" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
 <script>
-function showState(cardId, state) {
-  document.getElementById(cardId + '-before').classList.toggle('on', state === 'before');
-  document.getElementById(cardId + '-after').classList.toggle('on', state === 'after');
-  document.querySelectorAll('#' + cardId + ' .stab').forEach(t => t.classList.remove('active'));
-  document.querySelector('#' + cardId + ' .stab-' + state).classList.add('active');
-}
-function updateChecklist() {
-  const all = document.querySelectorAll('.cl-item input[type="checkbox"]');
-  const checked = document.querySelectorAll('.cl-item input[type="checkbox"]:checked');
-  const progress = document.getElementById('cl-progress');
-  if (progress) progress.textContent = checked.length + ' of ' + all.length + ' complete';
-  all.forEach(cb => { const item = cb.closest('.cl-item'); if (item) item.classList.toggle('done', cb.checked); });
+function copyToClipboard(btn, sourceId) {
+  const text = document.getElementById(sourceId).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => { btn.textContent = original; }, 1800);
+  });
 }
 function switchTab(id, btn) {
   document.querySelectorAll('.apanel').forEach(p => p.classList.remove('on'));
@@ -566,20 +999,6 @@ function switchTab(id, btn) {
   document.getElementById('tab-' + id).classList.add('on');
   btn.classList.add('active');
 }
-const rtt = document.getElementById('rtt');
-window.addEventListener('scroll', () => {
-  const show = window.scrollY > window.innerHeight * .8;
-  rtt.style.opacity = show ? '1' : '0';
-  rtt.style.transform = show ? 'translateY(0)' : 'translateY(10px)';
-});
-const obs = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
-}), { threshold: .08 });
-document.querySelectorAll('.hc,.fc,.tp,.bacard,.cl-cat').forEach(el => {
-  el.style.opacity = '0'; el.style.transform = 'translateY(14px)';
-  el.style.transition = 'opacity .4s ease, transform .4s ease';
-  obs.observe(el);
-});
 </script>
 </body>
 </html>
