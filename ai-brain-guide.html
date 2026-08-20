@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>One System, Not Five Apps: Where Your Docs Actually Live</title>
+<meta name="description" content="A free guide to building your AI Brain: the folder system that lets Claude actually know your business, department by department."/>
+<meta property="og:title" content="One System, Not Five Apps: Where Your Docs Actually Live"/>
+<meta property="og:description" content="A free guide to building your AI Brain: the folder system that lets Claude actually know your business, department by department."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.aiwithintent.com.au/ai-brain-guide.html"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="One System, Not Five Apps: Where Your Docs Actually Live"/>
+<meta name="twitter:description" content="A free guide to building your AI Brain: the folder system that lets Claude actually know your business, department by department."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --dark:       #2E2845;
+  --denim:      #25587F;
+  --denim-mid:  #95B6D7;
+  --denim-light:#D6E7F7;
+  --cream:      #EEE6DE;
+  --pale-pink:  #FAEFF3;
+  --pink:       #D4336E;
+  --white:      #FFFFFF;
+  --font-h: 'Libre Baskerville', Georgia, serif;
+  --font-b: 'Nunito', system-ui, sans-serif;
+  --font-s: 'Caveat', cursive;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--denim-light);color:var(--dark);overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased;font-size:17px}
+
+.s-denim-light{background:linear-gradient(150deg,#D6E7F7 0%,#C2D8EE 100%)}
+.s-cream      {background:linear-gradient(150deg,#EEE6DE 0%,#E2D9CF 100%)}
+.s-pink       {background:linear-gradient(150deg,#FAEFF3 0%,#F2DFEA 100%)}
+.s-denim-mid  {background:linear-gradient(150deg,#95B6D7 0%,#79A7CE 100%)}
+
+.sec{padding:64px 32px}
+.inner{max-width:900px;margin:0 auto}
+.eyebrow{font-family:var(--font-s);font-size:1.9rem;font-weight:700;color:var(--pink);display:inline-block;margin-bottom:6px}
+h2{font-family:var(--font-h);font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;line-height:1.15;color:var(--dark);margin-bottom:14px}
+.sub{font-size:.96rem;color:var(--dark);max-width:660px;line-height:1.85;margin-bottom:26px;font-weight:400}
+
+/* HERO */
+.hero{min-height:82vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 32px 50px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 72% 15%,rgba(212,51,110,.14),transparent 48%),radial-gradient(ellipse at 18% 82%,rgba(37,88,127,.18),transparent 45%),radial-gradient(ellipse at 50% 105%,rgba(149,182,215,.35),transparent 55%);pointer-events:none}
+.for-tag{font-family:var(--font-b);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--denim);border:1.5px solid rgba(37,88,127,.3);padding:7px 22px;border-radius:50px;display:inline-block;margin-bottom:26px;background:rgba(255,255,255,.5)}
+.hero h1{font-family:var(--font-h);font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;line-height:1.12;color:var(--dark);margin-bottom:18px;max-width:760px}
+.hero h1 em{color:var(--pink);font-style:italic}
+.hero-p{font-size:clamp(.96rem,2vw,1.08rem);color:var(--dark);max-width:660px;margin:0 auto 12px;line-height:1.85;font-weight:400}
+.cue{color:var(--denim);font-size:.82rem;display:flex;flex-direction:column;align-items:center;gap:6px;animation:bob 3s ease-in-out infinite;cursor:pointer;margin-top:26px}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* FILE TREE */
+.ftree{background:var(--dark);border-radius:12px;padding:26px 30px;margin:20px 0;overflow-x:auto}
+.ft-row{display:flex;align-items:baseline;gap:8px;font-family:'Courier New',monospace;font-size:.85rem;white-space:nowrap;padding:3px 0}
+.ft-line{color:rgba(238,230,222,.35)}
+.ft-name{color:var(--cream);font-weight:700}
+.ft-note{margin-left:18px;color:rgba(238,230,222,.5);font-style:italic;font-size:.78rem;font-family:var(--font-b)}
+@media(max-width:640px){.ft-note{display:none}}
+
+/* PITFALLS LIST */
+.pfl{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.pf{background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:18px 22px;font-size:.94rem;color:var(--dark);line-height:1.7}
+
+.gap-note{font-size:.94rem;color:var(--dark);line-height:1.85;margin-top:8px;max-width:760px}
+.gap-note strong{color:var(--pink)}
+
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:10px;margin:20px 0}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:16px 20px}
+.snum{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--pink),#B5295C);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:var(--white);flex-shrink:0;box-shadow:0 2px 8px rgba(212,51,110,.35)}
+.scontent h4{font-size:.96rem;font-weight:700;color:var(--dark);margin-bottom:3px}
+.scontent p{font-size:.92rem;color:var(--dark);line-height:1.68}
+
+/* PROMPT BOX */
+.pbox{background:var(--dark);border-radius:12px;padding:22px 24px;margin:20px 0;position:relative}
+.pbox-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin-bottom:10px;display:block}
+.pbox p{font-family:'Courier New',monospace;font-size:.95rem;color:var(--cream);line-height:1.7;margin:0}
+.pbox-copy{margin-top:14px;background:transparent;border:1.5px solid rgba(238,230,222,.4);color:var(--cream);font-family:var(--font-b);font-size:.78rem;font-weight:700;padding:7px 16px;border-radius:50px;cursor:pointer;transition:all .2s}
+.pbox-copy:hover{border-color:var(--pink);color:var(--pink)}
+
+/* UPSELL TEASER */
+.teaser{background:var(--white);border:2px solid var(--pink);border-radius:14px;padding:32px;margin-top:10px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.teaser-icon{font-size:2.2rem;flex-shrink:0}
+.teaser h3{font-family:var(--font-h);font-size:1.2rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.teaser p{font-size:.88rem;color:var(--dark);line-height:1.65}
+.teaser-cta{margin-left:auto;flex-shrink:0}
+@media(max-width:640px){
+  .teaser-cta{margin-left:0;flex-shrink:1;width:100%}
+  .teaser-cta .btn-pink{display:block;width:100%;box-sizing:border-box;text-align:center;padding-left:20px;padding-right:20px}
+}
+
+/* FOOTER */
+footer{padding:64px 32px 48px;text-align:center;background:var(--denim-mid);border-top:1px solid rgba(37,88,127,.2)}
+.ft-script{font-family:var(--font-s);font-size:2.1rem;color:var(--dark);margin-bottom:10px;font-weight:400}
+.ft-h{font-family:var(--font-h);font-size:clamp(1.7rem,4.5vw,2.4rem);font-weight:700;color:var(--dark);margin-bottom:14px;line-height:1.15}
+.ft-sub{font-size:.94rem;color:var(--dark);margin-bottom:20px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.8}
+.ft-quote{font-family:var(--font-h);font-style:italic;font-size:1rem;color:var(--dark);max-width:440px;margin:0 auto 26px;line-height:1.6;padding:18px 24px;background:rgba(255,255,255,.4);border-radius:12px;border:1px solid rgba(37,88,127,.2)}
+.ft-quote-by{display:block;font-family:var(--font-b);font-style:normal;font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;color:var(--pink);margin-top:8px}
+.btn-pink{display:inline-block;padding:14px 36px;border-radius:50px;background:linear-gradient(135deg,var(--pink),#B5295C);color:var(--white);font-family:var(--font-b);font-weight:700;font-size:.9rem;text-decoration:none;transition:all .25s;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(212,51,110,.4)}
+.btn-pink:hover{background:linear-gradient(135deg,#C72C65,#9C2250);transform:translateY(-2px);box-shadow:0 6px 28px rgba(212,51,110,.5)}
+.acb{text-align:center;font-size:.72rem;color:rgba(37,88,127,.55);padding:10px 0 0;letter-spacing:.04em}
+.div-soft{height:1px;background:linear-gradient(90deg,transparent,rgba(37,88,127,.2),transparent)}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero s-denim-light">
+  <div class="for-tag">A free guide from AI With Intent</div>
+  <h1>One system, not <em>five apps</em></h1>
+  <p class="hero-p">If you're part of the 69% using AI but not yet seeing the results you hoped for, this is the fastest fix of all, since everything else in this series builds on it. Only 5% of businesses using AI are actually set up well enough to get real value from it. If your business knowledge is scattered across five different apps, a doc here, a note there, a folder you forgot about, Claude can't use any of it properly, no matter how good the tool is.</p>
+  <div class="cue" onclick="document.getElementById('teach').scrollIntoView({behavior:'smooth'})">
+    <span>See how ↓</span>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- SECTION 1: WHAT IT ACTUALLY IS -->
+<section class="sec s-cream" id="teach">
+  <div class="inner">
+    <div class="eyebrow">the ai brain</div>
+    <h2>A system, not a single folder</h2>
+    <p class="sub">Anthropic's own research names this as one of three things separating businesses that get real value from AI and those that don't: <strong>reliable data in one place.</strong><br/><br/>That comes from setting up a system of folders organised around how your business actually works, department by department, so Claude always knows exactly where to look.</p>
+
+    <div class="ftree">
+      <div class="ft-row"><span class="ft-name">Your AI Brain/</span></div>
+      <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">About the Business.md</span><span class="ft-note">← who you are, what you do, who it's for</span></div>
+      <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">Voice Profile.md</span><span class="ft-note">← how you write, words you'd never use</span></div>
+      <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">skills/</span><span class="ft-note">← skills that apply across the whole business</span></div>
+      <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">brand/</span><span class="ft-note">← logo, colours, fonts, style guide</span></div>
+      <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">offers/</span><span class="ft-note">← what you sell, your packages, your pricing</span></div>
+      <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">clients/</span></div>
+      <div class="ft-row"><span class="ft-line">│&nbsp;&nbsp;&nbsp;└──</span><span class="ft-name">client-name/</span></div>
+      <div class="ft-row"><span class="ft-line">│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├──</span><span class="ft-name">About This Client.md</span><span class="ft-note">← context specific to this one client, outputs for them saved right here too</span></div>
+      <div class="ft-row"><span class="ft-line">│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──</span><span class="ft-name">skills/</span><span class="ft-note">← skills that only apply to this client</span></div>
+      <div class="ft-row"><span class="ft-line">├──</span><span class="ft-name">content/</span><span class="ft-note">← emails, social posts, drafts, lead magnets, and anything Claude creates for this area</span></div>
+      <div class="ft-row"><span class="ft-line">└──</span><span class="ft-name">operations/</span><span class="ft-note">← processes, templates, how you work</span></div>
+    </div>
+
+    <p class="sub">Skills don't all belong in one place either. A skill that applies across your whole business, your standard email format, your brand voice, sits in the top-level <strong>skills/</strong> folder. A skill that only makes sense for one client or project, exactly how they like their reports formatted, lives inside that client's own folder instead, in its own <strong>skills/</strong> subfolder. That way Claude only reaches for it when it's actually working on something for that client, not every time it writes an email for anyone.</p>
+
+    <p class="sub">The same goes for what Claude creates. Content it drafts for you lands in the content folder. Work it does for a specific client lands inside that client's own folder. You give Claude a starting structure and a short map of what's where, and it files what it makes into the relevant department, not one shared pile everything gets dumped into.</p>
+
+    <p class="sub" style="margin-bottom:0;">Most of what goes into these folders already exists somewhere, a brand guide, voice notes, process docs. The work here is gathering and organising it into one system Claude can actually use.</p>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- SECTION 2: THE ONE-MINUTE CHECK -->
+<section class="sec s-denim-mid">
+  <div class="inner">
+    <div class="eyebrow">worth checking today</div>
+    <h2>Claude isn't lost, it's looking where you told it to look</h2>
+    <p class="sub">This is the single most common thing that goes wrong once someone's actually using their AI Brain day to day, and it's rarely talked about.</p>
+
+    <div class="pfl">
+      <div class="pf">A Scheduled Task saved its output inside Claude's own default folder instead of the actual project folder, because nobody had told it exactly where to save to, so it looked finished but the file was nowhere anyone could find it.</div>
+      <div class="pf">Someone's whole folder lived inside Downloads, and it wouldn't link at all. Downloads is treated differently by most software for security reasons, so it's one of the few places your AI Brain shouldn't actually live.</div>
+      <div class="pf">Someone had two copies of the same folder without realising it, one synced from Google Drive, one being edited directly. Claude was reading from the synced copy, so nothing typed into the real one ever showed up.</div>
+      <div class="pf">A finished document landed in the very top level of someone's Google Drive instead of inside the actual client folder, because the destination given was "save it to Drive" instead of the exact folder.</div>
+    </div>
+
+    <p class="sub" style="margin-bottom:0;">Each of these takes under a minute to fix once you know to check it. Go take a look at where your own tasks and outputs are actually landing today.</p>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- SECTION 3: BUILDING YOURS -->
+<section class="sec s-pink">
+  <div class="inner">
+    <div class="eyebrow">try it now</div>
+    <h2>Set yours up today</h2>
+
+    <div class="steps">
+      <div class="step"><div class="snum">1</div><div class="scontent"><h4>List your departments</h4><p>Most businesses start with five: brand, offers (what you sell, your packages, your pricing), clients, content (this is where lead magnets and freebies live too), and operations. Add or drop to match what your business actually runs on.</p></div></div>
+      <div class="step"><div class="snum">2</div><div class="scontent"><h4>Create the folders</h4><p>One per department, on your own device or wherever you already store files, nothing needs to move to a new tool.</p></div></div>
+      <div class="step"><div class="snum">3</div><div class="scontent"><h4>Move in what already exists</h4><p>Gather what's already sitting in scattered docs and notes, no new writing required at this step.</p></div></div>
+      <div class="step"><div class="snum">4</div><div class="scontent"><h4>Point Claude at the actual folder</h4><p>The specific folder path, ideally the exact department subfolder for whatever you're working on that day, rather than just "my computer" in general.</p></div></div>
+    </div>
+
+    <div class="pbox">
+      <span class="pbox-label">Copy this in to get started</span>
+      <p id="prompt-text">Interview me about my business so you can help me set up an AI Brain folder structure. Ask me what departments or areas my business actually runs on, what documents already exist for each one, and where they currently live. Once you've got enough, suggest a folder structure specific to my business, not a generic template, and tell me exactly what to move where.</p>
+      <button class="pbox-copy" onclick="copyToClipboard(this, 'prompt-text')">📋 Copy prompt</button>
+    </div>
+
+    <p class="gap-note" style="margin-top:8px;"><strong>Do this today:</strong> create your folders, move in what already exists, and point Claude at the specific one you need for today's task, not just the top-level folder.</p>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- PART OF CLOSE THE GAP -->
+<section class="sec s-cream">
+  <div class="inner">
+    <h2>Part of Close the Gap</h2>
+    <div class="teaser">
+      <div class="teaser-icon">🗺️</div>
+      <div>
+        <h3>This is one of six ways to move from basic to intermediate use</h3>
+        <p>Where your docs live, Projects, Skills, Scheduled Tasks, Global Instructions, and the bonus that pushes Claude from talking about the work into actually doing it, they're all covered together in the full Close the Gap guide.</p>
+      </div>
+      <div class="teaser-cta">
+        <a href="https://www.aiwithintent.com.au/close-the-gap-guide.html" class="btn-pink">Back to the full Close the Gap guide</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-script">need a hand?</div>
+  <h2 class="ft-h">Ready to skip the DIY<br/>and have it built for you?</h2>
+  <p class="ft-sub">You've just learned how to do this yourself, piece by piece. Out of Your Head builds your whole AI architecture for you, built specifically around your business, so you get the finished foundation without doing the work of putting it together yourself.</p>
+  <p class="ft-quote">"150% yes it is worth the investment. Don't even think about it, honestly just do it. Your future self will thank you for it."<span class="ft-quote-by">— Lisa</span></p>
+  <a href="https://www.aiwithintent.com.au/out-of-your-head.html" class="btn-pink">See what's included in OUT OF YOUR HEAD</a>
+</footer>
+<div class="acb">Created with care by AI With Intent · aiwithintent.com.au</div>
+
+<script>
+function copyToClipboard(btn, sourceId) {
+  const text = document.getElementById(sourceId).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => { btn.textContent = original; }, 1800);
+  });
+}
+</script>
+</body>
+</html>
