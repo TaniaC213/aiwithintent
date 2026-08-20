@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Admin That Happens Without You: Scheduled Tasks</title>
+<meta name="description" content="A free guide to Claude Scheduled Tasks: what to automate first, Project vs standalone, and how to write instructions robust enough to run on their own."/>
+<meta property="og:title" content="The Admin That Happens Without You: Scheduled Tasks"/>
+<meta property="og:description" content="A free guide to Claude Scheduled Tasks: what to automate first, Project vs standalone, and how to write instructions robust enough to run on their own."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.aiwithintent.com.au/scheduled-tasks-guide.html"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The Admin That Happens Without You: Scheduled Tasks"/>
+<meta name="twitter:description" content="A free guide to Claude Scheduled Tasks: what to automate first, Project vs standalone, and how to write instructions robust enough to run on their own."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --dark:       #2E2845;
+  --denim:      #25587F;
+  --denim-mid:  #95B6D7;
+  --denim-light:#D6E7F7;
+  --cream:      #EEE6DE;
+  --pale-pink:  #FAEFF3;
+  --pink:       #D4336E;
+  --white:      #FFFFFF;
+  --font-h: 'Libre Baskerville', Georgia, serif;
+  --font-b: 'Nunito', system-ui, sans-serif;
+  --font-s: 'Caveat', cursive;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--denim-light);color:var(--dark);overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased;font-size:17px}
+
+.s-denim-light{background:linear-gradient(150deg,#D6E7F7 0%,#C2D8EE 100%)}
+.s-cream      {background:linear-gradient(150deg,#EEE6DE 0%,#E2D9CF 100%)}
+.s-pink       {background:linear-gradient(150deg,#FAEFF3 0%,#F2DFEA 100%)}
+.s-denim-mid  {background:linear-gradient(150deg,#95B6D7 0%,#79A7CE 100%)}
+
+.sec{padding:64px 32px}
+.inner{max-width:900px;margin:0 auto}
+.eyebrow{font-family:var(--font-s);font-size:1.9rem;font-weight:700;color:var(--pink);display:inline-block;margin-bottom:6px}
+h2{font-family:var(--font-h);font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;line-height:1.15;color:var(--dark);margin-bottom:14px}
+.sub{font-size:.96rem;color:var(--dark);max-width:660px;line-height:1.85;margin-bottom:26px;font-weight:400}
+
+/* HERO */
+.hero{min-height:82vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 32px 50px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 72% 15%,rgba(212,51,110,.14),transparent 48%),radial-gradient(ellipse at 18% 82%,rgba(37,88,127,.18),transparent 45%),radial-gradient(ellipse at 50% 105%,rgba(149,182,215,.35),transparent 55%);pointer-events:none}
+.for-tag{font-family:var(--font-b);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--denim);border:1.5px solid rgba(37,88,127,.3);padding:7px 22px;border-radius:50px;display:inline-block;margin-bottom:26px;background:rgba(255,255,255,.5)}
+.hero h1{font-family:var(--font-h);font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;line-height:1.12;color:var(--dark);margin-bottom:18px;max-width:760px}
+.hero h1 em{color:var(--pink);font-style:italic}
+.hero-p{font-size:clamp(.96rem,2vw,1.08rem);color:var(--dark);max-width:660px;margin:0 auto 12px;line-height:1.85;font-weight:400}
+.cue{color:var(--denim);font-size:.82rem;display:flex;flex-direction:column;align-items:center;gap:6px;animation:bob 3s ease-in-out infinite;cursor:pointer;margin-top:26px}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* FLIP CARDS */
+.flip-hint{font-size:.84rem;color:var(--dark);margin-bottom:26px}
+.fg{display:flex;flex-wrap:wrap;gap:20px;padding:4px 0}
+.fc{flex:0 1 270px;max-width:300px;perspective:1000px;cursor:pointer}
+.fci{position:relative;width:100%;transform-style:preserve-3d;transition:transform .6s ease}
+.fc.fl .fci{transform:rotateY(180deg)}
+.fcf{position:relative;width:100%;min-height:220px;backface-visibility:hidden;border-radius:10px;padding:26px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;background:var(--white);border:2px solid var(--denim);transition:border-color .25s}
+.fc:hover .fcf{border-color:var(--pink)}
+.fcb{position:absolute;top:0;left:0;width:100%;height:100%;min-height:220px;backface-visibility:hidden;border-radius:10px;padding:22px;box-sizing:border-box;display:flex;flex-direction:column;overflow-y:auto;background:linear-gradient(145deg,#2E2845 0%,#3D3066 100%);border:2px solid var(--denim-mid);transform:rotateY(180deg)}
+.fco{font-size:1.9rem;margin-bottom:12px}
+.fcf h3{font-family:var(--font-h);font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--dark)}
+.fcf p{font-size:.92rem;color:var(--dark);line-height:1.68}
+.fh{font-size:.74rem;color:rgba(37,88,127,.55);margin-top:10px}
+.fcb-lbl{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--denim-mid);margin-bottom:12px;font-family:var(--font-b)}
+.fe{font-size:.92rem;background:rgba(61,53,96,.5);padding:9px 12px;border-radius:6px;margin:6px 0;border-left:3px solid var(--pink);line-height:1.65;color:var(--cream)}
+
+/* INFO GRID */
+.dg{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:20px 0}
+@media(max-width:600px){.dg{grid-template-columns:1fr}}
+.dc{background:var(--white);border-radius:10px;padding:20px;border:1px solid rgba(37,88,127,.18)}
+.dc-icon{font-size:1.5rem;margin-bottom:10px}
+.dc h4{font-family:var(--font-h);font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.dc p{font-size:.92rem;color:var(--dark);line-height:1.68}
+
+/* CALLOUT / AHEAD */
+.ahead{display:flex;align-items:flex-start;gap:20px;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:28px;margin:20px 0}
+@media(max-width:600px){.ahead{flex-direction:column}}
+.abadge{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--denim-light),rgba(37,88,127,.22));display:flex;align-items:center;justify-content:center;font-size:1.7rem;flex-shrink:0;box-shadow:0 2px 10px rgba(37,88,127,.18)}
+.atitle{font-family:var(--font-h);font-size:1.3rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.asub{font-size:.96rem;color:var(--dark);line-height:1.75;font-weight:400}
+
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:10px;margin:20px 0}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:2px solid var(--denim);border-radius:10px;padding:16px 20px}
+.snum{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--pink),#B5295C);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:var(--white);flex-shrink:0;box-shadow:0 2px 8px rgba(212,51,110,.35)}
+.scontent h4{font-size:.96rem;font-weight:700;color:var(--dark);margin-bottom:3px}
+.scontent p{font-size:.92rem;color:var(--dark);line-height:1.68}
+
+/* PROMPT BOX */
+.pbox{background:var(--dark);border-radius:12px;padding:22px 24px;margin:20px 0;position:relative}
+.pbox-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin-bottom:10px;display:block}
+.pbox p{font-family:'Courier New',monospace;font-size:.95rem;color:var(--cream);line-height:1.7;margin:0}
+.pbox-copy{margin-top:14px;background:transparent;border:1.5px solid rgba(238,230,222,.4);color:var(--cream);font-family:var(--font-b);font-size:.78rem;font-weight:700;padding:7px 16px;border-radius:50px;cursor:pointer;transition:all .2s}
+.pbox-copy:hover{border-color:var(--pink);color:var(--pink)}
+
+.gap-note{font-size:.94rem;color:var(--dark);line-height:1.85;margin-top:8px;max-width:760px}
+.gap-note strong{color:var(--pink)}
+
+/* TEASER / RETURN BOX */
+.teaser{background:var(--white);border:2px solid var(--pink);border-radius:14px;padding:32px;margin-top:10px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.teaser-icon{font-size:2.2rem;flex-shrink:0}
+.teaser h3{font-family:var(--font-h);font-size:1.2rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.teaser p{font-size:.88rem;color:var(--dark);line-height:1.65}
+.teaser-cta{margin-left:auto;flex-shrink:0}
+@media(max-width:640px){
+  .teaser-cta{margin-left:0;flex-shrink:1;width:100%}
+  .teaser-cta .btn-pink{display:block;width:100%;box-sizing:border-box;text-align:center;padding-left:20px;padding-right:20px}
+}
+
+/* FOOTER */
+footer{padding:64px 32px 48px;text-align:center;background:var(--denim-mid);border-top:1px solid rgba(37,88,127,.2)}
+.ft-script{font-family:var(--font-s);font-size:2.1rem;color:var(--dark);margin-bottom:10px;font-weight:400}
+.ft-h{font-family:var(--font-h);font-size:clamp(1.7rem,4.5vw,2.4rem);font-weight:700;color:var(--dark);margin-bottom:14px;line-height:1.15}
+.ft-sub{font-size:.94rem;color:var(--dark);margin-bottom:20px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.8}
+.ft-quote{font-family:var(--font-h);font-style:italic;font-size:1rem;color:var(--dark);max-width:440px;margin:0 auto 26px;line-height:1.6;padding:18px 24px;background:rgba(255,255,255,.4);border-radius:12px;border:1px solid rgba(37,88,127,.2)}
+.ft-quote-by{display:block;font-family:var(--font-b);font-style:normal;font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;color:var(--pink);margin-top:8px}
+.btn-pink{display:inline-block;padding:14px 36px;border-radius:50px;background:linear-gradient(135deg,var(--pink),#B5295C);color:var(--white);font-family:var(--font-b);font-weight:700;font-size:.9rem;text-decoration:none;transition:all .25s;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(212,51,110,.4)}
+.btn-pink:hover{background:linear-gradient(135deg,#C72C65,#9C2250);transform:translateY(-2px);box-shadow:0 6px 28px rgba(212,51,110,.5)}
+.acb{text-align:center;font-size:.72rem;color:rgba(37,88,127,.55);padding:10px 0 0;letter-spacing:.04em}
+.div-soft{height:1px;background:linear-gradient(90deg,transparent,rgba(37,88,127,.2),transparent)}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero s-denim-light">
+  <div class="for-tag">A free guide from AI With Intent</div>
+  <h1>The admin that happens <em>without you</em></h1>
+  <p class="hero-p">If you're part of the 69% using AI but not yet seeing the results you hoped for, this is one of the fastest fixes. Only 5% of businesses using AI are actually set up well enough to get real value from it. A Scheduled Task is instructions you save once, that Claude then repeats on its own, on a schedule, without you needing to remember to ask.</p>
+  <div class="cue" onclick="document.getElementById('teach').scrollIntoView({behavior:'smooth'})">
+    <span>See how ↓</span>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- SECTION 1: WHAT IT IS -->
+<section class="sec s-cream" id="teach">
+  <div class="inner">
+    <div class="eyebrow">way 5 of 6</div>
+    <h2>Start with the problem, not the tech</h2>
+    <p class="sub">Don't ask "what can Claude automate." Ask "what's my most expensive, repetitive problem." That's the question that actually points you at a task worth setting up.</p>
+    <p class="flip-hint">👆 Click any card to flip it</p>
+
+    <div class="fg">
+      <div class="fc" onclick="this.classList.toggle('fl')">
+        <div class="fci">
+          <div class="fcf"><div><div class="fco">⏰</div><h3>Trigger</h3><p>When should this run?</p></div><div class="fh">Tap to learn more →</div></div>
+          <div class="fcb"><div class="fcb-lbl">What to name</div>
+            <div class="fe">A day and time. Weekly, daily, whatever matches the task.</div>
+            <div class="fe">Don't start by asking what Claude can do. Start by asking what your headache actually is.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('fl')">
+        <div class="fci">
+          <div class="fcf"><div><div class="fco">📄</div><h3>Output</h3><p>What should it actually produce?</p></div><div class="fh">Tap to learn more →</div></div>
+          <div class="fcb"><div class="fcb-lbl">What to name</div>
+            <div class="fe">A summary, a brief, a draft, whatever the task is meant to hand you.</div>
+            <div class="fe">Pick your most repetitive task first, that's the one worth automating.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc" onclick="this.classList.toggle('fl')">
+        <div class="fci">
+          <div class="fcf"><div><div class="fco">📥</div><h3>Destination</h3><p>Where should the output go?</p></div><div class="fh">Tap to learn more →</div></div>
+          <div class="fcb"><div class="fcb-lbl">What to name</div>
+            <div class="fe">Your inbox, a folder, a doc, wherever you'll actually see and use it.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- SECTION 2: PROJECT OR STANDALONE -->
+<section class="sec s-pink">
+  <div class="inner">
+    <div class="eyebrow">a real distinction</div>
+    <h2>Project or standalone?</h2>
+    <p class="sub">There are two ways to set up a Scheduled Task. On its own (standalone), or inside a Project. The instructions work the same either way, what's different is how much the task actually knows when it runs.</p>
+
+    <div class="dg">
+      <div class="dc"><div class="dc-icon">⚙️</div><h4>Standalone</h4><p>Runs with only the instructions you gave it, nothing else. Fine for something simple and self-contained, checking one folder, pulling one report, the same steps every time.</p></div>
+      <div class="dc"><div class="dc-icon">🗂️</div><h4>Inside a Project</h4><p>Runs with the same instructions, plus that Project's own context, files and Memory behind it. Worth it the moment the task needs to make a judgement call, not just repeat a step.</p></div>
+    </div>
+
+    <div class="ahead">
+      <div class="abadge">💡</div>
+      <div>
+        <div class="atitle">Why that difference actually matters</div>
+        <div class="asub">A Scheduled Task can't pause partway through and ask you a question. A weekly newsletter draft set up standalone can hit a decision it has no way to make, which voice to use, which client this update is actually about, and it has nowhere to turn. The same task set up inside a Project already has the brand voice, the client context and past decisions sitting there, so it can just make the call and keep going.</div>
+      </div>
+    </div>
+
+    <p class="sub" style="margin-bottom:0;"><strong>Simple version:</strong> nothing to judge, same steps every time, standalone is fine. Needs real context to make a call, build it inside a Project instead.</p>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- SECTION 3: SETTING ONE UP -->
+<section class="sec s-denim-mid">
+  <div class="inner">
+    <div class="eyebrow">try it now</div>
+    <h2>Setting one up</h2>
+
+    <div class="steps">
+      <div class="step"><div class="snum">1</div><div class="scontent"><h4>Give it a name</h4><p>Specific enough that you'll recognise it in a list of tasks in a month's time.</p></div></div>
+      <div class="step"><div class="snum">2</div><div class="scontent"><h4>Set the trigger</h4><p>The day and time it should run, matched to how often the problem it solves actually comes up.</p></div></div>
+      <div class="step"><div class="snum">3</div><div class="scontent"><h4>Decide Project or standalone</h4><p>Using the test above, does it need judgement calls, or just the same steps every time.</p></div></div>
+      <div class="step"><div class="snum">4</div><div class="scontent"><h4>Write the instructions</h4><p>The part that actually determines whether it runs well. Use the prompt below if you'd like Claude's help pulling it together.</p></div></div>
+      <div class="step"><div class="snum">5</div><div class="scontent"><h4>Connect a tool if it needs one</h4><p>Reaching Gmail, Google Drive or another tool directly needs a connector, covered in its own guide in this series.</p></div></div>
+    </div>
+
+    <div class="pbox">
+      <span class="pbox-label">Copy this in to draft robust task instructions</span>
+      <p id="prompt-text">Interview me about a task I want to run on a schedule, one question at a time: what problem it solves and how often it needs to run, exactly what it should do each time it runs, what information or files it needs to reference, what the finished output should look like (ask me for one good example if I have one), where the output should go, and what it should do if something's missing or unclear, skip it, flag it for me, or make a reasonable assumption and say so. Once you've got enough, draft the full task instructions for me to check over before I save it.</p>
+      <button class="pbox-copy" onclick="copyToClipboard(this, 'prompt-text')">📋 Copy prompt</button>
+    </div>
+
+    <p class="gap-note" style="margin-top:8px;"><strong>Do this today:</strong> pick your most repetitive task, work through the prompt above, and set up one Scheduled Task for it.</p>
+  </div>
+</section>
+
+<div class="div-soft"></div>
+
+<!-- PART OF CLOSE THE GAP -->
+<section class="sec s-cream">
+  <div class="inner">
+    <h2>Part of Close the Gap</h2>
+    <div class="teaser">
+      <div class="teaser-icon">🗺️</div>
+      <div>
+        <h3>This is one of six ways to move from basic to intermediate use</h3>
+        <p>Where your docs live, Projects, Skills, Global Instructions, Connectors, and this one, they're all covered together in the full Close the Gap guide.</p>
+      </div>
+      <div class="teaser-cta">
+        <a href="https://www.aiwithintent.com.au/close-the-gap-guide.html" class="btn-pink">Back to the full Close the Gap guide</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-script">need a hand?</div>
+  <h2 class="ft-h">Ready to skip the DIY<br/>and have it built for you?</h2>
+  <p class="ft-sub">You've just learned how to do this yourself, piece by piece. Out of Your Head builds your whole AI architecture for you, built specifically around your business, so you get the finished foundation without doing the work of putting it together yourself.</p>
+  <p class="ft-quote">"150% yes it is worth the investment. Don't even think about it, honestly just do it. Your future self will thank you for it."<span class="ft-quote-by">— Lisa</span></p>
+  <a href="https://www.aiwithintent.com.au/out-of-your-head.html" class="btn-pink">See what's included in OUT OF YOUR HEAD</a>
+</footer>
+<div class="acb">Created with care by AI With Intent · aiwithintent.com.au</div>
+
+<script>
+function copyToClipboard(btn, sourceId) {
+  const text = document.getElementById(sourceId).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => { btn.textContent = original; }, 1800);
+  });
+}
+</script>
+</body>
+</html>
