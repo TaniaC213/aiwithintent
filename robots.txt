@@ -1,30 +1,39 @@
-# Block AI training crawlers
-User-agent: GPTBot
-Disallow: /
-
-User-agent: CCBot
-Disallow: /
-
-User-agent: anthropic-ai
-Disallow: /
-
-User-agent: Google-Extended
-Disallow: /
-
-User-agent: PerplexityBot
-Disallow: /
-
-User-agent: Cohere-ai
-Disallow: /
-
-User-agent: Meta-ExternalAgent
-Disallow: /
-
-User-agent: Bytespider
-Disallow: /
-
-# Allow all standard search engine crawlers
+# Open to all crawlers, including AI training and AI answer-engine bots
+# (GPTBot, CCBot, anthropic-ai, Google-Extended, PerplexityBot, Cohere-ai,
+# Meta-ExternalAgent, Bytespider), so the public marketing pages can be
+# discovered and cited by ChatGPT, Claude, Perplexity, Google AI Overviews
+# and similar tools, not just standard search results.
+#
+# Lead magnets and paid guide content stay blocked below since they're
+# meant to be reached via a sign-up or a paid checkout, not crawled and
+# handed out for free. Client delivery pages are private and blocked too.
 User-agent: *
 Allow: /
+
+# Free lead magnets (gated behind email sign-up)
+Disallow: /project-setup-guide
+Disallow: /project-setup-guide.html
+Disallow: /global-instructions-setup-guide
+Disallow: /global-instructions-setup-guide.html
+
+# Paid guide content (gated behind checkout)
+Disallow: /close-the-gap-guide
+Disallow: /close-the-gap-guide.html
+Disallow: /skills-setup-guide
+Disallow: /skills-setup-guide.html
+Disallow: /ai-brain-guide
+Disallow: /ai-brain-guide.html
+Disallow: /connectors-guide
+Disallow: /connectors-guide.html
+Disallow: /scheduled-tasks-guide
+Disallow: /scheduled-tasks-guide.html
+Disallow: /claude-back-pocket-guide
+Disallow: /claude-back-pocket-guide.html
+
+# Screenshots and assets that belong to the gated guides above
+Disallow: /assets/close-the-gap/
+
+# Private, client-specific delivery pages
+Disallow: /clients/
 
 Sitemap: https://www.aiwithintent.com.au/sitemap.xml
