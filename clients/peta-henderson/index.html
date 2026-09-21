@@ -146,6 +146,7 @@
     body:has(#tasks:target)         .nav a[href="#tasks"]     { background: var(--plum); color: var(--white); }
     body:has(#tips:target)          .nav a[href="#tips"]      { background: var(--plum); color: var(--white); }
     body:has(#nextsteps:target)     .nav a[href="#nextsteps"] { background: var(--plum); color: var(--white); }
+    body:has(#changes:target)       .nav a[href="#changes"]   { background: var(--plum); color: var(--white); }
     body:has(#thankyou:target)      .nav a[href="#thankyou"]  { background: var(--plum); color: var(--white); }
 
     /* ── Sections - CSS :target navigation ── */
@@ -358,6 +359,17 @@
       cursor: pointer;
     }
 
+    /* ── Guide Screenshot ── */
+    .guide-img {
+      display: block;
+      max-width: 100%;
+      width: 520px;
+      margin: 18px auto;
+      border-radius: 12px;
+      border: 2px solid var(--pale-denim);
+      box-shadow: 0 4px 18px rgba(46,40,69,0.1);
+    }
+
     /* ── Revision Box ── */
     .revision-box {
       border: 2px solid var(--mid-denim);
@@ -494,6 +506,7 @@
     <a href="#tasks">Automation Ideas</a>
     <a href="#tips">Quick Tips</a>
     <a href="#nextsteps">Next Steps</a>
+    <a href="#changes">Making Changes</a>
     <a href="#thankyou">A Note from Tania</a>
   </div>
 
@@ -721,6 +734,47 @@
       <p><strong>What counts:</strong> Adjustments and refinements to what's already built. Not new skills or additional deliverables. Those are a separate conversation. One I'd love to have with you when you're ready to tackle the next phase, your dance lesson plans and a client-language library are both waiting whenever you are!</p>
       <p><strong>How to request a revision</strong></p>
       <p>Email Tania at <a href="mailto:tania@aiwithintent.com.au">tania@aiwithintent.com.au</a> clearly outlining what needs revising. I'll get back to you within 2 working days.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- SECTION: Making Changes            -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="changes" class="section">
+    <h2>Making Changes to Your HQ</h2>
+
+    <p>You're welcome to reshape this however suits how you actually work. Renaming folders, merging two into one, adding a new department, none of that breaks anything, as long as you follow the steps below so the rest of your setup knows about the change too. Nothing here happens automatically just because you renamed something, Claude only finds out what you tell it.</p>
+
+    <ol class="step-list">
+      <li>
+        <span class="step-num">1</span>
+        <span><strong>Make the change in your OneDrive first.</strong> Rename, merge, split or add the folder exactly how you want it to actually exist. Do this before telling Claude anything, your real folder structure is always the source of truth, not the other way around.</span>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <span><strong>Switch to Cowork, link your HQ folder for that session, and tell Claude exactly what changed.</strong> In the chat box, toggle from Chat to Cowork. Underneath, you'll see "Project or folder", hover over it and click to select the folder you want linked for that session, choose your whole Dragonfly Magic HQ. This isn't the same as attaching a single file, it gives Claude proper access to look at your actual folders. Then describe the change precisely: "I merged 03 - Workshops & Masterclasses and 04 - Sacred Circles into one folder called 03 - Workshops" is useful. "I changed some folders around" isn't, Claude can't act on that.</span>
+      </li>
+    </ol>
+
+    <img class="guide-img" src="/assets/client-resources/cowork-folder-select.png" alt="Claude chat box showing the Chat/Cowork toggle set to Cowork, with Project or folder, Manual and Output options underneath">
+
+    <ol class="step-list" start="3">
+      <li>
+        <span class="step-num">3</span>
+        <span><strong>Ask Claude to update CLAUDE.md and README.md to match.</strong> These two files are what tell Claude where everything lives and what each folder is for. Once Claude can see the real folder structure (from Step 2), ask it directly: "Please update CLAUDE.md's routing table and README.md's folder map to reflect this change." It'll rewrite both for you.</span>
+      </li>
+      <li>
+        <span class="step-num">4</span>
+        <span><strong>If a Project was already pointed at the folder that changed, re-link it yourself.</strong> This is the one step Claude can't do on your behalf, no matter how clearly you explain the change. A Project's linked folder is set inside Claude's own Project settings, not in a file, so it doesn't update itself. If you've renamed or moved a folder that a Project already points to (like Blog or Workshops & Masterclasses), open that Project, go to its settings, and re-select the folder in its new location.</span>
+      </li>
+      <li>
+        <span class="step-num">5</span>
+        <span><strong>Check whether any of your skills mention the old folder by name.</strong> Your Blog Writing skill saves its output to a specific folder path, so if you ever restructure Content, ask Claude: "Does this change affect any of my skills?" If it does, it'll offer to update the skill, and the same rule applies as any skill update, download the new version from Settings → Skills and replace the old file in your skills folder yourself, so your saved copy and your live skill stay in sync.</span>
+      </li>
+    </ol>
+
+    <div class="box cream">
+      <p>That's the whole process. It looks like more steps written out than it feels like doing it, most changes are really just Steps 1 through 3. Steps 4 and 5 only apply if a Project or a skill already depended on the specific thing you changed.</p>
     </div>
   </div>
 
